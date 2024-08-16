@@ -37,6 +37,10 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "dist/neo-barberia",
+              "index": "src/index.html",
+              "baseHref": "/",
+              "deployUrl": "/",
               "budgets": [
               {
                 "type": "initial",
