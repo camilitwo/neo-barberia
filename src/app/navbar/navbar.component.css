@@ -16,7 +16,6 @@
   z-index: 1000;
   font-family: 'Open Sans', sans-serif;
   width: 100%;
-
 }
 
 .nav .container {
@@ -24,7 +23,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  transition: all 0.3s ease-in-out;
+  transition: max-height 0.7s ease-in-out;
 }
 
 .nav ul {
@@ -32,14 +31,14 @@
   list-style-type: none;
   align-items: center;
   justify-content: center;
-  padding-left: 0; /* Asegura que no haya padding adicional */
+  padding-left: 0;
 }
 
 .nav a {
   color: #fff;
   text-decoration: none;
   padding: 7px 15px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.9s ease-in-out;
 }
 
 .nav.active {
@@ -58,53 +57,45 @@
 .nav a.current,
 .nav a:hover {
   color: #c0392b;
-  font-weight: bold;
+  transition: all 0.5s ease-in-out;
 }
 
+/* Estilo para el menú de hamburguesa */
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-toggle .bar {
+  height: 3px;
+  width: 25px;
+  background-color: #fff;
+  margin: 4px 0;
+  transition: all 0.3s ease-in-out;
+}
 
 @media (max-width: 768px) {
-  .nav-menu {
+  .menu-toggle {
+    display: flex;
+  }
+  ul.nav-menu {
     display: none;
     flex-direction: column;
+    height: 100vh;
     width: 100%;
-    position: absolute;
-    top: 100%; /* Esto asegura que el menú se despliegue justo debajo del navbar */
+    position: fixed;
+    top: 60px;
+    left: -100%;
+    text-align: center;
+    background-color: #222;
+    transition: all 0.5s ease;
+  }
+  ul.nav-menu.active {
     left: 0;
-    background-color: #333;
-    padding: 1rem;
-    transition: max-height 0.3s ease-in-out;
-    max-height: 0;
-    overflow: hidden;
   }
-  .nav-menu.active {
-    display: flex;
-    max-height: 300px; /* Ajusta esto según la cantidad de elementos en el menú */
-  }
-  .nav-toggle {
-    display: block;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  .hamburger {
-    width: 1.5rem;
-    height: 2px;
-    background: white;
-    position: relative;
-    transition: all 0.3s ease-in-out;
-  }
-  .hamburger::before, .hamburger::after {
-    content: '';
-    width: 1.5rem;
-    height: 2px;
-    background: white;
-    position: absolute;
-    transition: all 0.3s ease-in-out;
-  }
-  .hamburger::before {
-    top: -0.5rem;
-  }
-  .hamburger::after {
-    top: 0.5rem;
+  ul.nav-menu li {
+    margin: 50px 0;
   }
 }

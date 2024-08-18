@@ -12,50 +12,21 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
+  title = 'BarberHub';
 
   toggleMenu() {
-    const navMenu = document.querySelector('.nav-menu');
-    const hamburger = document.querySelector('.hamburger');
-    if (navMenu) {
-      navMenu.classList.toggle('active');
-    }
-    if (hamburger) {
-      hamburger.classList.toggle('active');
-    }
-  }
+    const menuToggle = document.getElementById('mobile-menu');
+    const navMenu = document.querySelector('ul.nav-menu');
 
-// Puedes también ajustar la lógica para cerrar el menú al hacer clic en un enlace
-  closeMenu() {
-    const navMenu = document.querySelector('.nav-menu');
-    const hamburger = document.querySelector('.hamburger');
-    if (navMenu && navMenu.classList.contains('active')) {
-      navMenu.classList.remove('active');
-    }
-    if (hamburger && hamburger.classList.contains('active')) {
-      hamburger.classList.remove('active');
-    }
-  }
-  isBrowser: boolean;
-  constructor(@Inject(PLATFORM_ID) private platformId: any, private renderer: Renderer2, private el: ElementRef) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
+    menuToggle?.addEventListener('click', () => {
+      navMenu?.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    });
   }
 
   ngOnInit() {
-    if (this.isBrowser) {
-      this.renderer.listen('window', 'scroll', () => {
-        this.fixNav();
-      });
-    }
-  }
-
-  fixNav() {
-    const nav = this.el.nativeElement.querySelector('.nav') as HTMLElement;
-    if (window.scrollY > nav.offsetHeight + 150) {
-      this.renderer.addClass(nav, 'active');
-    } else {
-      this.renderer.removeClass(nav, 'active');
-    }
+    this.toggleMenu();
   }
 
 }
