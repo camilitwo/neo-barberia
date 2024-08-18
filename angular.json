@@ -15,12 +15,11 @@
           "options": {
             "outputPath": "dist/neo-barberia",
             "index": "src/index.html",
-            "baseHref": "/neo-barberia/",
             "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
@@ -37,10 +36,6 @@
           },
           "configurations": {
             "production": {
-              "outputPath": "dist/neo-barberia",
-              "index": "src/index.html",
-              "baseHref": "/",
-              "deployUrl": "/",
               "budgets": [
               {
                 "type": "initial",
