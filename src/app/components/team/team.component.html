@@ -14,10 +14,10 @@
       <p>{{ miembro.descripcion }}</p>
       <div class="social-icons">
         <a *ngIf="miembro.instagram" [href]="miembro.instagram" target="_blank">
-          <fa-icon icon="instagram" class="social-icon"></fa-icon>
+          <fa-icon [icon]="['fab', 'instagram']" class="social-icon"></fa-icon>
         </a>
         <a *ngIf="miembro.facebook" [href]="miembro.facebook" target="_blank">
-          <fa-icon icon="facebook" class="social-icon"></fa-icon>
+          <fa-icon [icon]="['fab', 'facebook']" class="social-icon"></fa-icon>
         </a>
       </div>
     </div>

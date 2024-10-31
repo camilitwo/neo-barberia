@@ -1,7 +1,8 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {FaIconLibrary, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {CommonModule} from "@angular/common";
 import * as AOS from 'aos';
+import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 
 @Component({
@@ -22,8 +23,8 @@ export class TeamComponent implements OnInit, AfterViewInit {
       especialidad: 'Corte Clásico',
       descripcion: 'Con más de 10 años de experiencia, Carlos domina el estilo clásico con precisión y profesionalismo.',
       imagen: 'https://avatar.anywhere.app/files/img/fwX5JH1Nz5M9/profilepic.png',
-      instagram: 'https://instagram.com/carlosperez',
-      facebook: 'https://facebook.com/carlosperez'
+      instagram: 'https://www.instagram.com/stofer_.barber/',
+      facebook: ''
     },
 
     {
@@ -32,8 +33,8 @@ export class TeamComponent implements OnInit, AfterViewInit {
       especialidad: 'Corte Clásico',
       descripcion: 'Con más de 10 años de experiencia, Carlos domina el estilo clásico con precisión y profesionalismo.',
       imagen: 'https://avatar.anywhere.app/files/img/fSJlNA2u1AsE/profilepic.png',
-      instagram: 'https://instagram.com/carlosperez',
-      facebook: 'https://facebook.com/carlosperez'
+      instagram: 'https://www.instagram.com/viishon.barber/',
+      facebook: ''
     },
     {
       nombre: 'Fabián Garrido',
@@ -41,8 +42,8 @@ export class TeamComponent implements OnInit, AfterViewInit {
       especialidad: 'Corte Clásico',
       descripcion: 'Con más de 10 años de experiencia, Carlos domina el estilo clásico con precisión y profesionalismo.',
       imagen: 'https://avatar.anywhere.app/files/img/fkneURSA3h6p/profilepic.png',
-      instagram: 'https://instagram.com/carlosperez',
-      facebook: 'https://facebook.com/carlosperez'
+      instagram: 'https://www.instagram.com/keo_barber.cl/',
+      facebook: ''
     },
     {
       nombre: 'Julio Cesar',
@@ -50,12 +51,15 @@ export class TeamComponent implements OnInit, AfterViewInit {
       especialidad: 'Corte Clásico',
       descripcion: 'Con más de 10 años de experiencia, Carlos domina el estilo clásico con precisión y profesionalismo.',
       imagen: 'https://avatar.anywhere.app/files/img/fLLJb3F5TdW0/1726283971723.png',
-      instagram: 'https://instagram.com/carlosperez',
-      facebook: 'https://facebook.com/carlosperez'
+      instagram: '',
+      facebook: ''
     },
   ];
 
-  constructor() {}
+  constructor(private library: FaIconLibrary) {
+    // Añadir los iconos de Instagram y Facebook a la librería
+    this.library.addIcons(faInstagram, faFacebook);
+  }
 
   ngOnInit(): void {
     AOS.init({
