@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Renderer2} from '@angular/core';
-import {NavbarComponent} from "../navbar/navbar.component";
+import {NavbarComponent} from "../../features/navbar/navbar.component";
 
 @Component({
   selector: 'app-faq',
