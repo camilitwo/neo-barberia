@@ -1,0 +1,25 @@
+<section id="nuestro-equipo" class="equipo">
+  <h2 data-aos="fade-up">Nuestro equipo</h2>
+  <p data-aos="fade-up">Conoce a los artistas detrás de cada corte. ¡Síguenos y descubre el estilo NeoBarbería!</p>
+  <div class="equipo-cards">
+    <div class="card" *ngFor="let miembro of equipo" data-aos="zoom-in">
+      <img
+        loading="lazy"
+        [src]="miembro.imagen"
+        [alt]="miembro.nombre"
+      />
+      <h3>{{ miembro.nombre }}</h3>
+      <h5>{{ miembro.apodo }}</h5>
+      <p>Especialidad: {{ miembro.especialidad }}</p>
+      <p>{{ miembro.descripcion }}</p>
+      <div class="social-icons">
+        <a *ngIf="miembro.instagram" [href]="miembro.instagram" target="_blank">
+          <fa-icon icon="instagram" class="social-icon"></fa-icon>
+        </a>
+        <a *ngIf="miembro.facebook" [href]="miembro.facebook" target="_blank">
+          <fa-icon icon="facebook" class="social-icon"></fa-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
