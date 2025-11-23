@@ -16,7 +16,7 @@ export default function Home() {
       <BarberCarousel barbers={barbersData} />
       <Contact />
       <Footer />
-      <FloatingBookingButton url="https://booksy.com" />
+      <FloatingBookingButton />
     </main>
   );
 }
