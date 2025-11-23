@@ -17,8 +17,8 @@ export default function Hero() {
   };
 
   const titleVariants = {
-    hidden: { 
-      y: 50, 
+    hidden: {
+      y: 50,
       opacity: 0,
       scale: 0.9,
     },
@@ -36,8 +36,8 @@ export default function Hero() {
   };
 
   const subtitleVariants = {
-    hidden: { 
-      y: 30, 
+    hidden: {
+      y: 30,
       opacity: 0,
     },
     visible: {
@@ -52,7 +52,7 @@ export default function Hero() {
   };
 
   const buttonVariants = {
-    hidden: { 
+    hidden: {
       scale: 0,
       opacity: 0,
     },
@@ -82,7 +82,7 @@ export default function Hero() {
   return (
     <section id="inicio" className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Background Image with Parallax Effect */}
-      <motion.div 
+      <motion.div
         initial={{ scale: 1.2 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.5, ease: [0.43, 0.13, 0.23, 0.96] }}
@@ -110,16 +110,16 @@ export default function Hero() {
         {/* Main Title */}
         <motion.h1
           variants={titleVariants}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 text-white leading-tight"
         >
           <span className="block">Neo</span>
-          <span className="text-gradient block">Barbería</span>
+          <span className="text-gradient text-gradient-fallback block">Barbería</span>
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p
           variants={subtitleVariants}
-          className="text-xl md:text-2xl lg:text-3xl mb-8 text-gray-200 max-w-3xl mx-auto"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-muted max-w-3xl mx-auto"
         >
           La Barbería que está revolucionando Quilicura
         </motion.p>
@@ -137,7 +137,7 @@ export default function Hero() {
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
-          className="inline-block px-10 py-4 bg-gradient-to-r from-primary to-accent text-black font-bold text-lg rounded-full shadow-glow transition-all duration-300"
+          className="inline-block px-8 sm:px-10 py-4 bg-primary hover:bg-primary-hover text-black font-bold text-base sm:text-lg rounded-full shadow-glow transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           Agenda tu cita
         </motion.a>

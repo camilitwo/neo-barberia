@@ -19,8 +19,8 @@ export default function WhoWeAre() {
   };
 
   const leftVariants = {
-    hidden: { 
-      x: -100, 
+    hidden: {
+      x: -100,
       opacity: 0,
       rotate: -5,
     },
@@ -37,8 +37,8 @@ export default function WhoWeAre() {
   };
 
   const rightVariants = {
-    hidden: { 
-      x: 100, 
+    hidden: {
+      x: 100,
       opacity: 0,
     },
     visible: {
@@ -53,8 +53,8 @@ export default function WhoWeAre() {
   };
 
   const textVariants = {
-    hidden: { 
-      y: 20, 
+    hidden: {
+      y: 20,
       opacity: 0,
     },
     visible: {
@@ -68,10 +68,10 @@ export default function WhoWeAre() {
   };
 
   return (
-    <section 
-      id="nosotros" 
+    <section
+      id="nosotros"
       ref={ref}
-      className="py-20 md:py-32 px-4 bg-gradient-to-b from-black to-secondary"
+      className="py-16 sm:py-20 md:py-32 px-4 bg-gradient-to-b from-background to-surface"
     >
       <motion.div
         variants={containerVariants}
@@ -101,8 +101,8 @@ export default function WhoWeAre() {
             {/* Floating Info Card */}
             <motion.div
               initial={{ scale: 0, rotate: -10 }}
-              animate={isInView ? { 
-                scale: 1, 
+              animate={isInView ? {
+                scale: 1,
                 rotate: 0,
                 transition: {
                   type: 'spring',
@@ -111,7 +111,7 @@ export default function WhoWeAre() {
                   delay: 0.5,
                 }
               } : {}}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
                 y: -5,
                 transition: {
@@ -138,9 +138,9 @@ export default function WhoWeAre() {
             className="space-y-6"
           >
             <motion.div variants={textVariants}>
-              <motion.h2 
-                className="text-5xl md:text-6xl font-bold mb-4"
-                whileInView={{ 
+              <motion.h2
+                className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4"
+                whileInView={{
                   backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
                 }}
                 transition={{ duration: 5, repeat: Infinity }}
@@ -153,35 +153,35 @@ export default function WhoWeAre() {
               >
                 Nosotros
               </motion.h2>
-              <h3 className="text-2xl md:text-3xl text-gray-300 mb-6">
+              <h3 className="text-xl sm:text-2xl md:text-3xl text-muted mb-6">
                 Peluquería con estilo experimentado y tradicional
               </h3>
             </motion.div>
 
-            <motion.p 
+            <motion.p
               variants={textVariants}
-              className="text-lg text-gray-400 leading-relaxed text-justify"
+              className="text-base sm:text-lg text-muted leading-relaxed text-justify"
             >
-              ¡Bienvenidos a <span className="text-primary font-semibold">NEOBARBERÍA</span>, donde tu estilo es nuestra prioridad! 
-              Somos pioneros en la comuna, y no es casualidad: nos enorgullecemos de contar con los barberos más talentosos, 
+              ¡Bienvenidos a <span className="text-primary font-semibold">NEOBARBERÍA</span>, donde tu estilo es nuestra prioridad!
+              Somos pioneros en la comuna, y no es casualidad: nos enorgullecemos de contar con los barberos más talentosos,
               apasionados por su arte y expertos en resaltar lo mejor de ti.
             </motion.p>
 
-            <motion.p 
+            <motion.p
               variants={textVariants}
-              className="text-lg text-gray-400 leading-relaxed text-justify"
+              className="text-base sm:text-lg text-muted leading-relaxed text-justify"
             >
-              En NEOBARBERÍA, combinamos tradición y calidad con productos de prestigio como 
-              <span className="text-accent font-semibold"> SirFausto</span> y 
+              En NEOBARBERÍA, combinamos tradición y calidad con productos de prestigio como
+              <span className="text-accent font-semibold"> SirFausto</span> y
               <span className="text-accent font-semibold"> Nishman</span>, para asegurarte una experiencia única y de primera.
             </motion.p>
 
-            <motion.p 
+            <motion.p
               variants={textVariants}
-              className="text-lg text-gray-400 leading-relaxed text-justify"
+              className="text-base sm:text-lg text-muted leading-relaxed text-justify"
             >
-              Ven y descubre el lugar donde el estilo se encuentra con la excelencia; estamos aquí para transformar tu imagen 
-              con dedicación, alegría y profesionalismo. ¡Deja que tu estilo hable por ti con 
+              Ven y descubre el lugar donde el estilo se encuentra con la excelencia; estamos aquí para transformar tu imagen
+              con dedicación, alegría y profesionalismo. ¡Deja que tu estilo hable por ti con
               <span className="text-primary font-semibold"> NEOBARBERÍA</span>!
             </motion.p>
 
@@ -191,12 +191,12 @@ export default function WhoWeAre() {
             >
               <motion.a
                 href="#equipo"
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   x: 10,
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-8 py-3 bg-primary text-black font-bold rounded-full shadow-lg hover:shadow-glow transition-all duration-300"
+                className="inline-flex items-center px-6 sm:px-8 py-3 bg-primary hover:bg-primary-hover text-black font-bold rounded-full shadow-glow transition-all duration-300 text-sm sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 Conoce nuestro equipo
                 <motion.span

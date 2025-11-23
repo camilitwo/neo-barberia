@@ -17,8 +17,8 @@ export default function FloatingBookingButton({ url }: FloatingBookingButtonProp
       rel="noopener noreferrer"
       aria-label="Agenda tu cita"
       initial={{ scale: 0, opacity: 0 }}
-      animate={{ 
-        scale: 1, 
+      animate={{
+        scale: 1,
         opacity: 1,
         transition: {
           type: 'spring',
@@ -27,7 +27,7 @@ export default function FloatingBookingButton({ url }: FloatingBookingButtonProp
           delay: 1,
         }
       }}
-      whileHover={{ 
+      whileHover={{
         scale: 1.1,
         y: -5,
         transition: {
@@ -39,14 +39,14 @@ export default function FloatingBookingButton({ url }: FloatingBookingButtonProp
       whileTap={{ scale: 0.9 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="fixed bottom-8 right-8 z-50 px-6 py-4 bg-gradient-to-r from-primary to-accent text-black font-bold text-lg rounded-full shadow-2xl cursor-pointer overflow-hidden group"
+      className="fixed bottom-6 sm:bottom-8 right-6 sm:right-8 z-50 px-5 sm:px-6 py-3 sm:py-4 bg-primary hover:bg-primary-hover text-black font-bold text-sm sm:text-lg rounded-full shadow-2xl cursor-pointer overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       style={{
         boxShadow: '0 10px 40px rgba(212, 175, 55, 0.4)',
       }}
     >
       {/* Animated background */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-accent to-primary"
+        className="absolute inset-0 bg-accent/20"
         initial={{ x: '100%' }}
         animate={{ x: isHovered ? '0%' : '100%' }}
         transition={{ duration: 0.3 }}
@@ -67,7 +67,7 @@ export default function FloatingBookingButton({ url }: FloatingBookingButtonProp
       <motion.div
         className="absolute inset-0 bg-primary rounded-full"
         initial={{ scale: 1, opacity: 0.5 }}
-        animate={{ 
+        animate={{
           scale: [1, 1.5, 1.5],
           opacity: [0.5, 0, 0],
         }}
