@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DayPicker } from 'react-day-picker';
 import { es } from 'date-fns/locale';
-import { format, addDays, startOfDay } from 'date-fns';
+import { format, addDays } from 'date-fns';
 import { barbersData, type Barber } from '@/data/barbers';
 import type { TimeSlot } from '@/types/booking';
 import 'react-day-picker/dist/style.css';
@@ -174,9 +174,11 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
               <div className="sticky top-0 bg-surface border-b border-border px-6 py-4 flex justify-between items-center">
                 <div>
                   <h2 className="text-2xl font-bold text-foreground">Agenda tu Cita</h2>
-                  <p className="text-sm text-muted mt-1">
-                    Paso {step} de 4
-                  </p>
+                  {step < 5 && (
+                    <p className="text-sm text-muted mt-1">
+                      Paso {step} de 4
+                    </p>
+                  )}
                 </div>
                 <button
                   onClick={onClose}
