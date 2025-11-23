@@ -11,6 +11,13 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        surface: "var(--surface)",
+        secondary: "var(--secondary)",
+        muted: "var(--muted)",
+        border: "var(--border)",
+        primary: "var(--primary)",
+        accent: "var(--accent)",
+        danger: "var(--danger)",
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',

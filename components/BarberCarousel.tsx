@@ -37,10 +37,10 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
   };
 
   return (
-    <section 
-      id="equipo" 
+    <section
+      id="equipo"
       ref={ref}
-      className="py-20 md:py-32 px-4 bg-secondary"
+      className="py-16 sm:py-20 md:py-32 px-4 bg-surface"
     >
       <motion.div
         variants={containerVariants}
@@ -49,16 +49,16 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
         className="max-w-7xl mx-auto"
       >
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 text-gradient">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gradient text-gradient-fallback">
             Nuestro Equipo
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted max-w-2xl mx-auto">
             Conoce a los artistas detrás de cada corte. ¡Descubre el estilo NeoBarbería!
           </p>
         </motion.div>
@@ -117,19 +117,19 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
         .barber-swiper {
           padding: 20px;
         }
-        
+
         .barber-swiper .swiper-pagination-bullet {
           background: var(--primary);
           width: 12px;
           height: 12px;
           opacity: 0.5;
         }
-        
+
         .barber-swiper .swiper-pagination-bullet-active {
           opacity: 1;
           background: var(--accent);
         }
-        
+
         .barber-swiper .swiper-button-next,
         .barber-swiper .swiper-button-prev {
           color: var(--primary);
@@ -140,13 +140,13 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
           border-radius: 50%;
           transition: all 0.3s ease;
         }
-        
+
         .barber-swiper .swiper-button-next:hover,
         .barber-swiper .swiper-button-prev:hover {
           background: rgba(212, 175, 55, 0.3);
           transform: scale(1.1);
         }
-        
+
         .barber-swiper .swiper-button-next::after,
         .barber-swiper .swiper-button-prev::after {
           font-size: 20px;
@@ -168,7 +168,7 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
         damping: 15,
         delay: index * 0.1,
       }}
-      whileHover={{ 
+      whileHover={{
         y: -10,
         transition: {
           type: 'spring',
@@ -188,7 +188,7 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
         />
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        
+
         {/* Nickname Badge */}
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
@@ -206,22 +206,22 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
 
       {/* Content */}
       <div className="p-6 space-y-3">
-        <motion.h3 
+        <motion.h3
           className="text-2xl font-bold text-white"
           whileHover={{ scale: 1.05, color: 'var(--primary)' }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
           {barber.nombre}
         </motion.h3>
-        
+
         <div className="flex items-center space-x-2">
           <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-          <p className="text-primary font-semibold text-sm uppercase tracking-wider">
+          <p className="text-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">
             {barber.especialidad}
           </p>
         </div>
-        
-        <p className="text-gray-400 text-sm leading-relaxed">
+
+        <p className="text-muted text-sm leading-relaxed">
           {barber.descripcion}
         </p>
 
@@ -233,12 +233,12 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
                 href={barber.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ 
+                whileHover={{
                   scale: 1.2,
                   rotate: 15,
                 }}
                 whileTap={{ scale: 0.9 }}
-                className="text-white hover:text-accent transition-colors duration-300"
+                className="text-foreground hover:text-accent transition-colors duration-300"
               >
                 <FontAwesomeIcon icon={faInstagram} size="2x" />
               </motion.a>
@@ -248,12 +248,12 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
                 href={barber.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ 
+                whileHover={{
                   scale: 1.2,
                   rotate: -15,
                 }}
                 whileTap={{ scale: 0.9 }}
-                className="text-white hover:text-accent transition-colors duration-300"
+                className="text-foreground hover:text-accent transition-colors duration-300"
               >
                 <FontAwesomeIcon icon={faFacebook} size="2x" />
               </motion.a>

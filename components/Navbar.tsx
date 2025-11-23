@@ -30,7 +30,7 @@ export default function Navbar() {
       transition={{ type: 'spring', stiffness: 100, damping: 20 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'glass-effect shadow-lg' : 'bg-transparent'
-      }`}
+      } backdrop-blur-sm`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -45,7 +45,7 @@ export default function Navbar() {
           </motion.div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-6 lg:space-x-8">
             {navLinks.map((link, index) => (
               <motion.div
                 key={link.href}
@@ -55,7 +55,7 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className="text-foreground hover:text-primary transition-colors duration-300 relative group"
+                  className="text-foreground hover:text-primary transition-colors duration-300 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
@@ -68,7 +68,7 @@ export default function Navbar() {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-surface/80 bg-surface/60 border border-border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label="Toggle menu"
           >
             <div className="w-6 h-5 flex flex-col justify-between">
@@ -97,7 +97,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden glass-effect"
+            className="md:hidden glass-effect border-t border-border"
           >
             <div className="px-4 py-6 space-y-4">
               {navLinks.map((link, index) => (
@@ -110,7 +110,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-lg text-foreground hover:text-primary transition-colors duration-300"
+                    className="block text-base text-foreground hover:text-primary transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
                   >
                     {link.label}
                   </Link>
