@@ -1,27 +1,105 @@
-# NeoBarberia
+# Neo Barbería
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+Sitio web oficial de Neo Barbería - La barbería que está revolucionando Quilicura.
 
-## Development server
+## 🚀 Tecnologías
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Este proyecto está construido con:
 
-## Code scaffolding
+- **Next.js 14** - Framework de React para producción
+- **TypeScript** - Tipado estático para JavaScript
+- **Tailwind CSS** - Framework de CSS utility-first
+- **Framer Motion** - Librería de animaciones para React
+- **Swiper** - Carrusel moderno y responsive
+- **Font Awesome** - Iconos
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## ✨ Características
 
-## Build
+- ✅ Diseño elegante y moderno
+- ✅ Animaciones fluidas siguiendo los 12 principios de animación
+- ✅ Hero section impactante
+- ✅ Sección "Quiénes Somos" con información del negocio
+- ✅ Carrusel de barberos con efecto 3D
+- ✅ Formulario de contacto
+- ✅ Botón flotante de agendamiento
+- ✅ Totalmente responsive
+- ✅ Optimización de imágenes con Next.js
+- ✅ SEO optimizado
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🏃 Desarrollo
 
-## Running unit tests
+Primero, instala las dependencias:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm install
+```
 
-## Running end-to-end tests
+Luego, ejecuta el servidor de desarrollo:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm run dev
+```
 
-## Further help
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🏗️ Build
+
+Para crear una versión de producción:
+
+```bash
+npm run build
+```
+
+Para ejecutar la versión de producción:
+
+```bash
+npm start
+```
+
+## 📝 Estructura del Proyecto
+
+```
+neo-barberia/
+├── app/                    # App Router de Next.js
+│   ├── globals.css        # Estilos globales
+│   ├── layout.tsx         # Layout principal
+│   └── page.tsx           # Página de inicio
+├── components/            # Componentes React
+│   ├── Navbar.tsx
+│   ├── Hero.tsx
+│   ├── WhoWeAre.tsx
+│   ├── BarberCarousel.tsx
+│   ├── Contact.tsx
+│   ├── Footer.tsx
+│   └── FloatingBookingButton.tsx
+├── data/                  # Datos estáticos
+│   └── barbers.ts         # Información de barberos
+├── public/               # Archivos estáticos
+└── package.json
+```
+
+## 🎨 Principios de Animación Aplicados
+
+1. **Elasticidad** - Animaciones con spring physics
+2. **Anticipación** - Movimientos previos a acciones principales
+3. **Escena** - Focus en elementos importantes
+4. **Acción** - Transiciones suaves frame a frame
+5. **Continuidad** - Sin paradas bruscas
+6. **Suavidad** - Easing functions naturales
+7. **Arcos** - Movimientos curvos
+8. **Contexto** - Detalles de apoyo
+9. **Tiempo** - Duraciones apropiadas
+10. **Exageración** - Énfasis en interacciones
+11. **Volumen** - Profundidad y realismo
+12. **Atractivo** - Personalidad memorable
+
+## 📧 Contacto
+
+- **Email**: contacto@neobarberia.cl
+- **Instagram**: [@neobarberia](https://instagram.com/neobarberia)
+- **Ubicación**: Quilicura, Santiago, Chile
+
+## 📄 Licencia
+
+Copyright © 2024 Neo Barbería. Todos los derechos reservados.
+
