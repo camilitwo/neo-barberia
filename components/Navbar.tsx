@@ -20,6 +20,7 @@ export default function Navbar() {
     { href: '#inicio', label: 'Inicio' },
     { href: '#nosotros', label: 'Nosotros' },
     { href: '#equipo', label: 'Equipo' },
+    { href: '#blog', label: 'Blog' },
     { href: '#contacto', label: 'Contacto' },
   ];
 
