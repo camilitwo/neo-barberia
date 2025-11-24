@@ -3,7 +3,7 @@ export interface BlogPost {
   titulo: string;
   descripcion: string;
   contenido: string;
-  imagen: string;
+  imagen: string; // Placeholder path - Blog component uses gradient fallbacks
   categoria: string;
   fecha: string;
   autor: string;

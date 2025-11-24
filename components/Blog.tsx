@@ -9,6 +9,8 @@ interface BlogProps {
 
 export default function Blog({ posts }: BlogProps) {
   const shareToSocial = (platform: string, post: BlogPost) => {
+    if (typeof window === 'undefined') return;
+    
     const url = encodeURIComponent(window.location.href);
     const text = encodeURIComponent(`${post.titulo} - Neo Barbería`);
     
