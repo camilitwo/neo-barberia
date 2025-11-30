@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import {CalendarOutlined} from "@ant-design/icons";
 
 interface FloatingBookingButtonProps {
   url: string;
@@ -41,7 +42,7 @@ export default function FloatingBookingButton({ url }: FloatingBookingButtonProp
       onHoverEnd={() => setIsHovered(false)}
       className="fixed bottom-6 sm:bottom-8 right-6 sm:right-8 z-50 px-5 sm:px-6 py-3 sm:py-4 bg-primary hover:bg-primary-hover text-black font-bold text-sm sm:text-lg rounded-full shadow-2xl cursor-pointer overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       style={{
-        boxShadow: '0 10px 40px rgba(212, 175, 55, 0.4)',
+        boxShadow: '0 10px 40px rgba(230, 180, 100, 0.4)',
       }}
     >
       {/* Animated background */}
@@ -57,8 +58,7 @@ export default function FloatingBookingButton({ url }: FloatingBookingButtonProp
         <motion.span
           animate={{ rotate: isHovered ? 360 : 0 }}
           transition={{ duration: 0.5 }}
-        >
-          📅
+        ><CalendarOutlined />
         </motion.span>
         <span>Agenda Aquí</span>
       </span>

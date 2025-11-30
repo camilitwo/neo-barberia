@@ -143,7 +143,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
 
         .barber-swiper .swiper-button-next:hover,
         .barber-swiper .swiper-button-prev:hover {
-          background: rgba(212, 175, 55, 0.3);
+          background: rgba(230, 180, 100, 0.3);
           transform: scale(1.1);
         }
 
