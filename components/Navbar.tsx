@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,8 +40,21 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link href="/" className="text-2xl font-bold text-gradient">
-              Neo Barbería
+            <Link href="/" className="flex items-center gap-3">
+              {/* Usar un contenedor con esquinas suaves (no circular) y padding para que la imagen cuadrada se vea completa */}
+              <span className="bg-white/95 dark:bg-black/80 rounded-lg p-1.5 sm:p-2 shadow-sm border border-border">
+                {/* contenedor relativo para usar Image fill: ancho y alto explícitos para que `fill` funcione */}
+                <div className="relative w-10 sm:w-12 md:w-14 h-10 sm:h-12 md:h-14">
+                  <Image
+                    src="https://res.cloudinary.com/dddfx1xwt/image/upload/v1764116007/1_t2y8pa.png"
+                    alt="Neo Barbería"
+                    fill
+                    sizes="(max-width: 768px) 40px, (max-width: 1024px) 48px, 56px"
+                    className="object-contain"
+                  />
+                </div>
+              </span>
+              <span className="hidden md:inline text-2xl font-bold text-gradient ml-2">Neo Barbería</span>
             </Link>
           </motion.div>
 
