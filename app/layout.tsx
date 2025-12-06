@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "yet-another-react-lightbox/styles.css";
+import "./lightbox.css";
 
 export const metadata: Metadata = {
   title: "Neo Barbería | La Barbería que está revolucionando Quilicura",

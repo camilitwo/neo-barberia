@@ -20,6 +20,8 @@ Este proyecto está construido con:
 - ✅ Hero section impactante
 - ✅ Sección "Quiénes Somos" con información del negocio
 - ✅ Carrusel de barberos con efecto 3D
+- ✅ Galería de imágenes interactiva con vista modal
+- ✅ Popup promocional automático con galería y botón de agendamiento
 - ✅ Formulario de contacto
 - ✅ Botón flotante de agendamiento
 - ✅ Totalmente responsive
@@ -69,6 +71,8 @@ neo-barberia/
 │   ├── Hero.tsx
 │   ├── WhoWeAre.tsx
 │   ├── BarberCarousel.tsx
+│   ├── ImageGallery.tsx
+│   ├── GalleryPopup.tsx
 │   ├── Contact.tsx
 │   ├── Footer.tsx
 │   └── FloatingBookingButton.tsx
@@ -92,6 +96,39 @@ neo-barberia/
 10. **Exageración** - Énfasis en interacciones
 11. **Volumen** - Profundidad y realismo
 12. **Atractivo** - Personalidad memorable
+
+## 🖼️ Componentes de Galería
+
+### ImageGallery
+Componente de galería interactiva con las siguientes características:
+- Grid responsive (2 columnas en móvil, 4 en desktop)
+- Efecto hover con zoom y overlay degradado
+- Modal de vista ampliada con navegación
+- Animaciones suaves con Framer Motion
+- Botón de agendamiento opcional integrado
+- Optimización de imágenes con Next.js Image
+
+### GalleryPopup
+Popup promocional automático que:
+- Se abre 5 segundos después de cargar la página
+- Solo se muestra una vez por sesión (usa sessionStorage)
+- Incluye galería de imágenes completa
+- Botón de agendamiento prominente
+- Información promocional destacada
+- Diseño totalmente responsive
+- Animaciones elegantes de entrada/salida
+
+**Uso:**
+```tsx
+// En tu página
+<GalleryPopup delaySeconds={5} />
+
+// Galería standalone
+<ImageGallery 
+  showBookingButton={true}
+  onBookingClick={() => window.open('url', '_blank')}
+/>
+```
 
 ## ♿ Accesibilidad y Responsive
 
