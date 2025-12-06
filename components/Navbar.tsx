@@ -21,6 +21,7 @@ export default function Navbar() {
     { href: '#inicio', label: 'Inicio' },
     { href: '#nosotros', label: 'Nosotros' },
     { href: '#equipo', label: 'Equipo' },
+    { href: '#galeria', label: 'Galería' },
     { href: '#contacto', label: 'Contacto' },
   ];
 
