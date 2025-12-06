@@ -7,6 +7,9 @@ import FloatingBookingButton from "@/components/FloatingBookingButton";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { barbersData } from "@/data/barbers";
+import dynamic from 'next/dynamic';
+
+const Gallery = dynamic(() => import('@/components/Gallery'), { ssr: false });
 
 export default function Home() {
   return (
@@ -14,6 +17,7 @@ export default function Home() {
       <Navbar />
       <FloatingLogo />
       <Hero />
+      <Gallery />
       <WhoWeAre />
       <BarberCarousel barbers={barbersData} />
       <Contact />
