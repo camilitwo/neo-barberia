@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 interface BarberPageProps {
   params: {
@@ -52,6 +53,10 @@ export default function BarberPage({ params }: BarberPageProps) {
   if (!barber) {
     return notFound();
   }
+
+  const index = barbersData.findIndex((b) => b.slug === barber.slug);
+  const prev = index > 0 ? barbersData[index - 1] : null;
+  const next = index < barbersData.length - 1 ? barbersData[index + 1] : null;
 
   return (
     <main className="min-h-screen bg-surface text-foreground">
@@ -117,6 +122,33 @@ export default function BarberPage({ params }: BarberPageProps) {
         </div>
       </section>
 
+      {/* Navegación entre perfiles */}
+      <section className="max-w-6xl mx-auto px-4 pb-8">
+        <div className="flex items-center justify-between">
+          <Link href="/barberos" className="text-primary hover:underline">
+            ← Volver al equipo
+          </Link>
+          <div className="flex items-center gap-4">
+            {prev && (
+              <Link
+                href={`/barberos/${prev.slug}`}
+                className="px-4 py-2 rounded-full border border-border hover:border-primary text-foreground hover:text-primary transition-colors"
+              >
+                ← {prev.apodo}
+              </Link>
+            )}
+            {next && (
+              <Link
+                href={`/barberos/${next.slug}`}
+                className="px-4 py-2 rounded-full border border-border hover:border-primary text-foreground hover:text-primary transition-colors"
+              >
+                {next.apodo} →
+              </Link>
+            )}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-background/40 border-t border-border">
         <div className="max-w-6xl mx-auto px-4 py-12 grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
@@ -177,8 +209,13 @@ export default function BarberPage({ params }: BarberPageProps) {
         <div className="rounded-3xl border border-border bg-gradient-to-r from-background via-background/80 to-background shadow-xl p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-primary mb-2">Reserva directa</p>
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Agenda con {barber.apodo} en segundos</h3>
-            <p className="text-muted max-w-2xl">Elige la fecha y horario disponibles sin seleccionar barbero nuevamente. Tu página personal ya está lista para posicionarse en Google.</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+              Agenda con {barber.apodo} en segundos
+            </h3>
+            <p className="text-muted max-w-2xl">
+              Elige la fecha y horario disponibles sin seleccionar barbero nuevamente. Tu página personal ya está lista
+              para posicionarse en Google.
+            </p>
           </div>
           <BarberBookingButton barberId={barber.id} className="w-full md:w-auto" />
         </div>
