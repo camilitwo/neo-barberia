@@ -3,33 +3,82 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { SiInstagram, SiTiktok, SiWhatsapp } from 'react-icons/si';
+import { barbersData } from '@/data/barbers';
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const serviceOptions = [
+    'Corte clásico',
+    'Fade / diseños',
+    'Afeitado y perfilado',
+    'Color / decoloración',
+    'Paquete premium',
+  ];
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    barber: barbersData[0]?.nombre ?? '',
+    service: serviceOptions[0],
+    preferredDate: '',
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<{
+    type: 'idle' | 'loading' | 'success' | 'error';
+    message?: string;
+  }>({ type: 'idle' });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Create mailto link with form data
-    const subject = encodeURIComponent('Consulta desde Neo Barbería');
-    const body = encodeURIComponent(
-      `Nombre: ${formData.name}\nEmail: ${formData.email}\nTeléfono: ${formData.phone}\n\nMensaje:\n${formData.message}`
-    );
-    window.location.href = `mailto:contacto@neobarberia.cl?subject=${subject}&body=${body}`;
+    setStatus({ type: 'loading', message: 'Guardando tu reserva...' });
+
+    try {
+      const response = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result?.error || 'No pudimos registrar tu reserva.');
+      }
+
+      setStatus({ type: 'success', message: 'Reserva registrada. Te contactaremos con la confirmación.' });
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        barber: barbersData[0]?.nombre ?? '',
+        service: serviceOptions[0],
+        preferredDate: '',
+        message: '',
+      });
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message:
+          error instanceof Error
+            ? error.message
+            : 'Hubo un problema al guardar tu reserva. Inténtalo nuevamente.',
+      });
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
+
+  const isSubmitting = status.type === 'loading';
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -175,14 +224,100 @@ export default function Contact() {
           {/* Right column placeholder (form or CTA) - keep minimal to not break layout */}
           <motion.div variants={itemVariants} className="bg-transparent rounded-xl p-6 border border-border glass-effect">
             <h3 className="text-lg font-bold mb-4">Reserva o envíanos un mensaje</h3>
-            <p className="text-muted mb-4">Haz click en el botón de WhatsApp o envía un correo usando el formulario.</p>
+            <p className="text-muted mb-4">Tus datos se guardan en Supabase para que podamos confirmar tu hora sin esperas.</p>
             <form onSubmit={handleSubmit} className="space-y-3">
-              <input name="name" value={formData.name} onChange={handleChange} placeholder="Nombre" className="w-full p-3 rounded-md bg-background border border-border focus:outline-none" />
-              <input name="email" value={formData.email} onChange={handleChange} placeholder="Email" className="w-full p-3 rounded-md bg-background border border-border focus:outline-none" />
-              <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Mensaje" className="w-full p-3 rounded-md bg-background border border-border focus:outline-none h-24" />
-              <div className="flex items-center space-x-3">
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-full">Enviar WhatsApp</a>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input
+                  required
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Nombre"
+                  className="w-full p-3 rounded-md bg-background border border-border focus:outline-none"
+                />
+                <input
+                  required
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                  className="w-full p-3 rounded-md bg-background border border-border focus:outline-none"
+                />
+                <input
+                  required
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Teléfono"
+                  className="w-full p-3 rounded-md bg-background border border-border focus:outline-none"
+                />
+                <select
+                  name="barber"
+                  value={formData.barber}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-md bg-background border border-border focus:outline-none"
+                >
+                  {barbersData.map((barber) => (
+                    <option key={barber.id} value={barber.nombre}>
+                      {barber.nombre} ({barber.especialidad})
+                    </option>
+                  ))}
+                </select>
+                <select
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-md bg-background border border-border focus:outline-none"
+                >
+                  {serviceOptions.map((service) => (
+                    <option key={service} value={service}>
+                      {service}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  required
+                  type="datetime-local"
+                  name="preferredDate"
+                  value={formData.preferredDate}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-md bg-background border border-border focus:outline-none"
+                />
               </div>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Detalles adicionales (barba, diseños, cancelaciones o reagendamientos)"
+                className="w-full p-3 rounded-md bg-background border border-border focus:outline-none h-24"
+              />
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-3 sm:space-y-0">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-black font-semibold rounded-full shadow-sm hover:opacity-95 transition disabled:opacity-60"
+                >
+                  {isSubmitting ? 'Guardando...' : 'Guardar reserva'}
+                </button>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-full"
+                >
+                  Enviar WhatsApp
+                </a>
+              </div>
+              {status.type !== 'idle' && (
+                <p
+                  className={`text-sm ${
+                    status.type === 'success' ? 'text-green-400' : status.type === 'error' ? 'text-red-400' : 'text-muted'
+                  }`}
+                >
+                  {status.message}
+                </p>
+              )}
             </form>
           </motion.div>
 
