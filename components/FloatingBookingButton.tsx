@@ -2,17 +2,17 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import BookingModal from './BookingModal';
 import {CalendarOutlined} from "@ant-design/icons";
+import { useBookingModal } from './BookingModalProvider';
 
 export default function FloatingBookingButton() {
   const [isHovered, setIsHovered] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { openBookingModal } = useBookingModal();
 
   return (
     <>
       <motion.button
-        onClick={() => setIsModalOpen(true)}
+        onClick={openBookingModal}
         aria-label="Agenda tu cita"
         initial={{ scale: 0, opacity: 0 }}
         animate={{
@@ -76,7 +76,7 @@ export default function FloatingBookingButton() {
         />
       </motion.button>
 
-      <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* Se elimina la instancia local de BookingModal, ahora es global vía provider */}
     </>
   );
 }
