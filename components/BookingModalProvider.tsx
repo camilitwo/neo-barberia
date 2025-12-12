@@ -4,7 +4,7 @@ import { createContext, useContext, useState, ReactNode, useMemo } from "react";
 import BookingModal from "./BookingModal";
 
 interface BookingModalContextValue {
-  openBookingModal: () => void;
+  openBookingModal: (barberId?: number) => void;
   closeBookingModal: () => void;
 }
 
@@ -20,11 +20,18 @@ export function useBookingModal() {
 
 export default function BookingModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [initialBarberId, setInitialBarberId] = useState<number | undefined>();
 
   const value = useMemo(
     () => ({
-      openBookingModal: () => setIsOpen(true),
-      closeBookingModal: () => setIsOpen(false),
+      openBookingModal: (barberId?: number) => {
+        setInitialBarberId(barberId);
+        setIsOpen(true);
+      },
+      closeBookingModal: () => {
+        setIsOpen(false);
+        setInitialBarberId(undefined);
+      },
     }),
     []
   );
@@ -33,7 +40,14 @@ export default function BookingModalProvider({ children }: { children: ReactNode
     <BookingModalContext.Provider value={value}>
       {children}
       {/* Renderizamos una sola instancia del modal global */}
-      <BookingModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <BookingModal
+        isOpen={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+          setInitialBarberId(undefined);
+        }}
+        initialBarberId={initialBarberId}
+      />
     </BookingModalContext.Provider>
   );
 }

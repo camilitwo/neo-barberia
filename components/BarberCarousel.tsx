@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
@@ -224,6 +225,18 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
         <p className="text-muted text-sm leading-relaxed">
           {barber.descripcion}
         </p>
+
+        <div className="pt-2">
+          <Link
+            href={`/barberos/${barber.slug}`}
+            className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
+          >
+            Ver perfil y agenda
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
 
         {/* Social Icons */}
         {(barber.instagram || barber.facebook) && (

@@ -12,6 +12,7 @@ import 'react-day-picker/dist/style.css';
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialBarberId?: number;
 }
 
 interface ServiceOption {
@@ -71,7 +72,7 @@ const services: ServiceOption[] = [
   },
 ];
 
-export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
+export default function BookingModal({ isOpen, onClose, initialBarberId }: BookingModalProps) {
   const [step, setStep] = useState(1);
   const [selectedBarber, setSelectedBarber] = useState<Barber | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -106,6 +107,18 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
       }, 300);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    if (initialBarberId) {
+      const foundBarber = barbersData.find((barber) => barber.id === initialBarberId) || null;
+      setSelectedBarber(foundBarber);
+      setStep(foundBarber ? 2 : 1);
+    } else {
+      setStep(1);
+    }
+  }, [initialBarberId, isOpen]);
 
   // Fetch available slots when date or barber changes
   useEffect(() => {
