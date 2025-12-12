@@ -9,10 +9,14 @@ export default function FloatingBookingButton() {
   const [isHovered, setIsHovered] = useState(false);
   const { openBookingModal } = useBookingModal();
 
+  const handleClick = () => {
+    openBookingModal();
+  };
+
   return (
     <>
       <motion.button
-        onClick={openBookingModal}
+        onClick={handleClick}
         aria-label="Agenda tu cita"
         initial={{ scale: 0, opacity: 0 }}
         animate={{
