@@ -81,6 +81,7 @@ export default function Hero() {
   };
 
   const { openBookingModal } = useBookingModal();
+  const handleBookClick = () => openBookingModal();
 
   return (
     <section id="inicio" className="relative h-screen w-full flex items-center justify-center overflow-hidden">
@@ -136,7 +137,7 @@ export default function Hero() {
 
         {/* CTA Button */}
         <motion.button
-          onClick={openBookingModal}
+          onClick={handleBookClick}
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
