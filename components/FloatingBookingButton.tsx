@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import BookingModal from './BookingModal';
+import {CalendarOutlined} from "@ant-design/icons";
 
 export default function FloatingBookingButton() {
   const [isHovered, setIsHovered] = useState(false);
