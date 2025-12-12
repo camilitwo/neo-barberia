@@ -20,7 +20,7 @@ export function useBookingModal() {
 
 export default function BookingModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [initialBarberId, setInitialBarberId] = useState<number | undefined>();
+  const [initialBarberId, setInitialBarberId] = useState<number | undefined>(undefined);
 
   const value = useMemo(
     () => ({
@@ -40,15 +40,7 @@ export default function BookingModalProvider({ children }: { children: ReactNode
     <BookingModalContext.Provider value={value}>
       {children}
       {/* Renderizamos una sola instancia del modal global */}
-      <BookingModal
-        isOpen={isOpen}
-        onClose={() => {
-          setIsOpen(false);
-          setInitialBarberId(undefined);
-        }}
-        initialBarberId={initialBarberId}
-      />
+      <BookingModal isOpen={isOpen} onClose={() => setIsOpen(false)} initialBarberId={initialBarberId} />
     </BookingModalContext.Provider>
   );
 }
-
