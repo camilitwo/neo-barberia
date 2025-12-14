@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Barber {
+  id        Int       @id @default(autoincrement())
+  name      String
+  bio       String?
+  avatarUrl String?
+  active    Boolean   @default(true)
+  services  Service[]
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Service {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  duration    Int       // minutes
+  price       Float
+  active      Boolean   @default(true)
+  barber      Barber?   @relation(fields: [barberId], references: [id])
+  barberId    Int?
+  bookings    Booking[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Booking {
+  id             String   @id @default(cuid())
+  startTime      DateTime
+  endTime        DateTime
+  status         BookingStatus @default(PENDING)
+  customerName   String
+  customerEmail  String
+  customerPhone  String
+  notes          String?
+  barber         Barber   @relation(fields: [barberId], references: [id])
+  barberId       Int
+  service        Service  @relation(fields: [serviceId], references: [id])
+  serviceId      Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
