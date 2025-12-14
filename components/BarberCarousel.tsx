@@ -5,8 +5,10 @@ import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { useBookingModal } from './BookingModalProvider';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -158,6 +160,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
 }
 
 function BarberCard({ barber, index }: { barber: Barber; index: number }) {
+  const { openBookingModal } = useBookingModal();
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
@@ -187,7 +190,7 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
         {/* Nickname Badge */}
         <motion.div
@@ -205,7 +208,30 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
       </div>
 
       {/* Content */}
-      <div className="p-6 space-y-3">
+      <div className="relative z-10 p-6 space-y-3 pointer-events-auto">
+        {/* CTA primario */}
+        <div className="flex justify-between items-center mb-2">
+          <motion.button
+            onClick={() => openBookingModal(barber.id)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-4 py-2 bg-primary hover:bg-primary-hover text-black font-bold text-sm rounded-full shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            data-track="cta_agendar_carousel"
+          >
+            Agendar con {barber.apodo}
+          </motion.button>
+          <Link
+            href={`/barberos/${barber.slug}`}
+            className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
+            data-track="ver_perfil"
+          >
+            Ver perfil
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+
         <motion.h3
           className="text-2xl font-bold text-white"
           whileHover={{ scale: 1.05, color: 'var(--primary)' }}
@@ -220,6 +246,17 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
             {barber.especialidad}
           </p>
         </div>
+
+        {/* Pills de especialidades */}
+        {barber.especialidades?.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-2">
+            {barber.especialidades.slice(0, 3).map((esp) => (
+              <span key={esp} className="text-xs px-2 py-1 rounded-full bg-background border border-border text-muted">
+                {esp}
+              </span>
+            ))}
+          </div>
+        )}
 
         <p className="text-muted text-sm leading-relaxed">
           {barber.descripcion}
