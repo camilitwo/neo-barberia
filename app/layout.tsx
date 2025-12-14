@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "yet-another-react-lightbox/styles.css";
 import "./lightbox.css";
+import BookingModalProvider from "../components/BookingModalProvider";
 
 export const metadata: Metadata = {
   title: "Neo Barbería | La Barbería que está revolucionando Quilicura",
@@ -28,7 +29,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif" }}>
-        {children}
+        <BookingModalProvider>
+          {children}
+        </BookingModalProvider>
       </body>
     </html>
   );

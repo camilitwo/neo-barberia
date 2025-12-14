@@ -12,24 +12,74 @@ import 'react-day-picker/dist/style.css';
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialBarberId?: number;
 }
 
-const services = [
-  'Corte Clásico',
-  'Fade Moderno',
-  'Afeitado Clásico',
-  'Corte + Barba',
-  'Diseño Capilar',
-  'Perfilado',
+interface ServiceOption {
+  name: string;
+  price: string;
+  description: string;
+  includes?: string[];
+  tag?: string;
+}
+
+const services: ServiceOption[] = [
+  {
+    name: 'Corte Clásico',
+    price: '$8.000',
+    description:
+      'Un corte limpio y preciso con navaja y tijera, ideal para mantener un estilo prolijo y elegante.',
+    includes: ['Asesoría de estilo personalizada', 'Finalizado con productos premium'],
+  },
+  {
+    name: 'Fade Moderno',
+    price: '$10.000',
+    description:
+      'Degradados perfectos con transiciones suaves que realzan la forma de tu rostro y destacan tu look.',
+    includes: ['Definición de contornos', 'Aplicación de tónicos y peinado'],
+    tag: 'Popular',
+  },
+  {
+    name: 'Corte + Barba',
+    price: '$14.000',
+    description:
+      'Pack completo para renovar tu imagen con corte, perfilado y cuidado de barba con aceites y toalla caliente.',
+    includes: ['Toalla caliente', 'Aceite de barba y bálsamo', 'Definición con navaja'],
+    tag: 'Pack',
+  },
+  {
+    name: 'Afeitado Clásico',
+    price: '$9.000',
+    description:
+      'Ritual tradicional con shavette, toallas calientes y espuma caliente para una afeitada suave y sin irritación.',
+    includes: ['Toallas calientes', 'After shave calmante'],
+  },
+  {
+    name: 'Diseño Capilar',
+    price: '$12.000',
+    description:
+      'Líneas y figuras personalizadas con precisión milimétrica para un estilo único y llamativo.',
+    includes: ['Diseño a medida', 'Perfilado y definición'],
+    tag: 'Arte',
+  },
+  {
+    name: 'Promoción Premium',
+    price: '$16.000',
+    description:
+      'Promoción limitada que incluye corte, barba y limpieza facial express para una experiencia completa.',
+    includes: ['Limpieza facial express', 'Corte + perfilado de barba', 'Peinado y styling'],
+    tag: 'Promo',
+  },
 ];
 
-export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
+export default function BookingModal({ isOpen, onClose, initialBarberId }: BookingModalProps) {
   const [step, setStep] = useState(1);
   const [selectedBarber, setSelectedBarber] = useState<Barber | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
   const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([]);
   const [selectedService, setSelectedService] = useState('');
+  const [serviceDetail, setServiceDetail] = useState<ServiceOption | null>(null);
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -50,12 +100,25 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
         setSelectedSlot(null);
         setAvailableSlots([]);
         setSelectedService('');
+        setServiceDetail(null);
         setFormData({ name: '', email: '', phone: '' });
         setSuccessMessage('');
         setErrorMessage('');
       }, 300);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    if (initialBarberId) {
+      const foundBarber = barbersData.find((barber) => barber.id === initialBarberId) || null;
+      setSelectedBarber(foundBarber);
+      setStep(foundBarber ? 2 : 1);
+    } else {
+      setStep(1);
+    }
+  }, [initialBarberId, isOpen]);
 
   // Fetch available slots when date or barber changes
   useEffect(() => {
@@ -296,23 +359,61 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     </h3>
 
                     {/* Service Selection */}
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Servicio
-                      </label>
-                      <select
-                        value={selectedService}
-                        onChange={(e) => setSelectedService(e.target.value)}
-                        required
-                        className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                      >
-                        <option value="">Selecciona un servicio</option>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <label className="block text-sm font-medium text-foreground">
+                            Servicios y promociones
+                          </label>
+                          <p className="text-sm text-muted">
+                            Toca un servicio para ver el detalle y confirmar tu elección.
+                          </p>
+                        </div>
+                        {selectedService && (
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/15 text-primary border border-primary/30">
+                            Seleccionado
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {services.map((service) => (
-                          <option key={service} value={service}>
-                            {service}
-                          </option>
+                          <button
+                            key={service.name}
+                            type="button"
+                            onClick={() => setServiceDetail(service)}
+                            className={`relative p-4 text-left rounded-xl border transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                              selectedService === service.name
+                                ? 'border-primary bg-primary/10'
+                                : 'border-border hover:border-primary/60 bg-background'
+                            }`}
+                          >
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="space-y-1">
+                                <div className="flex items-center gap-2">
+                                  <h4 className="font-semibold text-foreground">{service.name}</h4>
+                                  {service.tag && (
+                                    <span className="text-[10px] uppercase tracking-wide font-bold px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30">
+                                      {service.tag}
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-sm text-muted line-clamp-2">{service.description}</p>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-lg font-bold text-primary">{service.price}</p>
+                                <p className="text-xs text-muted">Ver detalles</p>
+                              </div>
+                            </div>
+
+                            {selectedService === service.name && (
+                              <span className="absolute bottom-3 left-4 text-xs font-semibold text-primary">
+                                Confirmado
+                              </span>
+                            )}
+                          </button>
                         ))}
-                      </select>
+                      </div>
                     </div>
 
                     {/* Customer Info */}
@@ -441,6 +542,87 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                 </div>
               )}
             </div>
+
+            <AnimatePresence>
+              {serviceDetail && (
+                <>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.6 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/80 z-[60]"
+                    onClick={() => setServiceDetail(null)}
+                  />
+                  <motion.div
+                    initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 20, scale: 0.98 }}
+                    className="fixed inset-0 z-[65] flex items-center justify-center p-4"
+                  >
+                    <div className="bg-surface border border-border rounded-2xl shadow-2xl max-w-lg w-full p-6 space-y-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-sm text-muted mb-1">Detalles del servicio</p>
+                          <h4 className="text-2xl font-bold text-foreground leading-tight">{serviceDetail.name}</h4>
+                          {serviceDetail.tag && (
+                            <span className="inline-block mt-2 text-[10px] uppercase tracking-wide font-bold px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30">
+                              {serviceDetail.tag}
+                            </span>
+                          )}
+                        </div>
+                        <button
+                          aria-label="Cerrar detalles"
+                          onClick={() => setServiceDetail(null)}
+                          className="text-muted hover:text-foreground transition-colors"
+                        >
+                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+
+                      <div className="text-3xl font-extrabold text-primary">{serviceDetail.price}</div>
+                      <p className="text-muted leading-relaxed">{serviceDetail.description}</p>
+
+                      {serviceDetail.includes && (
+                        <div className="space-y-2">
+                          <p className="text-sm font-semibold text-foreground">Incluye:</p>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {serviceDetail.includes.map((item) => (
+                              <li
+                                key={item}
+                                className="flex items-start gap-2 text-sm text-muted bg-background border border-border rounded-lg px-3 py-2"
+                              >
+                                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-primary"></span>
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      <div className="flex flex-wrap justify-end gap-3 pt-2">
+                        <button
+                          onClick={() => setServiceDetail(null)}
+                          className="px-4 py-2 rounded-lg border border-border text-foreground hover:bg-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        >
+                          Seguir mirando
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedService(serviceDetail.name);
+                            setServiceDetail(null);
+                          }}
+                          className="px-5 py-2 rounded-lg bg-primary hover:bg-primary-hover text-black font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        >
+                          Elegir este servicio
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
           </motion.div>
         </>
       )}
