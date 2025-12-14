@@ -12,6 +12,9 @@ Este proyecto está construido con:
 - **Framer Motion** - Librería de animaciones para React
 - **Swiper** - Carrusel moderno y responsive
 - **Font Awesome** - Iconos
+- **react-day-picker** - Selector de fechas accesible y responsive
+- **date-fns** - Librería moderna para manejo de fechas
+
 
 ## ✨ Características
 
@@ -23,10 +26,15 @@ Este proyecto está construido con:
 - ✅ Galería de imágenes interactiva con vista modal
 - ✅ Popup promocional automático con galería y botón de agendamiento
 - ✅ Formulario de contacto
+- ✅ **Sistema de agendamiento completo con calendario interactivo**
+- ✅ **API REST para gestión de reservas**
+- ✅ **Modal multi-paso para reservas (barber → fecha → hora → detalles)**
 - ✅ Botón flotante de agendamiento
 - ✅ Totalmente responsive
 - ✅ Optimización de imágenes con Next.js
 - ✅ SEO optimizado
+- ✅ Accesibilidad WCAG (contraste, focus states, navegación por teclado)
+
 
 ## 🏃 Desarrollo
 
@@ -172,6 +180,103 @@ Editar variables en `app/globals.css` y extender en `tailwind.config.ts`.
 - Implementar tema claro completo.
 - Añadir tests automáticos de contraste.
 - Auditar tamaños táctiles (mínimo 44px) con herramientas.
+
+## 📅 Sistema de Agendamiento
+
+El sitio ahora incluye un sistema completo de reservas/agendamiento integrado:
+
+### Características del Sistema de Reservas
+
+- **Interfaz Multi-Paso**: Proceso guiado en 4 pasos para una experiencia de usuario intuitiva
+  1. Selección de barbero
+  2. Selección de fecha (calendario interactivo)
+  3. Selección de horario (slots de 30 minutos)
+  4. Detalles del cliente y confirmación
+
+- **Calendario Interactivo**: Integración con `react-day-picker` para selección de fechas
+  - Localizado en español
+  - Deshabilita fechas pasadas
+  - Rango de 60 días hacia adelante
+  - Diseño responsive y accesible
+
+- **Gestión de Disponibilidad**: 
+  - Horario de negocio: 11:00 AM - 8:30 PM
+  - Slots de 30 minutos
+  - Verificación en tiempo real de disponibilidad
+  - Prevención de reservas duplicadas
+
+- **API REST**: Endpoints para gestión de reservas
+  - `GET /api/bookings?date=YYYY-MM-DD&barberID=N` - Obtener slots disponibles
+  - `POST /api/bookings` - Crear nueva reserva
+
+- **Almacenamiento**: Sistema en memoria (Map) para MVP
+  - Fácilmente reemplazable por base de datos (Prisma + PostgreSQL)
+  - Estructura de datos lista para persistencia
+
+- **Validaciones**:
+  - Validación de email
+  - Campos requeridos
+  - Verificación de disponibilidad del slot
+  - Mensajes de error claros
+
+### Tecnologías Utilizadas
+
+- **react-day-picker**: Calendario accesible y bien mantenido
+- **date-fns**: Manejo eficiente de fechas con localización
+- **Next.js API Routes**: Backend serverless integrado
+- **TypeScript**: Tipado fuerte para modelos de datos
+
+### Estructura de Archivos del Sistema de Reservas
+
+```
+neo-barberia/
+├── app/api/bookings/
+│   └── route.ts              # API endpoints para reservas
+├── components/
+│   ├── BookingModal.tsx      # Modal de agendamiento multi-paso
+│   └── FloatingBookingButton.tsx  # Botón flotante actualizado
+├── lib/
+│   └── bookings.ts           # Lógica de negocio y utilidades
+├── types/
+│   └── booking.ts            # Interfaces TypeScript
+└── app/globals.css           # Estilos del calendario
+```
+
+### Modelo de Datos
+
+```typescript
+interface Booking {
+  id: string;              // ID único generado
+  barberID: number;        // ID del barbero seleccionado
+  date: string;            // Fecha en formato ISO (YYYY-MM-DD)
+  timeSlot: string;        // Hora en formato HH:MM
+  customerName: string;    // Nombre del cliente
+  customerEmail: string;   // Email del cliente
+  customerPhone: string;   // Teléfono del cliente
+  service: string;         // Servicio solicitado
+  createdAt: string;       // Timestamp de creación
+}
+```
+
+### Personalización
+
+Para modificar el horario de operación, editar en `/lib/bookings.ts`:
+
+```typescript
+const BUSINESS_START_HOUR = 11;    // Hora de apertura
+const BUSINESS_END_HOUR = 20;      // Hora de cierre
+const BUSINESS_END_MINUTE = 30;    // Minuto de cierre
+const SLOT_DURATION = 30;          // Duración de cada slot en minutos
+```
+
+### Migración a Base de Datos
+
+Para implementar persistencia con base de datos:
+
+1. Instalar Prisma: `npm install @prisma/client`
+2. Configurar esquema en `prisma/schema.prisma`
+3. Reemplazar funciones en `/lib/bookings.ts` con queries de Prisma
+4. Los endpoints API ya están preparados para trabajar con async/await
 
 ## 📧 Contacto
 

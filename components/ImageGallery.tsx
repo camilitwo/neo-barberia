@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
 import Lightbox from 'yet-another-react-lightbox';
+import { useBookingModal } from './BookingModalProvider';
 
 interface ImageGalleryProps {
   showBookingButton?: boolean;
@@ -38,6 +39,7 @@ export default function ImageGallery({
   onBookingClick
 }: ImageGalleryProps) {
   const [index, setIndex] = useState(-1);
+  const { openBookingModal } = useBookingModal();
 
   return (
     <>
@@ -205,12 +207,12 @@ export default function ImageGallery({
         ))}
       </motion.div>
 
-      {showBookingButton && onBookingClick && (
+      {showBookingButton && (
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, type: 'spring', stiffness: 100 }}
-          onClick={onBookingClick}
+          onClick={onBookingClick ?? (() => openBookingModal())}
           className="mt-8 w-full bg-primary hover:bg-primary-hover text-black font-bold py-4 px-8 rounded-lg transition-all duration-300 shadow-glow hover:shadow-[0_0_40px_rgba(230,180,100,0.5)] transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
         >
           <span className="flex items-center justify-center gap-3">
@@ -234,4 +236,3 @@ export default function ImageGallery({
     </>
   );
 }
-

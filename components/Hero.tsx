@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useBookingModal } from './BookingModalProvider';
 
 export default function Hero() {
   // Animation variants applying the 12 principles
@@ -79,6 +80,9 @@ export default function Hero() {
     },
   };
 
+  const { openBookingModal } = useBookingModal();
+  const handleBookClick = () => openBookingModal();
+
   return (
     <section id="inicio" className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Background Image with Parallax Effect */}
@@ -132,15 +136,15 @@ export default function Hero() {
         </motion.p>
 
         {/* CTA Button */}
-        <motion.a
-          href="https://neooc2b.setmore.com/?fbclid=PAZXh0bgNhZW0CMTEAAaaOGfb00uDJuEsMw9NMHy2Da7Qy6sfgyZHYMtwgSEj_5R3HK1mp4I51bxU_aem_ZEFdpvIRt2yhMVwlxEbhQg#services"
+        <motion.button
+          onClick={handleBookClick}
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
           className="inline-block px-8 sm:px-10 py-4 bg-primary hover:bg-primary-hover text-black font-bold text-base sm:text-lg rounded-full shadow-glow transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           Agenda tu cita
-        </motion.a>
+        </motion.button>
 
         {/* Floating Elements for Visual Interest */}
         <motion.div

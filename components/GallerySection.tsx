@@ -31,7 +31,7 @@ export default function GallerySection() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <ImageGallery
-            showBookingButton={true}
+            showBookingButton={false}
             onBookingClick={handleBooking}
           />
         </motion.div>
