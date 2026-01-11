@@ -1,16 +1,15 @@
 export interface Barber {
   id: number;
+  slug: string;
   nombre: string;
   apodo: string;
   especialidad: string;
   descripcion: string;
-  experiencia: string;
-  enfoque: string;
+  imagen: string;
   disponibilidad: string;
   servicios: string[];
   galeria: { src: string; alt: string }[];
   publicaciones: { titulo: string; fecha: string; resumen: string }[];
-  imagen: string;
   instagram?: string;
   facebook?: string;
 }
@@ -18,12 +17,11 @@ export interface Barber {
 export const barbersData: Barber[] = [
   {
     id: 1,
+    slug: 'stofer',
     nombre: 'Christofer Beltrán',
     apodo: 'Stofer',
     especialidad: 'Corte Clásico',
     descripcion: 'Con más de 10 años de experiencia, domina el estilo clásico con precisión y profesionalismo.',
-    experiencia: '10+ años de trayectoria en barbería clásica y asesoría de imagen.',
-    enfoque: 'Líneas limpias, simetría perfecta y acabados de alta duración.',
     disponibilidad: 'Martes a sábado · 10:00 - 20:00',
     servicios: ['Corte clásico premium', 'Perfilado de barba', 'Asesoría de estilo'],
     galeria: [
@@ -57,12 +55,11 @@ export const barbersData: Barber[] = [
   },
   {
     id: 2,
+    slug: 'viishon',
     nombre: 'Vicente Bravo',
     apodo: 'Viishon',
     especialidad: 'Fades Modernos',
     descripcion: 'Especialista en fades y diseños modernos, combina técnica con creatividad.',
-    experiencia: '8 años creando degradados personalizados y estilos urbanos.',
-    enfoque: 'Fades pulidos, detalles geométricos y textura contemporánea.',
     disponibilidad: 'Lunes a viernes · 11:00 - 21:00',
     servicios: ['Fades de autor', 'Diseño de líneas', 'Corte + styling urbano'],
     galeria: [
@@ -96,12 +93,11 @@ export const barbersData: Barber[] = [
   },
   {
     id: 3,
+    slug: 'keo',
     nombre: 'Fabián Garrido',
     apodo: 'Keo',
     especialidad: 'Afeitados Clásicos',
     descripcion: 'Maestro en afeitados tradicionales y experto en perfilados de precisión.',
-    experiencia: '12 años dominando técnicas de afeitado y rituales clásicos.',
-    enfoque: 'Rituales relajantes, toallas calientes y acabado ultra suave.',
     disponibilidad: 'Miércoles a domingo · 12:00 - 20:00',
     servicios: ['Afeitado tradicional', 'Ritual de barba', 'Perfilado premium'],
     galeria: [
@@ -135,12 +131,11 @@ export const barbersData: Barber[] = [
   },
   {
     id: 4,
+    slug: 'pato',
     nombre: 'Patricio Beltrán',
     apodo: 'Pato',
     especialidad: 'Diseños y Arte Capilar',
     descripcion: 'Creativo y detallista, transforma cada corte en una obra de arte.',
-    experiencia: '7 años combinando arte gráfico y barbería de precisión.',
-    enfoque: 'Diseños personalizados, líneas limpias y contraste visual.',
     disponibilidad: 'Jueves a lunes · 13:00 - 22:00',
     servicios: ['Diseños artísticos', 'Corte creativo', 'Color puntual'],
     galeria: [

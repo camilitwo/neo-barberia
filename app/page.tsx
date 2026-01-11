@@ -2,7 +2,6 @@ import Hero from "@/components/Hero";
 import FloatingLogo from '@/components/FloatingLogo';
 import WhoWeAre from "@/components/WhoWeAre";
 import BarberCarousel from "@/components/BarberCarousel";
-import BarberProfiles from "@/components/BarberProfiles";
 import GallerySection from "@/components/GallerySection";
 import Contact from "@/components/Contact";
 import FloatingBookingButton from "@/components/FloatingBookingButton";
@@ -19,7 +18,6 @@ export default function Home() {
       <Hero />
       <WhoWeAre />
       <BarberCarousel barbers={barbersData} />
-      <BarberProfiles barbers={barbersData} />
       <GallerySection />
       <Contact />
       <Footer />
