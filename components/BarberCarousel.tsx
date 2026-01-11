@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
@@ -176,7 +177,7 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
           damping: 10,
         }
       }}
-      className="glass-effect rounded-2xl overflow-hidden shadow-2xl h-full group cursor-pointer"
+      className="glass-effect rounded-2xl overflow-hidden shadow-2xl h-full group"
     >
       {/* Image Container */}
       <div className="relative h-80 overflow-hidden">
@@ -260,6 +261,13 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
             )}
           </div>
         )}
+
+        <Link
+          href={`/barberos/${barber.slug}`}
+          className="inline-flex items-center justify-center w-full mt-4 rounded-xl border border-primary/50 bg-transparent text-primary font-semibold py-3 transition-all duration-300 hover:bg-primary/10 hover:text-primary-hover focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          Ver perfil
+        </Link>
       </div>
     </motion.div>
   );
