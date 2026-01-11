@@ -13,7 +13,8 @@ export interface Booking {
   customerName: string;
   customerEmail: string;
   customerPhone: string;
-  service: string;
+  service?: string;
+  serviceId?: number;
   createdAt: string;
 }
 
@@ -27,7 +28,23 @@ export interface BookingRequest {
   service: string;
 }
 
+export interface AvailabilitySlot {
+  startTime: string;
+  available: boolean;
+}
+
 export interface AvailabilityResponse {
   date: string;
-  slots: TimeSlot[];
+  barberId: number;
+  slots: AvailabilitySlot[];
+}
+
+export interface CreateBookingInput {
+  barberId: number;
+  serviceId: number;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  notes?: string | null;
+  startTime: string;
 }

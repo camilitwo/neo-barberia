@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import type { TimeSlot, Booking } from '@/types/booking';
+import type { TimeSlot, Booking, AvailabilitySlot } from '@/types/booking';
 
 // Business hours: 11:00 AM - 8:30 PM
 const BUSINESS_START_HOUR = 11;
@@ -72,10 +72,45 @@ export function isSlotAvailable(date: string, timeSlot: string, barberID: number
  */
 export function getAvailableSlots(date: string, barberID: number): TimeSlot[] {
   const allSlots = generateTimeSlots();
-  const bookedSlots = getBookingsForDate(date, barberID);
   
   return allSlots.map(slot => ({
     ...slot,
+    available: isSlotAvailable(date, slot.label, barberID),
+  }));
+}
+
+/**
+ * Build an ISO-like start time string for a date and slot label.
+ */
+export function buildStartTime(date: string, timeSlot: string): string {
+  return `${date}T${timeSlot}:00`;
+}
+
+/**
+ * Parse a startTime string into date and slot label.
+ */
+export function parseStartTime(startTime: string): { date: string; timeSlot: string } | null {
+  const [date, time] = startTime.split('T');
+  if (!date || !time) {
+    return null;
+  }
+
+  const timeSlot = time.slice(0, 5);
+  if (!/^\d{2}:\d{2}$/.test(timeSlot)) {
+    return null;
+  }
+
+  return { date, timeSlot };
+}
+
+/**
+ * Get availability slots with start times and availability flags.
+ */
+export function getAvailabilitySlots(date: string, barberID: number): AvailabilitySlot[] {
+  const allSlots = generateTimeSlots();
+
+  return allSlots.map(slot => ({
+    startTime: buildStartTime(date, slot.label),
     available: isSlotAvailable(date, slot.label, barberID),
   }));
 }
