@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { barbersData } from '@/data/barbers';
 import EmbedFrame from '@/components/InstagramEmbed';
+import InstagramEmbedManager from '@/components/InstagramEmbedManager';
 
 interface BarberProfilePageProps {
   params: { slug: string };
@@ -26,7 +27,7 @@ export default function BarberProfilePage({ params }: BarberProfilePageProps) {
       : null;
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground" key={params.slug}>
       <section className="px-4 pt-28 pb-16">
         <div className="max-w-5xl mx-auto">
           {/* Breadcrumb + navegación sutil entre barberos */}
@@ -153,16 +154,21 @@ export default function BarberProfilePage({ params }: BarberProfilePageProps) {
 
               <div>
                 <h2 className="text-xl font-semibold text-white mb-4">Publicaciones</h2>
+                {/* Manager que fuerza el reprocesado de embeds al cambiar de barbero */}
+                <InstagramEmbedManager slug={params.slug} />
                 <div className="space-y-4">
                   {barber.publicaciones.slice(0, 3).map((post) => {
                     // Si la publicación tiene HTML embebido, lo mostramos en un frame genérico
                     if (post.embedHtml) {
                       return (
                         <div
-                          key={post.titulo}
+                          key={`${params.slug}-${post.url || post.titulo}`}
                           className="rounded-2xl border border-border bg-surface/80 px-3 py-3 sm:px-5 sm:py-4"
                         >
-                          <EmbedFrame html={post.embedHtml} />
+                          <EmbedFrame
+                            key={`${params.slug}-${post.url || post.titulo}`}
+                            html={post.embedHtml}
+                          />
                         </div>
                       );
                     }
@@ -177,7 +183,7 @@ export default function BarberProfilePage({ params }: BarberProfilePageProps) {
 
                     return post.url ? (
                       <Link
-                        key={post.titulo}
+                        key={`${params.slug}-${post.url || post.titulo}`}
                         href={post.url}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -188,7 +194,7 @@ export default function BarberProfilePage({ params }: BarberProfilePageProps) {
                       </Link>
                     ) : (
                       <article
-                        key={post.titulo}
+                        key={`${params.slug}-${post.url || post.titulo}`}
                         className="rounded-2xl border border-border bg-surface/80 px-5 py-4"
                       >
                         {content}
