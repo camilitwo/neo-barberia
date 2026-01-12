@@ -23,6 +23,7 @@ export default function Navbar() {
     { href: '#equipo', label: 'Equipo' },
     { href: '#galeria', label: 'Galería' },
     { href: '#contacto', label: 'Contacto' },
+    { href: '/visagismo', label: '¡Analiza tu rostro!' }, // Nuevo link agregado
   ];
 
   return (
