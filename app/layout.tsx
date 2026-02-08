@@ -22,7 +22,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <title>Neo Barbería | La Barbería que está revolucionando Quilicura</title>
         {/* Favicon: logo de la barbería */}
-        <link rel="icon" href="https://res.cloudinary.com/dddfx1xwt/image/upload/v1764116007/1_t2y8pa.png" type="image/png" />
+        <link rel="icon" href="/neobarberia_2026-01-28_09_23/1_t2y8pa.png" type="image/png" />
         {/* Color del navegador / barra en móviles */}
         <meta name="theme-color" content="#E6B464" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

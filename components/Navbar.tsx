@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
+import CdnImage from '@/components/CdnImage';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,8 +46,8 @@ export default function Navbar() {
               <span className="bg-white/95 dark:bg-black/80 rounded-lg p-1.5 sm:p-2 shadow-sm border border-border">
                 {/* contenedor relativo para usar Image fill: ancho y alto explícitos para que `fill` funcione */}
                 <div className="relative w-10 sm:w-12 md:w-14 h-10 sm:h-12 md:h-14">
-                  <Image
-                    src="https://res.cloudinary.com/dddfx1xwt/image/upload/v1764116007/1_t2y8pa.png"
+                  <CdnImage
+                    src="/neobarberia_2026-01-28_09_23/1_t2y8pa.png"
                     alt="Neo Barbería"
                     fill
                     sizes="(max-width: 768px) 40px, (max-width: 1024px) 48px, 56px"

@@ -50,7 +50,7 @@ export default function ComingSoon() {
         >
           <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 overflow-hidden rounded-2xl">
             <Image
-              src="https://res.cloudinary.com/dddfx1xwt/image/upload/v1764116007/1_t2y8pa.png"
+              src="/neobarberia_2026-01-28_09_23/1_t2y8pa.png"
               alt="Neo Barbería Logo"
               fill
               priority

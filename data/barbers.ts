@@ -16,7 +16,7 @@ export const barbersData: Barber[] = [
     apodo: 'Stofer',
     especialidad: 'Corte Clásico',
     descripcion: 'Con más de 10 años de experiencia, domina el estilo clásico con precisión y profesionalismo.',
-    imagen: 'https://res.cloudinary.com/dddfx1xwt/image/upload/v1764511152/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp',
+    imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp',
     instagram: 'https://www.instagram.com/stofer_.barber/',
   },
   {
@@ -25,7 +25,7 @@ export const barbersData: Barber[] = [
     apodo: 'Viishon',
     especialidad: 'Fades Modernos',
     descripcion: 'Especialista en fades y diseños modernos, combina técnica con creatividad.',
-    imagen: 'https://res.cloudinary.com/dddfx1xwt/image/upload/v1764511152/5c78573f-3fde-4257-944d-b68f113e4b40_ctyy8e.webp',
+    imagen: '/neobarberia_2026-01-28_09_23/barbers/5c78573f-3fde-4257-944d-b68f113e4b40_ctyy8e.webp',
     instagram: 'https://www.instagram.com/viishon.barber/',
   },
   {
@@ -34,7 +34,7 @@ export const barbersData: Barber[] = [
     apodo: 'Keo',
     especialidad: 'Afeitados Clásicos',
     descripcion: 'Maestro en afeitados tradicionales y experto en perfilados de precisión.',
-    imagen: 'https://res.cloudinary.com/dddfx1xwt/image/upload/v1764511151/576989ba-9099-4c0d-a430-69d314eedb44_jfph0o.webp',
+    imagen: '/neobarberia_2026-01-28_09_23/barbers/576989ba-9099-4c0d-a430-69d314eedb44_jfph0o.webp',
     instagram: 'https://www.instagram.com/keo_barber.cl/',
   },
   {
@@ -43,6 +43,6 @@ export const barbersData: Barber[] = [
     apodo: 'Pato',
     especialidad: 'Diseños y Arte Capilar',
     descripcion: 'Creativo y detallista, transforma cada corte en una obra de arte.',
-    imagen: 'https://res.cloudinary.com/dddfx1xwt/image/upload/v1764511151/aw-image-53_vgsjzj.webp',
+    imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp',
   },
 ];

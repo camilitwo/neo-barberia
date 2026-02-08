@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'res.cloudinary.com', // permitido para logo
       },
+      {
+        protocol: 'https',
+        hostname: 'ik.imagekit.io',
+      },
     ],
   },
 };

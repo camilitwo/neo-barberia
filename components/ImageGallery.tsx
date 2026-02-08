@@ -2,32 +2,35 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import Image from 'next/image';
 import Lightbox from 'yet-another-react-lightbox';
+
+import CdnImage from '@/components/CdnImage';
+import { imagekitUrl } from '@/lib/imagekit';
 
 interface ImageGalleryProps {
   showBookingButton?: boolean;
   onBookingClick?: () => void;
+  urlEndpoint?: string;
 }
 
 const photos = [
   {
-    src: 'https://res.cloudinary.com/dddfx1xwt/image/upload/v1765021660/WhatsApp_Image_2025-12-01_at_09.18.24_mpsuh5.jpg',
+    src: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.18.24_mpsuh5.jpg',
     width: 1200,
     height: 1600,
   },
   {
-    src: 'https://res.cloudinary.com/dddfx1xwt/image/upload/v1765021659/WhatsApp_Image_2025-12-01_at_09.19.37_a1b0c7.jpg',
+    src: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.37_a1b0c7.jpg',
     width: 1200,
     height: 1600,
   },
   {
-    src: 'https://res.cloudinary.com/dddfx1xwt/image/upload/v1765021659/WhatsApp_Image_2025-12-01_at_09.19.43_nqzjni.jpg',
+    src: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.43_nqzjni.jpg',
     width: 1200,
     height: 1600,
   },
   {
-    src: 'https://res.cloudinary.com/dddfx1xwt/image/upload/v1765021659/WhatsApp_Image_2025-12-01_at_09.19.43_1_zp0dzj.jpg',
+    src: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.43_1_zp0dzj.jpg',
     width: 1200,
     height: 1600,
   },
@@ -35,9 +38,15 @@ const photos = [
 
 export default function ImageGallery({
   showBookingButton = false,
-  onBookingClick
+  onBookingClick,
+  urlEndpoint,
 }: ImageGalleryProps) {
   const [index, setIndex] = useState(-1);
+
+  const slides = photos.map((photo) => ({
+    ...photo,
+    src: imagekitUrl(photo.src),
+  }));
 
   return (
     <>
@@ -59,7 +68,8 @@ export default function ImageGallery({
             onClick={() => setIndex(0)}
           >
             <div className="relative w-full h-full overflow-hidden rounded-lg shadow-2xl">
-              <Image
+              <CdnImage
+                urlEndpoint={urlEndpoint}
                 src={photos[0].src}
                 alt="Neo Barbería 1"
                 fill
@@ -88,7 +98,8 @@ export default function ImageGallery({
             onClick={() => setIndex(1)}
           >
             <div className="relative w-full h-full overflow-hidden rounded-lg shadow-2xl">
-              <Image
+              <CdnImage
+                urlEndpoint={urlEndpoint}
                 src={photos[1].src}
                 alt="Neo Barbería 2"
                 fill
@@ -117,7 +128,8 @@ export default function ImageGallery({
             onClick={() => setIndex(2)}
           >
             <div className="relative w-full h-full overflow-hidden rounded-lg shadow-2xl">
-              <Image
+              <CdnImage
+                urlEndpoint={urlEndpoint}
                 src={photos[2].src}
                 alt="Neo Barbería 3"
                 fill
@@ -145,7 +157,8 @@ export default function ImageGallery({
             onClick={() => setIndex(3)}
           >
             <div className="relative w-full h-full overflow-hidden rounded-lg shadow-2xl">
-              <Image
+              <CdnImage
+                urlEndpoint={urlEndpoint}
                 src={photos[3].src}
                 alt="Neo Barbería 4"
                 fill
@@ -184,7 +197,8 @@ export default function ImageGallery({
             }`}
             onClick={() => setIndex(idx)}
           >
-            <Image
+            <CdnImage
+              urlEndpoint={urlEndpoint}
               src={photo.src}
               alt={`Neo Barbería ${idx + 1}`}
               fill
@@ -226,7 +240,7 @@ export default function ImageGallery({
         open={index >= 0}
         index={index}
         close={() => setIndex(-1)}
-        slides={photos}
+        slides={slides}
         styles={{
           container: { backgroundColor: 'rgba(0, 0, 0, 0.95)' },
         }}

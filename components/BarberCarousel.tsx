@@ -16,6 +16,9 @@ import 'swiper/css/effect-coverflow';
 
 import { Barber } from '@/data/barbers';
 
+import CdnImage from '@/components/CdnImage';
+import { imagekitUrl } from '@/lib/imagekit';
+
 interface BarberCarouselProps {
   barbers: Barber[];
 }
@@ -186,6 +189,15 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
+
+        <CdnImage
+                src={barber.imagen}
+                alt={barber.nombre}
+                fill
+                sizes="50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                priority
+              />
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
