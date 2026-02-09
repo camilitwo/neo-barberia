@@ -24,6 +24,7 @@ Este proyecto está construido con:
 - ✅ Popup promocional automático con galería y botón de agendamiento
 - ✅ Formulario de contacto
 - ✅ Botón flotante de agendamiento
+- ✅ Integración con Supabase para capturar reservas y leads
 - ✅ Totalmente responsive
 - ✅ Optimización de imágenes con Next.js
 - ✅ SEO optimizado
@@ -57,6 +58,32 @@ Para ejecutar la versión de producción:
 ```bash
 npm start
 ```
+
+## 🗄️ Integración con Supabase
+
+1. Crea un archivo `.env.local` basado en `.env.example` y define:
+
+```bash
+SUPABASE_URL=https://<tu-proyecto>.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=<clave_de_servicio>
+```
+
+2. En Supabase, crea la tabla `reservations` con las columnas mínimas:
+
+| Columna | Tipo | Notas |
+| --- | --- | --- |
+| id | uuid | Primary key, `default uuid_generate_v4()` |
+| created_at | timestamptz | `default now()` |
+| name | text | Requerido |
+| email | text | Requerido |
+| phone | text | Requerido |
+| barber | text | Requerido |
+| preferred_date | timestamptz | Requerido |
+| service | text | Opcional |
+| message | text | Opcional |
+| lead_source | text | Opcional |
+
+3. El formulario de la sección **Contacto** envía la información a `/api/reservations`, que la inserta en la tabla `reservations` usando la clave de servicio (solo en el servidor).
 
 ## 📝 Estructura del Proyecto
 
