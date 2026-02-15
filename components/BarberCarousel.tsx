@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 import { Barber } from '@/data/barbers';
@@ -16,6 +16,10 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+
+  const selectedBarber = barbers[selectedIndex] ?? barbers[0];
+  const socialUrl = selectedBarber?.instagram || selectedBarber?.facebook;
+  const socialLabel = selectedBarber?.instagram ? 'Instagram' : selectedBarber?.facebook ? 'Facebook' : '';
 
   useEffect(() => {
     if (barbers.length <= 1) return;
@@ -51,14 +55,25 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
       onBlurCapture={() => setIsPaused(false)}
     >
       <div className="absolute inset-0 z-0 grain-overlay pointer-events-none">
-        <CdnImage
-          src={barbers[selectedIndex]?.imagen ?? barbers[0]?.imagen}
-          alt={barbers[selectedIndex]?.nombre ?? barbers[0]?.nombre ?? 'Neo Barbería - Barbero'}
-          fill
-          sizes="100vw"
-          className="w-full h-full object-cover object-[50%_18%] grayscale contrast-125 brightness-50"
-          priority
-        />
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={barbers[selectedIndex]?.id ?? selectedIndex}
+            className="absolute inset-0"
+            initial={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <CdnImage
+              src={barbers[selectedIndex]?.imagen ?? barbers[0]?.imagen}
+              alt={barbers[selectedIndex]?.nombre ?? barbers[0]?.nombre ?? 'Neo Barbería - Barbero'}
+              fill
+              sizes="100vw"
+              className="w-full h-full object-cover object-[50%_18%] grayscale contrast-125 brightness-50"
+              priority
+            />
+          </motion.div>
+        </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/80" />
       </div>
 
@@ -101,6 +116,22 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
               </div>
             ))}
           </div>
+
+          {socialUrl && (
+            <motion.a
+              href={socialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="mt-10 inline-flex items-center justify-between gap-4 border border-white/20 text-white font-bold uppercase py-4 px-6 hover:bg-white hover:text-black transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent w-fit"
+            >
+              <span className="text-[11px] tracking-[0.2em]">Ver {socialLabel}</span>
+              <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
+            </motion.a>
+          )}
         </div>
       </motion.div>
 
@@ -123,7 +154,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
         }
 
         .team-section .barber-name {
-          transition: all 0.3s ease;
+          transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
         }
       `}</style>
     </section>
