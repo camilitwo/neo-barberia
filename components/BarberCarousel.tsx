@@ -104,12 +104,20 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
                   htmlFor={`barber-${barber.id}`}
                 >
                   <span
-                    className="barber-name text-5xl md:text-6xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 block group-hover:text-primary transition-all peer-checked:text-primary"
+                    className={`barber-name text-5xl md:text-6xl font-extrabold tracking-tighter block transition-colors ${
+                      selectedIndex === index
+                        ? 'text-primary'
+                        : 'text-white/90 group-hover:text-white'
+                    }`}
                   >
                     {barber.apodo.toUpperCase()}
                   </span>
 
-                  <span className="text-sm font-mono text-gray-500 mt-2 block opacity-0 peer-checked:opacity-100 transition-opacity">
+                  <span
+                    className={`text-sm font-mono text-gray-500 mt-2 block transition-opacity ${
+                      selectedIndex === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
                     {barber.especialidad} / {(index + 1).toString().padStart(2, '0')}
                   </span>
                 </label>
