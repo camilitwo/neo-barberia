@@ -74,7 +74,9 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }}
       className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 flex justify-between items-center transition-all duration-300 ${
-        isScrolled ? 'bg-background/80 backdrop-blur-md' : 'bg-transparent'
+        isScrolled
+          ? 'bg-background/80 backdrop-blur-md'
+          : 'bg-background/75 backdrop-blur-md sm:bg-transparent sm:backdrop-blur-0'
       }`}
     >
       <Link href="/" className="flex items-center gap-3">
