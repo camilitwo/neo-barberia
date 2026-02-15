@@ -12,107 +12,85 @@ export default function Footer() {
   const tiktokUrl = 'https://www.tiktok.com/@neo.barberia.cl';
   const whatsappNumber = '56923726076';
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola NeoBarberia!')}`;
-
-  const footerLinks = [
-    { href: '#inicio', label: 'Inicio' },
-    { href: '#nosotros', label: 'Nosotros' },
-    { href: '#equipo', label: 'Equipo' },
-    { href: '#contacto', label: 'Contacto' },
-  ];
+  const mapsDirections = 'https://www.google.com/maps/dir/?api=1&destination=-33.35871917342603,-70.73995452397547';
 
   return (
-    <footer className="bg-background border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand Section */}
-          <div className="space-y-4">
-            <motion.h3
-              className="text-3xl font-bold text-gradient"
-              whileHover={{ scale: 1.05 }}
-            >
-              Neo Barbería
-            </motion.h3>
-            <p className="text-muted text-sm">
-              La barbería que está revolucionando Quilicura con estilo, precisión y personalidad.
-            </p>
-          </div>
+    <footer className="relative bg-black text-white pt-24 pb-0 overflow-hidden">
+      <div className="absolute top-8 right-8 z-20">
+        <a
+          className="group flex items-center justify-center w-8 h-8 rounded-full border border-white/20 hover:border-white transition-colors duration-300"
+          href="#inicio"
+          aria-label="Volver arriba"
+        >
+          <span className="text-sm text-gray-400 group-hover:text-white transition-colors">↑</span>
+        </a>
+      </div>
 
-          {/* Links Section */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-primary">Enlaces</h4>
-            <ul className="space-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-muted hover:text-primary transition-colors duration-300 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social Section */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-primary">Síguenos</h4>
-            <div className="flex space-x-4">
-              <motion.a
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                whileHover={{ scale: 1.12, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                <SiInstagram className="w-5 h-5" aria-hidden />
-              </motion.a>
-
-              <motion.a
-                href={tiktokUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-                whileHover={{ scale: 1.12, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                <SiTiktok className="w-5 h-5" aria-hidden />
-              </motion.a>
-
-              <motion.a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                whileHover={{ scale: 1.12, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                <SiWhatsapp className="w-5 h-5" aria-hidden />
-              </motion.a>
-            </div>
-            <div className="text-muted text-sm space-y-1 pt-4">
-              <p>Horario de atención:</p>
-              <p className="text-primary font-semibold">Lun-Dom: 11:00 - 20:30</p>
-            </div>
-          </div>
+      <div className="px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-32 relative z-10">
+        <div className="flex flex-col space-y-4">
+          <h4 className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase mb-2">Location</h4>
+          <a
+            className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors"
+            href={mapsDirections}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Quilicura, Santiago,
+            <br />
+            Chile
+          </a>
+          <a
+            className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors mt-2"
+            href={mapsDirections}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get Directions
+          </a>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-primary/20 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-muted text-sm">
-            Copyright © {currentYear} Neo Barbería. Todos los derechos reservados.
-          </p>
-          <div className="flex space-x-6 text-sm">
-            <Link href="https://github.com/camilitwo" className="text-muted hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded">
-              Diseñado por Camilo González
-            </Link>
-          </div>
+        <div className="flex flex-col space-y-4">
+          <h4 className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase mb-2">Social</h4>
+          <a
+            className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors"
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </a>
+          <a
+            className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors"
+            href={tiktokUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            TikTok
+          </a>
+          <a
+            className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
+        </div>
+
+        <div className="flex flex-col space-y-4">
+          <h4 className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase mb-2">Legal</h4>
+          <span className="text-[11px] font-medium tracking-wide text-gray-300">Horario</span>
+          <span className="text-[11px] font-medium tracking-wide text-gray-300">Lun-Dom: 11:00 - 20:30</span>
+          <span className="text-[11px] font-medium tracking-wide text-gray-300">© {currentYear} Neo Barbería</span>
+          <Link
+            href="https://github.com/camilitwo"
+            className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+          >
+            Diseñado por Camilo González
+          </Link>
         </div>
       </div>
+      
     </footer>
   );
 }
