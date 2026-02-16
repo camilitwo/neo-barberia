@@ -135,16 +135,16 @@ export default function Contact() {
 
           <motion.div
             variants={itemVariants}
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-20"
+            className="mt-10 flex justify-center sm:mt-0 sm:block sm:absolute sm:right-6 sm:top-1/2 sm:-translate-y-1/2 z-20"
           >
             <a
               href={mapsDirections}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-primary text-black shadow-[0_20px_50px_rgba(230,180,100,0.25)] flex items-center justify-center hover:scale-105 transition-transform duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-primary text-black shadow-[0_20px_50px_rgba(230,180,100,0.25)] flex items-center justify-center hover:scale-105 transition-transform duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               aria-label="Cómo llegar"
             >
-              <span className="text-3xl sm:text-4xl transform -rotate-45 group-hover:rotate-0 transition-transform duration-300">↗</span>
+              <span className="text-2xl sm:text-4xl transform -rotate-45 group-hover:rotate-0 transition-transform duration-300">↗</span>
             </a>
             <span className="absolute top-full left-1/2 -translate-x-1/2 mt-4 text-[10px] font-bold uppercase tracking-[0.2em] text-primary whitespace-nowrap opacity-80">
               Cómo llegar
