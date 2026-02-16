@@ -16,9 +16,10 @@ export default function Hero() {
           fill
           priority
           className="object-cover scale-105 blur-[2px] opacity-70"
-          quality={70}
+          quality={90}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
+        <div className="absolute inset-0 bg-black/5" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/70 to-black/90" />
         <div className="absolute inset-0 hero-grain pointer-events-none opacity-[0.12] mix-blend-overlay" />
       </div>
 

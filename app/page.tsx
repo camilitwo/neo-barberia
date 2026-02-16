@@ -14,7 +14,6 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Navbar />
-      <FloatingLogo />
       <Hero />
       <WhoWeAre variant="preview" />
       <BarberCarousel barbers={barbersData} />

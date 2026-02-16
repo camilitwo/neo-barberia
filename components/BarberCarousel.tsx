@@ -48,7 +48,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
     <section
       id="equipo"
       ref={ref}
-      className="relative py-16 sm:py-20 md:py-28 px-4 bg-background overflow-hidden team-section"
+      className="relative pt-16 pb-32 sm:py-20 md:py-28 px-4 bg-background overflow-hidden team-section"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -126,19 +126,35 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
           </div>
 
           {socialUrl && (
-            <motion.a
-              href={socialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="mt-10 inline-flex items-center justify-between gap-4 border border-white/20 text-white font-bold uppercase py-4 px-6 hover:bg-white hover:text-black transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent w-fit"
-            >
-              <span className="text-[11px] tracking-[0.2em]">Ver {socialLabel}</span>
-              <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
-            </motion.a>
+            <>
+              <motion.a
+                href={socialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2 }}
+                className="mt-8 sm:hidden inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.2em] text-[11px] underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+              >
+                <span>Ver {socialLabel}</span>
+                <span className="text-base">→</span>
+              </motion.a>
+
+              <motion.a
+                href={socialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className="hidden sm:mt-10 sm:inline-flex items-center justify-between gap-4 border border-primary/60 text-primary font-bold uppercase py-3.5 px-6 hover:bg-primary hover:text-black transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent w-fit"
+              >
+                <span className="text-[11px] tracking-[0.2em]">Ver {socialLabel}</span>
+                <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
+              </motion.a>
+            </>
           )}
         </div>
       </motion.div>
