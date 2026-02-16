@@ -1,3 +1,8 @@
+export interface BarberCut {
+  imagen: string;
+  label: string;
+}
+
 export interface Barber {
   id: number;
   nombre: string;
@@ -7,6 +12,11 @@ export interface Barber {
   imagen: string;
   instagram?: string;
   facebook?: string;
+  yearsExperience: number;
+  role: string;
+  interests: string[];
+  signatureCuts: BarberCut[];
+  quote: string;
 }
 
 export const barbersData: Barber[] = [
@@ -18,6 +28,15 @@ export const barbersData: Barber[] = [
     descripcion: 'Con más de 10 años de experiencia, domina el estilo clásico con precisión y profesionalismo.',
     imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp',
     instagram: 'https://www.instagram.com/stofer_.barber/',
+    yearsExperience: 10,
+    role: 'FOUNDER',
+    interests: ['Corte Clásico', 'Tijera sobre peine', 'Estilo Old School', 'Navaja tradicional'],
+    signatureCuts: [
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp', label: 'CLASSIC_TAPER' },
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp', label: 'GENTLEMAN_CUT' },
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp', label: 'POMPADOUR_FADE' },
+    ],
+    quote: 'LA PRECISIÓN NO ES TÉCNICA; ES UN LENGUAJE DE NECESIDAD MECÁNICA.',
   },
   {
     id: 2,
@@ -27,6 +46,15 @@ export const barbersData: Barber[] = [
     descripcion: 'Especialista en fades y diseños modernos, combina técnica con creatividad.',
     imagen: '/neobarberia_2026-01-28_09_23/barbers/5c78573f-3fde-4257-944d-b68f113e4b40_ctyy8e.webp',
     instagram: 'https://www.instagram.com/viishon.barber/',
+    yearsExperience: 6,
+    role: 'SENIOR BARBER',
+    interests: ['Fades Modernos', 'Skin Fade', 'Diseño Freestyle', 'Texturas'],
+    signatureCuts: [
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/5c78573f-3fde-4257-944d-b68f113e4b40_ctyy8e.webp', label: 'SKIN_FADE' },
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/5c78573f-3fde-4257-944d-b68f113e4b40_ctyy8e.webp', label: 'DROP_FADE' },
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/5c78573f-3fde-4257-944d-b68f113e4b40_ctyy8e.webp', label: 'BURST_TAPER' },
+    ],
+    quote: 'CADA FADE ES UNA TRANSICIÓN ENTRE LO VISIBLE Y LO INVISIBLE.',
   },
   {
     id: 3,
@@ -36,6 +64,15 @@ export const barbersData: Barber[] = [
     descripcion: 'Maestro en afeitados tradicionales y experto en perfilados de precisión.',
     imagen: '/neobarberia_2026-01-28_09_23/barbers/576989ba-9099-4c0d-a430-69d314eedb44_jfph0o.webp',
     instagram: 'https://www.instagram.com/keo_barber.cl/',
+    yearsExperience: 5,
+    role: 'BARBER',
+    interests: ['Afeitado Clásico', 'Perfilado de barba', 'Hot Towel', 'Navaja recta'],
+    signatureCuts: [
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/576989ba-9099-4c0d-a430-69d314eedb44_jfph0o.webp', label: 'RAZOR_SHAVE' },
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/576989ba-9099-4c0d-a430-69d314eedb44_jfph0o.webp', label: 'BEARD_SCULPT' },
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/576989ba-9099-4c0d-a430-69d314eedb44_jfph0o.webp', label: 'LINE_UP' },
+    ],
+    quote: 'EL AFEITADO ES UN RITUAL, NO UN PROCEDIMIENTO.',
   },
   {
     id: 4,
@@ -44,5 +81,14 @@ export const barbersData: Barber[] = [
     especialidad: 'Diseños y Arte Capilar',
     descripcion: 'Creativo y detallista, transforma cada corte en una obra de arte.',
     imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp',
+    yearsExperience: 4,
+    role: 'CREATIVE BARBER',
+    interests: ['Arte Capilar', 'Diseños Geométricos', 'Color Creativo', 'Freestyle Art'],
+    signatureCuts: [
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp', label: 'HAIR_ART' },
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp', label: 'GEO_DESIGN' },
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp', label: 'CONTRAST_CROP' },
+    ],
+    quote: 'CADA CABEZA ES UN LIENZO; CADA CORTE, UNA DECLARACIÓN.',
   },
 ];

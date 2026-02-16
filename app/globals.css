@@ -76,6 +76,25 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, textar
   }
   .shadow-glow { box-shadow: 0 0 30px rgba(230, 180, 100, 0.35); }
   .focus-ring { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  .concrete-texture {
+    background-color: #0d0d0d;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.2'/%3E%3C/svg%3E");
+  }
+  .brutalist-border {
+    border: 2px solid #333;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Modo reducción de movimiento */

@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, useInView } from 'framer-motion';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 import { Barber } from '@/data/barbers';
@@ -125,37 +126,51 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
             ))}
           </div>
 
-          {socialUrl && (
-            <>
-              <motion.a
-                href={socialUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-                className="mt-8 sm:hidden inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.2em] text-[11px] underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
-              >
-                <span>Ver {socialLabel}</span>
-                <span className="text-base">→</span>
-              </motion.a>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedBarber?.id ?? 'actions'}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
+            >
+              {socialUrl && (
+                <>
+                  <a
+                    href={socialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
+                    className="sm:hidden inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.2em] text-[11px] underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                  >
+                    <span>Ver {socialLabel}</span>
+                    <span className="text-base">→</span>
+                  </a>
 
-              <motion.a
-                href={socialUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.25 }}
-                className="hidden sm:mt-10 sm:inline-flex items-center justify-between gap-4 border border-primary/60 text-primary font-bold uppercase py-3.5 px-6 hover:bg-primary hover:text-black transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent w-fit"
+                  <a
+                    href={socialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
+                    className="hidden sm:inline-flex items-center justify-between gap-4 border border-primary/60 text-primary font-bold uppercase py-3.5 px-6 hover:bg-primary hover:text-black transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent w-fit"
+                  >
+                    <span className="text-[11px] tracking-[0.2em]">Ver {socialLabel}</span>
+                    <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+                </>
+              )}
+
+              <Link
+                href={`/barberos/${selectedBarber?.id}`}
+                aria-label={`Ver perfil de ${selectedBarber?.apodo ?? 'barbero'}`}
+                className="inline-flex items-center gap-1.5 text-white/40 uppercase tracking-[0.15em] text-[10px] hover:text-white/70 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               >
-                <span className="text-[11px] tracking-[0.2em]">Ver {socialLabel}</span>
-                <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
-              </motion.a>
-            </>
-          )}
+                <span>Perfil</span>
+                <span className="text-xs">↗</span>
+              </Link>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </motion.div>
 

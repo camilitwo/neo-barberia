@@ -87,12 +87,6 @@ export default function Contact() {
               <div className="pl-4 flex flex-col items-start space-y-2">
                 <a
                   className="text-xl text-gray-200 hover:text-primary transition-colors border-b border-white/10 pb-1"
-                  href={`mailto:${email}`}
-                >
-                  {email}
-                </a>
-                <a
-                  className="text-xl text-gray-200 hover:text-primary transition-colors border-b border-white/10 pb-1"
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
