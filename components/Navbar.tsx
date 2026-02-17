@@ -138,13 +138,13 @@ export default function Navbar() {
             type="button"
             aria-label="Cerrar menú"
             onClick={() => setIsMenuOpen(false)}
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/90 backdrop-blur-md"
           />
           <motion.div
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-4 left-4 right-4 rounded-2xl border border-white/10 bg-background/95 backdrop-blur-md p-4"
+            className="relative z-10 top-4 mx-4 rounded-2xl border border-white/10 bg-[#0a0a0a] p-4 shadow-2xl"
           >
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-gray-300">Menu</span>

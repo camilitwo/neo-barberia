@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 import CdnImage from '@/components/CdnImage';
 import { imagekitUrl } from '@/lib/imagekit';
@@ -25,6 +26,35 @@ const cuts = [
 ];
 
 export default function PopularCutsSection() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (!cards.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let best: { index: number; ratio: number } | null = null;
+        entries.forEach((entry) => {
+          const idx = cards.indexOf(entry.target as HTMLDivElement);
+          if (idx === -1) return;
+          if (!best || entry.intersectionRatio > best.ratio) {
+            best = { index: idx, ratio: entry.intersectionRatio };
+          }
+        });
+        if (best && (best as { index: number; ratio: number }).ratio > 0.5) {
+          setActiveIndex((best as { index: number; ratio: number }).index);
+        }
+      },
+      { root: scrollRef.current, threshold: [0, 0.5, 1] }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="cortes" className="py-16 sm:py-20 border-t border-white/10 bg-background">
       <div className="max-w-7xl mx-auto">
@@ -35,10 +65,11 @@ export default function PopularCutsSection() {
           <span className="text-xs text-primary font-mono">[SCROLL]</span>
         </div>
 
-        <div className="popular-cuts flex overflow-x-auto gap-1 px-4 sm:px-6 pb-8 snap-x snap-mandatory">
-          {cuts.map((cut) => (
+        <div ref={scrollRef} className="popular-cuts flex overflow-x-auto gap-1 px-4 sm:px-6 pb-8 snap-x snap-mandatory">
+          {cuts.map((cut, i) => (
             <motion.div
               key={cut.title}
+              ref={(el) => { cardRefs.current[i] = el; }}
               whileHover={{ scale: 1.01 }}
               className="flex-none w-[80vw] sm:w-[65vw] md:w-[40vw] snap-center relative aspect-[3/4] group overflow-hidden"
             >
@@ -47,7 +78,9 @@ export default function PopularCutsSection() {
                 alt={cut.title}
                 fill
                 sizes="(max-width: 768px) 80vw, (max-width: 1024px) 65vw, 40vw"
-                className="object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                className={`object-cover transition-all duration-500 ${
+                  activeIndex === i ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'
+                }`}
               />
               <div className="absolute bottom-4 left-4">
                 <p className="text-white text-xl uppercase tracking-wider bg-black/50 px-2">

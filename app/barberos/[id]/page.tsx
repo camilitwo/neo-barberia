@@ -25,7 +25,7 @@ export default async function BarberProfilePage({ params }: PageProps) {
   return (
     <div className="concrete-texture font-mono text-gray-300 antialiased overflow-x-hidden min-h-screen">
       {/* Header */}
-      <header className="pt-6 pb-4 px-4 sm:px-6 lg:px-10 flex items-center justify-between fixed top-0 w-full z-[60]">
+      <header className="pt-6 pb-6 px-4 sm:px-6 lg:px-10 flex items-center justify-between fixed top-0 w-full z-[60] bg-gradient-to-b from-black/90 via-black/60 to-transparent">
         <Link
           href="/#equipo"
           className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border-2 border-gray-300/20 bg-[#1a1a1a]/80 backdrop-blur-sm text-gray-300 hover:text-white transition-colors"
