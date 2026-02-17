@@ -134,13 +134,6 @@ export default async function BarberProfilePage({ params }: PageProps) {
                       className="w-full aspect-[4/5] lg:aspect-[3/4] object-cover grayscale contrast-150 brightness-90"
                     />
                   </div>
-                  <div
-                    className={`mt-2 text-[9px] sm:text-[10px] font-bold uppercase bg-white text-black inline-block px-2 sm:px-3 py-1 ${
-                      isEven ? 'float-right lg:float-none' : ''
-                    }`}
-                  >
-                    REF_{String(i + 1).padStart(2, '0')}: {cut.label}
-                  </div>
                   {isEven && <div className="clear-both lg:hidden" />}
                 </div>
               );

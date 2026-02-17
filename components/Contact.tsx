@@ -37,7 +37,7 @@ export default function Contact() {
   const tiktokUrl = 'https://www.tiktok.com/@neo.barberia.cl';
   const whatsappNumber = '56923726076'; // sin signos ni espacios
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola NeoBarberia!')}`;
-  const mapsDirections = 'https://www.google.com/maps/dir/?api=1&destination=-33.35871917342603,-70.73995452397547';
+  const mapsDirections = 'https://www.google.com/maps/place/NEOBARBERIA/@-33.3587192,-70.7399545,17z/data=!3m1!4b1!4m6!3m5!1s0x9662c17ea1e163d9:0x2d3c52ec810800c9!8m2!3d-33.3587192!4d-70.7373796!16s%2Fg%2F11l33c9gmr?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D';
   const email = 'contacto@neobarberia.cl';
 
   return (

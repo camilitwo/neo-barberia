@@ -8,19 +8,19 @@ import { imagekitUrl } from '@/lib/imagekit';
 const cuts = [
   {
     title: 'Pompadour',
-    src: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.18.24_mpsuh5.jpg',
+    src: '/neobarberia_2026-01-28_09_23/cd06874ebcad5ed5e1aa18e1388f4c32.jpg',
   },
   {
-    title: 'Textured Crop',
-    src: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.37_a1b0c7.jpg',
+    title: 'Crop francés',
+    src: '/neobarberia_2026-01-28_09_23/Swanky-Malone-French-Crop-Taper.jpg',
   },
   {
-    title: 'Buzz Fade',
-    src: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.43_nqzjni.jpg',
+    title: 'Buzz Cut',
+    src: '/neobarberia_2026-01-28_09_23/1759405506_bab390bdea15f5cb03a8506b9f45f21d.webp',
   },
   {
-    title: 'Flow',
-    src: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.43_1_zp0dzj.jpg',
+    title: 'Texturizado',
+    src: '/neobarberia_2026-01-28_09_23/a326c8e546a490f543bc1c7ad998d461.jpg',
   },
 ];
 

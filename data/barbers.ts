@@ -32,9 +32,9 @@ export const barbersData: Barber[] = [
     role: 'FOUNDER',
     interests: ['Corte Clásico', 'Tijera sobre peine', 'Estilo Old School', 'Navaja tradicional'],
     signatureCuts: [
-      { imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp', label: 'CLASSIC_TAPER' },
-      { imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp', label: 'GENTLEMAN_CUT' },
-      { imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp', label: 'POMPADOUR_FADE' },
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp', label: '' },
+      { imagen: 'neobarberia_2026-01-28_09_23/barbers/Chris/IMG_6308_ydhab1.jpg?updatedAt=1769603096843', label: '' },
+      
     ],
     quote: 'LA PRECISIÓN NO ES TÉCNICA; ES UN LENGUAJE DE NECESIDAD MECÁNICA.',
   },
@@ -51,8 +51,7 @@ export const barbersData: Barber[] = [
     interests: ['Fades Modernos', 'Skin Fade', 'Diseño Freestyle', 'Texturas'],
     signatureCuts: [
       { imagen: '/neobarberia_2026-01-28_09_23/barbers/5c78573f-3fde-4257-944d-b68f113e4b40_ctyy8e.webp', label: 'SKIN_FADE' },
-      { imagen: '/neobarberia_2026-01-28_09_23/barbers/5c78573f-3fde-4257-944d-b68f113e4b40_ctyy8e.webp', label: 'DROP_FADE' },
-      { imagen: '/neobarberia_2026-01-28_09_23/barbers/5c78573f-3fde-4257-944d-b68f113e4b40_ctyy8e.webp', label: 'BURST_TAPER' },
+      { imagen: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.43_1_zp0dzj.jpg?updatedAt=1769603095497', label: 'DROP_FADE' },
     ],
     quote: 'CADA FADE ES UNA TRANSICIÓN ENTRE LO VISIBLE Y LO INVISIBLE.',
   },
@@ -69,8 +68,7 @@ export const barbersData: Barber[] = [
     interests: ['Afeitado Clásico', 'Perfilado de barba', 'Hot Towel', 'Navaja recta'],
     signatureCuts: [
       { imagen: '/neobarberia_2026-01-28_09_23/barbers/576989ba-9099-4c0d-a430-69d314eedb44_jfph0o.webp', label: 'RAZOR_SHAVE' },
-      { imagen: '/neobarberia_2026-01-28_09_23/barbers/576989ba-9099-4c0d-a430-69d314eedb44_jfph0o.webp', label: 'BEARD_SCULPT' },
-      { imagen: '/neobarberia_2026-01-28_09_23/barbers/576989ba-9099-4c0d-a430-69d314eedb44_jfph0o.webp', label: 'LINE_UP' },
+      { imagen: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.43_nqzjni.jpg?updatedAt=1769603095899', label: 'BEARD_SCULPT' },
     ],
     quote: 'EL AFEITADO ES UN RITUAL, NO UN PROCEDIMIENTO.',
   },
@@ -86,8 +84,6 @@ export const barbersData: Barber[] = [
     interests: ['Arte Capilar', 'Diseños Geométricos', 'Color Creativo', 'Freestyle Art'],
     signatureCuts: [
       { imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp', label: 'HAIR_ART' },
-      { imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp', label: 'GEO_DESIGN' },
-      { imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp', label: 'CONTRAST_CROP' },
     ],
     quote: 'CADA CABEZA ES UN LIENZO; CADA CORTE, UNA DECLARACIÓN.',
   },
