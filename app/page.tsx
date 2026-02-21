@@ -2,7 +2,7 @@ import Hero from "@/components/Hero";
 import FloatingLogo from '@/components/FloatingLogo';
 import WhoWeAre from "@/components/WhoWeAre";
 import BarberCarousel from "@/components/BarberCarousel";
-import PopularCutsSection from "@/components/PopularCutsSection";
+import StylesShowcase from "@/components/StylesShowcase";
 import GallerySection from "@/components/GallerySection";
 import Contact from "@/components/Contact";
 import FloatingBookingButton from "@/components/FloatingBookingButton";
@@ -15,9 +15,10 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
+     
       <WhoWeAre variant="preview" />
       <BarberCarousel barbers={barbersData} />
-      <PopularCutsSection />
+       <StylesShowcase />
       {/*<GallerySection variant="preview" />*/}
       <Contact />
       <Footer />

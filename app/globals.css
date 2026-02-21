@@ -95,6 +95,9 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, textar
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  .grainy-bw {
+    filter: grayscale(100%) contrast(120%) brightness(90%);
+  }
 }
 
 /* Modo reducción de movimiento */
