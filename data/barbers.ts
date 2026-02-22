@@ -27,7 +27,7 @@ export const barbersData: Barber[] = [
     especialidad: 'Fundador & Barbero',
     descripcion: 'Más de una década transformando estilos. Su visión creó Neo Barbería y su precisión define cada experiencia.',
     imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp',
-    instagram: 'https://www.instagram.com/stofer_.barber/',
+    instagram: 'https://www.instagram.com/stoferbarber/',
     yearsExperience: 10,
     role: 'FOUNDER',
     interests: ['Visión creativa', 'Atención al detalle', 'Experiencia premium', 'Estilo personalizado'],
