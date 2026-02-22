@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        mono: ['Space Mono', 'monospace'],
+        stencil: ['Big Shoulders Stencil Display', 'sans-serif'],
+        display: ['Syncopate', 'sans-serif'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

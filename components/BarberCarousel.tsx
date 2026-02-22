@@ -1,23 +1,12 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
-import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-coverflow';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 import { Barber } from '@/data/barbers';
 
 import CdnImage from '@/components/CdnImage';
-import { imagekitUrl } from '@/lib/imagekit';
 
 interface BarberCarouselProps {
   barbers: Barber[];
@@ -26,6 +15,23 @@ interface BarberCarouselProps {
 export default function BarberCarousel({ barbers }: BarberCarouselProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const selectedBarber = barbers[selectedIndex] ?? barbers[0];
+  const socialUrl = selectedBarber?.instagram || selectedBarber?.facebook;
+  const socialLabel = selectedBarber?.instagram ? 'Instagram' : selectedBarber?.facebook ? 'Facebook' : '';
+
+  useEffect(() => {
+    if (barbers.length <= 1) return;
+    if (isPaused) return;
+
+    const id = window.setInterval(() => {
+      setSelectedIndex((prev) => (prev + 1) % barbers.length);
+    }, 4500);
+
+    return () => window.clearInterval(id);
+  }, [barbers.length, isPaused]);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -43,236 +49,153 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
     <section
       id="equipo"
       ref={ref}
-      className="py-16 sm:py-20 md:py-32 px-4 bg-surface"
+      className="relative pt-16 pb-32 sm:py-20 md:py-28 px-4 bg-background overflow-hidden team-section"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={() => setIsPaused(false)}
     >
+      <div className="absolute inset-0 z-0 grain-overlay pointer-events-none">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={barbers[selectedIndex]?.id ?? selectedIndex}
+            className="absolute inset-0"
+            initial={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <CdnImage
+              src={barbers[selectedIndex]?.imagen ?? barbers[0]?.imagen}
+              alt={barbers[selectedIndex]?.nombre ?? barbers[0]?.nombre ?? 'Neo Barbería - Barbero'}
+              fill
+              sizes="100vw"
+              className="w-full h-full object-cover object-[50%_18%] grayscale contrast-125 brightness-50"
+              priority
+            />
+          </motion.div>
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/80" />
+      </div>
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="max-w-7xl mx-auto"
+        className="relative z-10 max-w-7xl mx-auto"
       >
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gradient text-gradient-fallback">
+        <div className="relative min-h-[60vh] flex flex-col justify-center py-10">
+          <h2 className="text-xs font-bold text-muted uppercase tracking-[0.2em] mb-8 ml-1">
             Nuestro Equipo
           </h2>
-          <p className="text-lg sm:text-xl text-muted max-w-2xl mx-auto">
-            Conoce a los artistas detrás de cada corte. ¡Descubre el estilo NeoBarbería!
-          </p>
-        </motion.div>
 
-        {/* Carousel */}
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
-          effect="coverflow"
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={1}
-          spaceBetween={30}
-          coverflowEffect={{
-            rotate: 20,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          pagination={{
-            clickable: true,
-            dynamicBullets: true,
-          }}
-          navigation={true}
-          breakpoints={{
-            640: {
-              slidesPerView: 1.5,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-            },
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 40,
-            },
-          }}
-          className="barber-swiper pb-16"
-        >
-          {barbers.map((barber, index) => (
-            <SwiperSlide key={barber.id}>
-              <BarberCard barber={barber} index={index} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          <div className="flex flex-col space-y-2 relative z-20">
+            {barbers.map((barber, index) => (
+              <div key={barber.id} className="group relative">
+                <input
+                  className="hidden peer"
+                  id={`barber-${barber.id}`}
+                  name="barber"
+                  type="radio"
+                  checked={selectedIndex === index}
+                  onChange={() => setSelectedIndex(index)}
+                />
+                <label
+                  className="relative z-10 block cursor-pointer py-4 border-b border-white/10 hover:border-primary/50 transition-colors"
+                  htmlFor={`barber-${barber.id}`}
+                >
+                  <span
+                    className={`barber-name text-5xl md:text-6xl font-extrabold tracking-tighter block transition-colors ${
+                      selectedIndex === index
+                        ? 'text-primary'
+                        : 'text-white/90 group-hover:text-white'
+                    }`}
+                  >
+                    {barber.apodo.toUpperCase()}
+                  </span>
+
+                  <span
+                    className={`text-sm font-mono text-gray-500 mt-2 block transition-opacity ${
+                      selectedIndex === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    {barber.especialidad} / {(index + 1).toString().padStart(2, '0')}
+                  </span>
+                </label>
+              </div>
+            ))}
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedBarber?.id ?? 'actions'}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
+            >
+              {socialUrl && (
+                <>
+                  <a
+                    href={socialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
+                    className="sm:hidden inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.2em] text-[11px] underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                  >
+                    <span>Ver {socialLabel}</span>
+                    <span className="text-base">→</span>
+                  </a>
+
+                  <a
+                    href={socialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
+                    className="hidden sm:inline-flex items-center justify-between gap-4 border border-primary/60 text-primary font-bold uppercase py-3.5 px-6 hover:bg-primary hover:text-black transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent w-fit"
+                  >
+                    <span className="text-[11px] tracking-[0.2em]">Ver {socialLabel}</span>
+                    <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+                </>
+              )}
+
+              <Link
+                href={`/barberos/${selectedBarber?.id}`}
+                aria-label={`Ver perfil de ${selectedBarber?.apodo ?? 'barbero'}`}
+                className="inline-flex items-center gap-1.5 text-white/40 uppercase tracking-[0.15em] text-[10px] hover:text-white/70 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+              >
+                <span>Perfil</span>
+                <span className="text-xs">↗</span>
+              </Link>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </motion.div>
 
-      {/* Custom Swiper Styles */}
       <style jsx global>{`
-        .barber-swiper {
-          padding: 20px;
+        .team-section .grain-overlay::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+          pointer-events: none;
+          mix-blend-mode: overlay;
+          z-index: 10;
         }
 
-        .barber-swiper .swiper-pagination-bullet {
-          background: var(--primary);
-          width: 12px;
-          height: 12px;
-          opacity: 0.5;
+        .team-section input[type='radio']:checked + label .barber-name {
+          transform: translateX(20px);
         }
 
-        .barber-swiper .swiper-pagination-bullet-active {
-          opacity: 1;
-          background: var(--accent);
-        }
-
-        .barber-swiper .swiper-button-next,
-        .barber-swiper .swiper-button-prev {
-          color: var(--primary);
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          transition: all 0.3s ease;
-        }
-
-        .barber-swiper .swiper-button-next:hover,
-        .barber-swiper .swiper-button-prev:hover {
-          background: rgba(230, 180, 100, 0.3);
-          transform: scale(1.1);
-        }
-
-        .barber-swiper .swiper-button-next::after,
-        .barber-swiper .swiper-button-prev::after {
-          font-size: 20px;
-          font-weight: bold;
+        .team-section .barber-name {
+          transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
         }
       `}</style>
     </section>
-  );
-}
-
-function BarberCard({ barber, index }: { barber: Barber; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{
-        type: 'spring',
-        stiffness: 100,
-        damping: 15,
-        delay: index * 0.1,
-      }}
-      whileHover={{
-        y: -10,
-        transition: {
-          type: 'spring',
-          stiffness: 400,
-          damping: 10,
-        }
-      }}
-      className="glass-effect rounded-2xl overflow-hidden shadow-2xl h-full group cursor-pointer"
-    >
-      {/* Image Container */}
-      <div className="relative h-80 overflow-hidden">
-        <Image
-          src={barber.imagen}
-          alt={barber.nombre}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-
-        <CdnImage
-                src={barber.imagen}
-                alt={barber.nombre}
-                fill
-                sizes="50vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                priority
-              />
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-        {/* Nickname Badge */}
-        <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          whileInView={{ scale: 1, rotate: 0 }}
-          transition={{
-            type: 'spring',
-            stiffness: 200,
-            delay: 0.3,
-          }}
-          className="absolute top-4 right-4 bg-primary text-black px-4 py-2 rounded-full font-bold shadow-lg"
-        >
-          {barber.apodo}
-        </motion.div>
-      </div>
-
-      {/* Content */}
-      <div className="p-6 space-y-3">
-        <motion.h3
-          className="text-2xl font-bold text-white"
-          whileHover={{ scale: 1.05, color: 'var(--primary)' }}
-          transition={{ type: 'spring', stiffness: 300 }}
-        >
-          {barber.nombre}
-        </motion.h3>
-
-        <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-          <p className="text-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">
-            {barber.especialidad}
-          </p>
-        </div>
-
-        <p className="text-muted text-sm leading-relaxed">
-          {barber.descripcion}
-        </p>
-
-        {/* Social Icons */}
-        {(barber.instagram || barber.facebook) && (
-          <div className="flex space-x-4 pt-4">
-            {barber.instagram && (
-              <motion.a
-                href={barber.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{
-                  scale: 1.2,
-                  rotate: 15,
-                }}
-                whileTap={{ scale: 0.9 }}
-                className="text-foreground hover:text-accent transition-colors duration-300"
-              >
-                <FontAwesomeIcon icon={faInstagram} size="2x" />
-              </motion.a>
-            )}
-            {barber.facebook && (
-              <motion.a
-                href={barber.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{
-                  scale: 1.2,
-                  rotate: -15,
-                }}
-                whileTap={{ scale: 0.9 }}
-                className="text-foreground hover:text-accent transition-colors duration-300"
-              >
-                <FontAwesomeIcon icon={faFacebook} size="2x" />
-              </motion.a>
-            )}
-          </div>
-        )}
-      </div>
-    </motion.div>
   );
 }

@@ -1,140 +1,191 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import CdnImage from '@/components/CdnImage';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState<string>(() => {
+    if (typeof window !== 'undefined') return window.location.hash || '#inicio';
+    return '#inicio';
+  });
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      if (pathname !== '/') return;
+
+      const sectionIds = ['inicio', 'nosotros', 'equipo', 'galeria', 'contacto'];
+      const scrollY = window.scrollY;
+      const offset = 140;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (scrollY + offset >= top) {
+          setActiveHref(`#${sectionIds[i]}`);
+          break;
+        }
+      }
     };
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    if (pathname === '/nosotros') {
+      setActiveHref('/nosotros');
+      return;
+    }
+    if (pathname === '/galeria') {
+      setActiveHref('/galeria');
+      return;
+    }
+    if (pathname === '/') {
+      setActiveHref((typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '#inicio');
+    }
+  }, [pathname]);
+
+  const navLinks = useMemo(() => {
+    const home = '/#inicio';
+    const team = '/#equipo';
+    const contact = '/#contacto';
+    return [
+      { href: home, label: 'Inicio', activeKey: '#inicio' },
+      { href: '/nosotros', label: 'Nosotros', activeKey: '/nosotros' },
+      { href: team, label: 'Equipo', activeKey: '#equipo' },
+      { href: '/galeria', label: 'Galería', activeKey: '/galeria' },
+      { href: contact, label: 'Contacto', activeKey: '#contacto' },
+    ];
   }, []);
 
-  const navLinks = [
-    { href: '#inicio', label: 'Inicio' },
-    { href: '#nosotros', label: 'Nosotros' },
-    { href: '#equipo', label: 'Equipo' },
-    { href: '#galeria', label: 'Galería' },
-    { href: '#contacto', label: 'Contacto' },
-  ];
-
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass-effect shadow-lg' : 'bg-transparent'
-      } backdrop-blur-sm`}
+    <motion.header
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }}
+      className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 flex justify-between items-center transition-all duration-300 ${
+        isScrolled
+          ? 'bg-black/80 supports-[backdrop-filter]:bg-black/50 backdrop-blur-md'
+          : 'bg-black/85 supports-[backdrop-filter]:bg-black/45 backdrop-blur-md sm:bg-transparent sm:backdrop-blur-0'
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href="/" className="flex items-center gap-3">
-              {/* Usar un contenedor con esquinas suaves (no circular) y padding para que la imagen cuadrada se vea completa */}
-              <span className="bg-white/95 dark:bg-black/80 rounded-lg p-1.5 sm:p-2 shadow-sm border border-border">
-                {/* contenedor relativo para usar Image fill: ancho y alto explícitos para que `fill` funcione */}
-                <div className="relative w-10 sm:w-12 md:w-14 h-10 sm:h-12 md:h-14">
-                  <CdnImage
-                    src="/neobarberia_2026-01-28_09_23/1_t2y8pa.png"
-                    alt="Neo Barbería"
-                    fill
-                    sizes="(max-width: 768px) 40px, (max-width: 1024px) 48px, 56px"
-                    className="object-contain"
-                  />
-                </div>
-              </span>
-              <span className="hidden md:inline text-2xl font-bold text-gradient ml-2">Neo Barbería</span>
+      <Link href="/" className="flex items-center gap-3">
+        <span className="relative w-9 h-9 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm overflow-hidden">
+          <CdnImage
+            src="/neobarberia_2026-01-28_09_23/1_t2y8pa.png"
+            alt="Neo Barbería"
+            fill
+            sizes="36px"
+            className="object-contain"
+          />
+        </span>
+        <span className="font-bold text-sm uppercase tracking-[0.35em] text-white mix-blend-difference">
+          Neo
+        </span>
+      </Link>
+
+      <nav className="hidden sm:flex items-center gap-4 sm:gap-6 md:gap-8">
+        {navLinks.map((link) => {
+          const isActive = activeHref === link.activeKey;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setActiveHref(link.activeKey)}
+              className={`relative font-semibold uppercase transition-colors ${
+                'text-white hover:text-primary'
+              } ${
+                'text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em]'
+              } ${isActive ? 'text-primary' : ''} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded`}
+            >
+              {link.label}
+              {isActive && (
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-[3px] h-[3px] sm:w-1 sm:h-1 rounded-full bg-primary" />
+              )}
             </Link>
-          </motion.div>
+          );
+        })}
+      </nav>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 lg:space-x-8">
-            {navLinks.map((link, index) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link
-                  href={link.href}
-                  className="text-foreground hover:text-primary transition-colors duration-300 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
-                >
-                  {link.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+      <button
+        type="button"
+        onClick={() => setIsMenuOpen((v) => !v)}
+        className="sm:hidden w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-black/20 backdrop-blur-sm text-white hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        aria-label="Abrir menú"
+        aria-expanded={isMenuOpen}
+      >
+        <span className="text-lg">☰</span>
+      </button>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-surface/80 bg-surface/60 border border-border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            aria-label="Toggle menu"
-          >
-            <div className="w-6 h-5 flex flex-col justify-between">
-              <motion.span
-                animate={isMobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-                className="w-full h-0.5 bg-foreground block transition-all"
-              />
-              <motion.span
-                animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="w-full h-0.5 bg-foreground block transition-all"
-              />
-              <motion.span
-                animate={isMobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-                className="w-full h-0.5 bg-foreground block transition-all"
-              />
-            </div>
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
+      {isMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[60] sm:hidden"
+        >
+          <button
+            type="button"
+            aria-label="Cerrar menú"
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute inset-0 bg-black/90 backdrop-blur-md"
+          />
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden glass-effect border-t border-border"
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            className="relative z-10 top-4 mx-4 rounded-2xl border border-white/10 bg-[#0a0a0a] p-4 shadow-2xl"
           >
-            <div className="px-4 py-6 space-y-4">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold tracking-[0.25em] uppercase text-gray-300">Menu</span>
+              <button
+                type="button"
+                onClick={() => setIsMenuOpen(false)}
+                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 hover:border-white/30 transition-colors"
+                aria-label="Cerrar"
+              >
+                <span className="text-lg">×</span>
+              </button>
+            </div>
+
+            <div className="mt-4 flex flex-col">
+              {navLinks.map((link) => {
+                const isActive = activeHref === link.activeKey;
+                return (
                   <Link
+                    key={link.href}
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-base text-foreground hover:text-primary transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                    onClick={() => {
+                      setActiveHref(link.activeKey);
+                      setIsMenuOpen(false);
+                    }}
+                    className={`py-3 border-b border-white/10 last:border-b-0 text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors ${
+                      isActive ? 'text-primary' : 'text-white hover:text-primary'
+                    } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded`}
                   >
-                    {link.label}
+                    <span className="relative inline-block">
+                      {link.label}
+                      {isActive && (
+                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
+                      )}
+                    </span>
                   </Link>
-                </motion.div>
-              ))}
+                );
+              })}
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+        </motion.div>
+      )}
+    </motion.header>
   );
 }

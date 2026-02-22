@@ -2,9 +2,15 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
 
-export default function WhoWeAre() {
+type WhoWeAreVariant = 'preview' | 'full';
+
+interface WhoWeAreProps {
+  variant?: WhoWeAreVariant;
+}
+
+export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -14,40 +20,6 @@ export default function WhoWeAre() {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const leftVariants = {
-    hidden: {
-      x: -100,
-      opacity: 0,
-      rotate: -5,
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      rotate: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 60,
-        damping: 15,
-      },
-    },
-  };
-
-  const rightVariants = {
-    hidden: {
-      x: 100,
-      opacity: 0,
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 60,
-        damping: 15,
       },
     },
   };
@@ -71,146 +43,110 @@ export default function WhoWeAre() {
     <section
       id="nosotros"
       ref={ref}
-      className="py-16 sm:py-20 md:py-32 px-4 bg-gradient-to-b from-background to-surface"
+      className="relative px-4 py-16 sm:py-20 md:py-24 bg-background overflow-hidden who-minimal"
     >
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="max-w-7xl mx-auto"
+        className="relative z-10 max-w-7xl mx-auto"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image Section */}
-          <motion.div
-            variants={leftVariants}
-            className="relative"
-          >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              className="relative h-[400px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl"
-            >
-              <Image
-                src="https://preview.colorlib.com/theme/thebarber/img/about/about_lft.png"
-                alt="Neo Barbería Interior"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-
-            {/* Floating Info Card */}
-            <motion.div
-              initial={{ scale: 0, rotate: -10 }}
-              animate={isInView ? {
-                scale: 1,
-                rotate: 0,
-                transition: {
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 15,
-                  delay: 0.5,
-                }
-              } : {}}
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                transition: {
-                  type: 'spring',
-                  stiffness: 400,
-                }
-              }}
-              className="absolute -bottom-6 -right-6 glass-effect rounded-xl p-6 shadow-glow"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="text-4xl">🕐</div>
-                <div>
-                  <h3 className="text-xl font-bold text-primary">Horario</h3>
-                  <p className="text-gray-300">Lun-Dom</p>
-                  <p className="text-gray-300">11:00 - 20:30</p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Content Section */}
-          <motion.div
-            variants={rightVariants}
-            className="space-y-6"
-          >
-            <motion.div variants={textVariants}>
-              <motion.h2
-                className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4"
-                whileInView={{
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                }}
-                transition={{ duration: 5, repeat: Infinity }}
-                style={{
-                  backgroundImage: 'linear-gradient(90deg, var(--primary), var(--accent), var(--primary))',
-                  backgroundSize: '200% 100%',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                Nosotros
-              </motion.h2>
-              <h3 className="text-xl sm:text-2xl md:text-3xl text-muted mb-6">
-                Peluquería con estilo experimentado y tradicional
-              </h3>
-            </motion.div>
-
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+          <div className="space-y-6">
             <motion.p
               variants={textVariants}
-              className="text-base sm:text-lg text-muted leading-relaxed text-justify"
+              className="text-xs font-bold text-muted uppercase tracking-[0.2em]"
             >
+              Nosotros
+            </motion.p>
+
+            <motion.h2
+              variants={textVariants}
+              className="text-6xl sm:text-7xl md:text-8xl font-black outline-text tracking-tighter leading-[0.9]"
+            >
+              NEO
+            </motion.h2>
+
+            <motion.p variants={textVariants} className="text-lg md:text-xl font-light text-gray-300 max-w-xl">
+              Peluquería con estilo experimentado y tradicional
+            </motion.p>
+          </div>
+
+          <div className="space-y-6">
+            <motion.p variants={textVariants} className="text-base sm:text-lg text-muted leading-relaxed">
               ¡Bienvenidos a <span className="text-primary font-semibold">NEOBARBERÍA</span>, donde tu estilo es nuestra prioridad!
               Somos pioneros en la comuna, y no es casualidad: nos enorgullecemos de contar con los barberos más talentosos,
               apasionados por su arte y expertos en resaltar lo mejor de ti.
             </motion.p>
 
-            <motion.p
-              variants={textVariants}
-              className="text-base sm:text-lg text-muted leading-relaxed text-justify"
-            >
-              En NEOBARBERÍA, combinamos tradición y calidad con productos de prestigio como
-              <span className="text-accent font-semibold"> SirFausto</span> y
-              <span className="text-accent font-semibold"> Nishman</span>, para asegurarte una experiencia única y de primera.
-            </motion.p>
+            {variant === 'full' && (
+              <>
+                <motion.p variants={textVariants} className="text-base sm:text-lg text-muted leading-relaxed">
+                  En NEOBARBERÍA, combinamos tradición y calidad con productos de prestigio como
+                  <span className="text-accent font-semibold"> SirFausto</span> y
+                  <span className="text-accent font-semibold"> Nishman</span>, para asegurarte una experiencia única y de primera.
+                </motion.p>
 
-            <motion.p
-              variants={textVariants}
-              className="text-base sm:text-lg text-muted leading-relaxed text-justify"
-            >
-              Ven y descubre el lugar donde el estilo se encuentra con la excelencia; estamos aquí para transformar tu imagen
-              con dedicación, alegría y profesionalismo. ¡Deja que tu estilo hable por ti con
-              <span className="text-primary font-semibold"> NEOBARBERÍA</span>!
-            </motion.p>
+                <motion.p variants={textVariants} className="text-base sm:text-lg text-muted leading-relaxed">
+                  Ven y descubre el lugar donde el estilo se encuentra con la excelencia; estamos aquí para transformar tu imagen
+                  con dedicación, alegría y profesionalismo. ¡Deja que tu estilo hable por ti con
+                  <span className="text-primary font-semibold"> NEOBARBERÍA</span>!
+                </motion.p>
+              </>
+            )}
 
-            <motion.div
-              variants={textVariants}
-              className="pt-6"
-            >
+            {variant === 'full' ? (
               <motion.a
+                variants={textVariants}
                 href="#equipo"
-                whileHover={{
-                  scale: 1.05,
-                  x: 10,
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-6 sm:px-8 py-3 bg-primary hover:bg-primary-hover text-black font-bold rounded-full shadow-glow transition-all duration-300 text-sm sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                whileHover={{ x: 8 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center text-sm font-bold tracking-[0.2em] uppercase text-white hover:text-primary transition-colors border-b border-white/10 pb-1"
               >
                 Conoce nuestro equipo
-                <motion.span
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="ml-2"
-                >
-                  →
-                </motion.span>
               </motion.a>
-            </motion.div>
-          </motion.div>
+            ) : (
+              <motion.div variants={textVariants}>
+                <Link
+                  href="/nosotros"
+                  className="inline-flex items-center text-sm font-bold tracking-[0.2em] uppercase text-white hover:text-primary transition-colors border-b border-white/10 pb-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                >
+                  Leer más
+                </Link>
+              </motion.div>
+            )}
+          </div>
         </div>
+
+        {variant === 'full' && (
+          <div className="mt-14 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <motion.div variants={textVariants}>
+              <h4 className="text-xs font-bold text-primary uppercase tracking-widest mb-3">HOURS</h4>
+              <ul className="space-y-1">
+                <li className="text-sm font-medium text-white flex justify-between">
+                  <span>Lun-Dom</span>
+                  <span className="text-gray-400">11:00-20:30</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div variants={textVariants}>
+              <h4 className="text-xs font-bold text-primary uppercase tracking-widest mb-3">INFO</h4>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-white">SirFausto / Nishman</span>
+                <span className="text-sm text-gray-500">NEOBARBERÍA</span>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </motion.div>
+
+      <style jsx global>{`
+        .who-minimal .outline-text {
+          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+          color: transparent;
+        }
+      `}</style>
     </section>
   );
 }

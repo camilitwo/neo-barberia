@@ -1,9 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import ImageGallery from './ImageGallery';
 
-export default function GallerySection() {
+type GallerySectionVariant = 'preview' | 'full';
+
+interface GallerySectionProps {
+  variant?: GallerySectionVariant;
+}
+
+export default function GallerySection({ variant = 'preview' }: GallerySectionProps) {
   const handleBooking = () => {
     window.open('https://neooc2b.setmore.com/?fbclid=PAZXh0bgNhZW0CMTEAAaaOGfb00uDJuEsMw9NMHy2Da7Qy6sfgyZHYMtwgSEj_5R3HK1mp4I51bxU_aem_ZEFdpvIRt2yhMVwlxEbhQg#services', '_blank');
   };
@@ -31,10 +38,22 @@ export default function GallerySection() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <ImageGallery
-            showBookingButton={true}
-            onBookingClick={handleBooking}
+            compact={variant === 'preview'}
+            showBookingButton={variant === 'full'}
+            onBookingClick={variant === 'full' ? handleBooking : undefined}
           />
         </motion.div>
+
+        {variant === 'preview' && (
+          <div className="pt-10 flex justify-center">
+            <Link
+              href="/galeria"
+              className="inline-flex items-center text-sm font-bold tracking-[0.2em] uppercase text-white hover:text-primary transition-colors border-b border-white/10 pb-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+            >
+              Ver galería completa
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
