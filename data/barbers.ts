@@ -55,7 +55,7 @@ export const barbersData: Barber[] = [
     ],
     quote: 'TU ESTILO HABLA ANTES QUE VOS.',
   },
-  // {
+  /*// {
   //   id: 3,
   //   nombre: 'Fabián Garrido',
   //   apodo: 'Keo',
@@ -86,5 +86,5 @@ export const barbersData: Barber[] = [
       { imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp', label: 'HAIR_ART' },
     ],
     quote: 'CADA CORTE ES UNA DECLARACIÓN.',
-  },
+  },*/
 ];
