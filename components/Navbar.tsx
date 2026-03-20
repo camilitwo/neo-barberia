@@ -50,6 +50,10 @@ export default function Navbar() {
       setActiveHref('/galeria');
       return;
     }
+    if (pathname === '/trabaja-con-nosotros') {
+      setActiveHref('/trabaja-con-nosotros');
+      return;
+    }
     if (pathname === '/') {
       setActiveHref((typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '#inicio');
     }
@@ -65,6 +69,7 @@ export default function Navbar() {
       { href: team, label: 'Equipo', activeKey: '#equipo' },
       { href: '/galeria', label: 'Galería', activeKey: '/galeria' },
       { href: contact, label: 'Contacto', activeKey: '#contacto' },
+      { href: '/trabaja-con-nosotros', label: 'Únete', activeKey: '/trabaja-con-nosotros' },
     ];
   }, []);
 
