@@ -80,6 +80,12 @@ export default function Footer() {
             <h4 className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase mb-2">Legal</h4>
             <span className="text-[11px] font-medium tracking-wide text-gray-300">Horario</span>
             <span className="text-[11px] font-medium tracking-wide text-gray-300">Lun-Dom: 11:00 - 20:30</span>
+            <Link
+              href="/trabaja-con-nosotros"
+              className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+            >
+              Únete al equipo
+            </Link>
             <span className="text-[11px] font-medium tracking-wide text-gray-300">© {currentYear} Neo Barbería</span>
             <Link
               href="https://github.com/camilitwo"

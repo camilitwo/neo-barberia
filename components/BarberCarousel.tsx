@@ -126,6 +126,16 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
             ))}
           </div>
 
+          <div className="mt-10 pt-8 border-t border-white/10">
+            <Link
+              href="/trabaja-con-nosotros"
+              className="inline-flex items-center gap-3 text-white/60 hover:text-primary border border-white/10 hover:border-primary/50 px-5 py-3 uppercase tracking-[0.2em] text-[11px] font-bold transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <span>¿Quieres ser parte del equipo?</span>
+              <span className="text-sm group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
+          </div>
+
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedBarber?.id ?? 'actions'}
