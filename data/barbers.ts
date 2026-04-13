@@ -17,6 +17,7 @@ export interface Barber {
   interests: string[];
   signatureCuts: BarberCut[];
   quote: string;
+  imagePosition?: string;
 }
 
 export const barbersData: Barber[] = [
@@ -54,6 +55,22 @@ export const barbersData: Barber[] = [
       { imagen: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.43_1_zp0dzj.jpg?updatedAt=1769603095497', label: 'DROP_FADE' },
     ],
     quote: 'TU ESTILO HABLA ANTES QUE VOS.',
+  },
+  {
+    id: 3,
+    nombre: 'Julio Gómez',
+    apodo: 'JC',
+    especialidad: 'Barbero Profesional',
+    descripcion: 'Más de 4 años de experiencia en el rubro. Cuenta con más de 3 diplomas de barbería que respaldan su técnica y dedicación.',
+    imagen: '/neobarberia_2026-01-28_09_23/barbers/6f0f93b7-5801-4dc8-8562-007d59f28da6.jpg',
+    imagePosition: '50% 30%',
+    yearsExperience: 4,
+    role: 'BARBER',
+    interests: ['Técnica certificada', 'Precisión en fades', 'Atención profesional', 'Crecimiento constante'],
+    signatureCuts: [
+      { imagen: '/neobarberia_2026-01-28_09_23/barbers/6f0f93b7-5801-4dc8-8562-007d59f28da6.jpg', label: '' },
+    ],
+    quote: 'LA DEDICACIÓN SE NOTA EN CADA DETALLE.',
   },
   /*// {
   //   id: 3,

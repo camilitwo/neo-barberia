@@ -70,7 +70,8 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
               alt={barbers[selectedIndex]?.nombre ?? barbers[0]?.nombre ?? 'Neo Barbería - Barbero'}
               fill
               sizes="100vw"
-              className="w-full h-full object-cover object-[50%_18%] grayscale contrast-125 brightness-50"
+              className="w-full h-full object-cover grayscale contrast-125 brightness-50"
+              style={{ objectPosition: barbers[selectedIndex]?.imagePosition ?? '50% 18%' }}
               priority
             />
           </motion.div>
