@@ -236,7 +236,7 @@ export default function StyleDetailPage() {
       </section>
 
       <Footer />
-      <FloatingBookingButton url="https://neooc2b.setmore.com/?fbclid=PAZXh0bgNhZW0CMTEAAaaOGfb00uDJuEsMw9NMHy2Da7Qy6sfgyZHYMtwgSEj_5R3HK1mp4I51bxU_aem_ZEFdpvIRt2yhMVwlxEbhQg#services" />
+      <FloatingBookingButton />
     </main>
   );
 }
