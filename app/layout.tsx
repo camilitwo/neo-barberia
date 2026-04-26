@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ClarityInit from "@/components/ClarityInit";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif" }}>
+        <ClarityInit />
         {children}
       </body>
     </html>
