@@ -54,6 +54,10 @@ export default function Navbar() {
       setActiveHref('/trabaja-con-nosotros');
       return;
     }
+    if (pathname === '/planes') {
+      setActiveHref('/planes');
+      return;
+    }
     if (pathname === '/') {
       setActiveHref((typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '#inicio');
     }
@@ -70,6 +74,7 @@ export default function Navbar() {
       { href: '/galeria', label: 'Galería', activeKey: '/galeria' },
       { href: contact, label: 'Contacto', activeKey: '#contacto' },
       { href: '/trabaja-con-nosotros', label: 'Únete', activeKey: '/trabaja-con-nosotros' },
+      { href: '/planes', label: 'Planes', activeKey: '/planes' },
     ];
   }, []);
 
@@ -102,6 +107,7 @@ export default function Navbar() {
       <nav className="hidden sm:flex items-center gap-4 sm:gap-6 md:gap-8">
         {navLinks.map((link) => {
           const isActive = activeHref === link.activeKey;
+          const isPlanes = link.label === 'Planes';
           return (
             <Link
               key={link.href}
@@ -111,11 +117,15 @@ export default function Navbar() {
                 'text-white hover:text-primary'
               } ${
                 'text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em]'
-              } ${isActive ? 'text-primary' : ''} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded`}
+              } ${isActive ? 'text-primary' : ''} ${
+                isPlanes ? 'planes-nav-link px-3 py-1.5 rounded-full bg-primary/10 border border-primary/30 !text-primary hover:bg-primary hover:!text-black transition-all duration-300' : ''} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded`}
             >
               {link.label}
-              {isActive && (
+              {isActive && !isPlanes && (
                 <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-[3px] h-[3px] sm:w-1 sm:h-1 rounded-full bg-primary" />
+              )}
+              {isPlanes && (
+                <span className="absolute inset-0 rounded-full bg-primary/20 animate-pulse-glow pointer-events-none" />
               )}
             </Link>
           );
@@ -166,6 +176,7 @@ export default function Navbar() {
             <div className="mt-4 flex flex-col">
               {navLinks.map((link) => {
                 const isActive = activeHref === link.activeKey;
+                const isPlanes = link.label === 'Planes';
                 return (
                   <Link
                     key={link.href}
@@ -176,7 +187,7 @@ export default function Navbar() {
                     }}
                     className={`py-3 border-b border-white/10 last:border-b-0 text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors ${
                       isActive ? 'text-primary' : 'text-white hover:text-primary'
-                    } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded`}
+                    } ${isPlanes ? 'text-primary bg-primary/10 rounded px-2' : ''} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded`}
                   >
                     <span className="relative inline-block">
                       {link.label}
@@ -191,6 +202,16 @@ export default function Navbar() {
           </motion.div>
         </motion.div>
       )}
+
+      <style jsx global>{`
+        @keyframes pulse-glow {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.6; transform: scale(1.05); }
+        }
+        .animate-pulse-glow {
+          animation: pulse-glow 2s ease-in-out infinite;
+        }
+      `}</style>
     </motion.header>
   );
 }

@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import FloatingLogo from '@/components/FloatingLogo';
 import WhoWeAre from "@/components/WhoWeAre";
+import PlanesPromo from "@/components/PlanesPromo";
 import BarberCarousel from "@/components/BarberCarousel";
 import StylesShowcase from "@/components/StylesShowcase";
 import GallerySection from "@/components/GallerySection";
@@ -17,12 +18,13 @@ export default function Home() {
       <Hero />
      
       <WhoWeAre variant="preview" />
+      <PlanesPromo />
       <BarberCarousel barbers={barbersData} />
        <StylesShowcase />
       {/*<GallerySection variant="preview" />*/}
       <Contact />
       <Footer />
-      <FloatingBookingButton url="https://neooc2b.setmore.com/?fbclid=PAZXh0bgNhZW0CMTEAAaaOGfb00uDJuEsMw9NMHy2Da7Qy6sfgyZHYMtwgSEj_5R3HK1mp4I51bxU_aem_ZEFdpvIRt2yhMVwlxEbhQg#services" />
+      <FloatingBookingButton />
     </main>
   );
 }

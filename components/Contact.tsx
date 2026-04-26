@@ -2,7 +2,9 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Link from 'next/link';
 import { SiInstagram, SiTiktok, SiWhatsapp } from 'react-icons/si';
+import { FiArrowRight } from 'react-icons/fi';
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -145,6 +147,20 @@ export default function Contact() {
             </span>
           </motion.div>
         </div>
+
+        {/* Plan CTA */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-16 flex justify-center"
+        >
+          <Link
+            href="/planes"
+            className="group inline-flex items-center gap-3 px-8 py-4 border border-primary/40 text-primary hover:bg-primary hover:text-black transition-all duration-300 rounded-full font-bold text-[11px] tracking-[0.3em] uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            <span>Ver Planes y Precios</span>
+            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
       </motion.div>
 
       <style jsx global>{`

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -35,6 +36,42 @@ export default function Hero() {
         <h2 className="text-[clamp(5rem,20vw,12rem)] font-light tracking-tighter text-outline leading-[0.8] -mt-2 md:-mt-6">
           Barbería
         </h2>
+
+        {/* CTA Buttons - Maximum Conversion */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4, ease: [0.43, 0.13, 0.23, 0.96] }}
+          className="mt-8 md:mt-12 flex flex-col sm:flex-row items-center gap-4"
+        >
+          <Link
+            href="/planes"
+            className="group relative px-8 py-4 bg-primary text-black font-black text-[11px] tracking-[0.3em] uppercase rounded-full overflow-hidden shadow-[0_0_40px_rgba(230,180,100,0.4)] hover:shadow-[0_0_60px_rgba(230,180,100,0.6)] transition-all duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              Ver Planes
+              <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
+            </span>
+          </Link>
+          <a
+            href="https://neooc2b.setmore.com/?fbclid=PAZXh0bgNhZW0CMTEAAaaOGfb00uDJuEsMw9NMHy2Da7Qy6sfgyZHYMtwgSEj_5R3HK1mp4I51bxU_aem_ZEFdpvIRt2yhMVwlxEbhQg#services"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 border border-white/30 text-white font-bold text-[11px] tracking-[0.3em] uppercase rounded-full hover:bg-white hover:text-black transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            Reservar Ahora
+          </a>
+        </motion.div>
+
+        {/* Social proof hint */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-6 text-[10px] text-white/50 uppercase tracking-[0.2em]"
+        >
+          Desde $12.000 · 4.9★ (150+ reseñas)
+        </motion.p>
       </motion.div>
 
       <style jsx global>{`
