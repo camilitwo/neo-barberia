@@ -60,9 +60,9 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
           <motion.div
             key={barbers[selectedIndex]?.id ?? selectedIndex}
             className="absolute inset-0"
-            initial={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
+            initial={{ opacity: 0, scale: 1.02 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.02 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             <CdnImage
@@ -86,7 +86,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
         className="relative z-10 max-w-7xl mx-auto"
       >
         <div className="relative min-h-[60vh] flex flex-col justify-center py-10">
-          <h2 className="text-xs font-bold text-muted uppercase tracking-[0.2em] mb-8 ml-1">
+          <h2 className="text-lg font-bold text-muted mb-8 ml-1 text-balance">
             Nuestro Equipo
           </h2>
 
@@ -102,11 +102,11 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
                   onChange={() => setSelectedIndex(index)}
                 />
                 <label
-                  className="relative z-10 block cursor-pointer py-4 border-b border-white/10 hover:border-primary/50 transition-colors"
+                  className="relative z-10 block cursor-pointer py-4 border-b border-white/10 hover:border-primary/50 transition-all duration-200 ease-out active:scale-[0.98]"
                   htmlFor={`barber-${barber.id}`}
                 >
                   <span
-                    className={`barber-name text-5xl md:text-6xl font-extrabold tracking-tighter block transition-colors ${
+                    className={`barber-name text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-[-0.03em] block transition-colors duration-200 ease-out ${
                       selectedIndex === index
                         ? 'text-primary'
                         : 'text-white/90 group-hover:text-white'
@@ -116,7 +116,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
                   </span>
 
                   <span
-                    className={`text-sm font-mono text-gray-500 mt-2 block transition-opacity ${
+                    className={`text-sm font-mono text-gray-500 mt-2 block transition-opacity duration-200 ease-out ${
                       selectedIndex === index ? 'opacity-100' : 'opacity-0'
                     }`}
                   >
@@ -130,10 +130,10 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
           <div className="mt-10 pt-8 border-t border-white/10">
             <Link
               href="/trabaja-con-nosotros"
-              className="inline-flex items-center gap-3 text-white/60 hover:text-primary border border-white/10 hover:border-primary/50 px-5 py-3 uppercase tracking-[0.2em] text-[11px] font-bold transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              className="inline-flex items-center gap-3 text-white/60 hover:text-primary border border-white/10 hover:border-primary/50 px-5 py-3 text-[11px] font-bold transition-all duration-200 ease-out group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.97]"
             >
               <span>¿Quieres ser parte del equipo?</span>
-              <span className="text-sm group-hover:translate-x-1 transition-transform">→</span>
+              <span className="text-sm group-hover:translate-x-1 transition-transform duration-200 ease-out">→</span>
             </Link>
           </div>
 
@@ -153,10 +153,10 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
-                    className="sm:hidden inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.2em] text-[11px] underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                    className="sm:hidden inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.2em] text-[11px] underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]"
                   >
                     <span>Ver {socialLabel}</span>
-                    <span className="text-base">→</span>
+                    <span className="text-base transition-transform duration-200 ease-out">→</span>
                   </a>
 
                   <a
@@ -164,10 +164,10 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
-                    className="hidden sm:inline-flex items-center justify-between gap-4 border border-primary/60 text-primary font-bold uppercase py-3.5 px-6 hover:bg-primary hover:text-black transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent w-fit"
+                    className="hidden sm:inline-flex items-center justify-between gap-4 border border-primary/60 text-primary font-bold uppercase py-3.5 px-6 hover:bg-primary hover:text-black transition-all duration-200 ease-out group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent w-fit active:scale-[0.97]"
                   >
                     <span className="text-[11px] tracking-[0.2em]">Ver {socialLabel}</span>
-                    <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
+                    <span className="text-lg group-hover:translate-x-1 transition-transform duration-200 ease-out">→</span>
                   </a>
                 </>
               )}
@@ -197,6 +197,10 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
           pointer-events: none;
           mix-blend-mode: overlay;
           z-index: 10;
+          will-change: transform;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .team-section .grain-overlay::before { display: none; }
         }
 
         .team-section input[type='radio']:checked + label .barber-name {

@@ -53,16 +53,16 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <div className="space-y-6">
-            <motion.p
+            <motion.h3
               variants={textVariants}
-              className="text-xs font-bold text-muted uppercase tracking-[0.2em]"
+              className="text-xl font-medium text-muted"
             >
               Nosotros
-            </motion.p>
+            </motion.h3>
 
             <motion.h2
               variants={textVariants}
-              className="text-6xl sm:text-7xl md:text-8xl font-black outline-text tracking-tighter leading-[0.9]"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black outline-text tracking-[-0.03em] leading-[0.9] text-balance"
             >
               NEO
             </motion.h2>
@@ -101,7 +101,7 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
                 href="#equipo"
                 whileHover={{ x: 8 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center text-sm font-bold tracking-[0.2em] uppercase text-white hover:text-primary transition-colors border-b border-white/10 pb-1"
+                className="inline-flex items-center text-sm font-bold text-white hover:text-primary transition-colors border-b border-white/10 pb-1"
               >
                 Conoce nuestro equipo
               </motion.a>
@@ -109,7 +109,7 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
               <motion.div variants={textVariants}>
                 <Link
                   href="/nosotros"
-                  className="inline-flex items-center text-sm font-bold tracking-[0.2em] uppercase text-white hover:text-primary transition-colors border-b border-white/10 pb-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                  className="inline-flex items-center text-sm font-bold text-white hover:text-primary transition-colors border-b border-white/10 pb-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
                 >
                   Leer más
                 </Link>
@@ -121,7 +121,7 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
         {variant === 'full' && (
           <div className="mt-14 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-8">
             <motion.div variants={textVariants}>
-              <h4 className="text-xs font-bold text-primary uppercase tracking-widest mb-3">HOURS</h4>
+              <h4 className="text-sm font-medium text-primary mb-3">Horario</h4>
               <ul className="space-y-1">
                 <li className="text-sm font-medium text-white flex justify-between">
                   <span>Lun-Dom</span>
@@ -131,7 +131,7 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
             </motion.div>
 
             <motion.div variants={textVariants}>
-              <h4 className="text-xs font-bold text-primary uppercase tracking-widest mb-3">INFO</h4>
+              <h4 className="text-sm font-medium text-primary mb-3">Info</h4>
               <div className="flex flex-col gap-1">
                 <span className="text-sm font-medium text-white">SirFausto / Nishman</span>
                 <span className="text-sm text-gray-500">NEOBARBERÍA</span>
@@ -143,7 +143,7 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
 
       <style jsx global>{`
         .who-minimal .outline-text {
-          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+          -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
           color: transparent;
         }
       `}</style>

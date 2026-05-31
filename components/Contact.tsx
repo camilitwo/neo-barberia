@@ -62,7 +62,7 @@ export default function Contact() {
       >
         <div className="relative px-2 sm:px-6 pb-12 pt-4">
           <motion.div variants={itemVariants} className="flex-none pt-4 pb-12">
-            <h2 className="text-[18vw] sm:text-[10vw] leading-[0.85] font-extrabold text-outline uppercase tracking-tighter mix-blend-overlay opacity-90">
+            <h2 className="text-[clamp(2.5rem,10vw,6rem)] leading-[0.9] font-extrabold text-outline uppercase tracking-[-0.03em] mix-blend-overlay opacity-90 text-balance">
               Quilicura,
               <br />
               Santiago
@@ -71,22 +71,22 @@ export default function Contact() {
 
           <div className="flex flex-col justify-end space-y-12 relative">
             <motion.div variants={itemVariants} className="space-y-3">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.25em] block border-l-2 border-primary pl-3">
-                Address
+              <span className="text-sm font-medium text-gray-400 block mb-2">
+                Dirección
               </span>
-              <div className="pl-4">
+              <div>
                 <p className="text-2xl font-light text-gray-100">Quilicura, Santiago</p>
                 <p className="text-2xl font-light text-gray-100">Chile</p>
               </div>
             </motion.div>
 
             <motion.div variants={itemVariants} className="space-y-3 pb-8">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.25em] block border-l-2 border-primary pl-3">
-                Contact
+              <span className="text-sm font-medium text-gray-400 block mb-2">
+                Contacto
               </span>
-              <div className="pl-4 flex flex-col items-start space-y-2">
+              <div className="flex flex-col items-start space-y-2">
                 <a
-                  className="text-xl text-gray-200 hover:text-primary transition-colors border-b border-white/10 pb-1"
+                  className="text-xl text-gray-200 hover:text-primary transition-colors duration-200 ease-out border-b border-white/10 pb-1 active:scale-[0.97]"
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -95,33 +95,33 @@ export default function Contact() {
                 </a>
               </div>
 
-              <div className="pl-4 pt-6 flex items-center gap-4">
+              <div className="pt-6 flex items-center gap-4">
                 <a
                   href={instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="w-12 h-12 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.95] will-change-transform"
                   aria-label="Instagram"
                 >
-                  <SiInstagram className="w-5 h-5" aria-hidden />
+                  <SiInstagram className="w-5 h-5 transition-transform duration-200 ease-out" aria-hidden />
                 </a>
                 <a
                   href={tiktokUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="w-12 h-12 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.95] will-change-transform"
                   aria-label="TikTok"
                 >
-                  <SiTiktok className="w-5 h-5" aria-hidden />
+                  <SiTiktok className="w-5 h-5 transition-transform duration-200 ease-out" aria-hidden />
                 </a>
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="w-12 h-12 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.95] will-change-transform"
                   aria-label="WhatsApp"
                 >
-                  <SiWhatsapp className="w-5 h-5" aria-hidden />
+                  <SiWhatsapp className="w-5 h-5 transition-transform duration-200 ease-out" aria-hidden />
                 </a>
               </div>
             </motion.div>
@@ -135,12 +135,12 @@ export default function Contact() {
               href={mapsDirections}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-primary text-black shadow-[0_20px_50px_rgba(230,180,100,0.25)] flex items-center justify-center hover:scale-105 transition-transform duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-primary text-black shadow-[0_20px_50px_rgba(230,180,100,0.25)] flex items-center justify-center hover:scale-105 transition-transform duration-200 ease-out group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent will-change-transform active:scale-[0.95]"
               aria-label="Cómo llegar"
             >
-              <span className="text-2xl sm:text-4xl transform -rotate-45 group-hover:rotate-0 transition-transform duration-300">↗</span>
+              <span className="text-2xl sm:text-4xl transform -rotate-45 group-hover:rotate-0 transition-transform duration-200 ease-out">↗</span>
             </a>
-            <span className="absolute top-full left-1/2 -translate-x-1/2 mt-4 text-[10px] font-bold uppercase tracking-[0.2em] text-primary whitespace-nowrap opacity-80">
+            <span className="absolute top-full left-1/2 -translate-x-1/2 mt-4 text-[11px] font-medium text-primary whitespace-nowrap opacity-80">
               Cómo llegar
             </span>
           </motion.div>

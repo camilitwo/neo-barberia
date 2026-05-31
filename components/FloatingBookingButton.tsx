@@ -13,7 +13,7 @@ export default function FloatingBookingButton({ url }: FloatingBookingButtonProp
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Agenda tu cita"
-      initial={{ scale: 0, opacity: 0 }}
+      initial={{ scale: 0.95, opacity: 0 }}
       animate={{
         scale: 1,
         opacity: 1,
@@ -26,13 +26,13 @@ export default function FloatingBookingButton({ url }: FloatingBookingButtonProp
       }}
       whileHover={{
         y: -4,
-        transition: { duration: 0.2 }
+        transition: { duration: 0.2, ease: [0.23, 1, 0.32, 1] }
       }}
-      whileTap={{ scale: 0.98 }}
-      className="fixed bottom-6 sm:bottom-8 right-6 sm:right-8 z-50 border border-white/20 text-white font-bold uppercase py-4 px-6 hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-between gap-4 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent bg-black/30 backdrop-blur-md"
+      whileTap={{ scale: 0.97 }}
+      className="fixed bottom-6 sm:bottom-8 right-6 sm:right-8 z-50 border border-white/20 text-white font-bold uppercase py-4 px-6 hover:bg-white hover:text-black transition-all duration-200 ease-out flex items-center justify-between gap-4 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent bg-black/30 backdrop-blur-md active:scale-[0.97]"
     >
       <span className="text-[12px] sm:text-sm tracking-[0.2em]">Agendar</span>
-      <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
+      <span className="text-lg group-hover:translate-x-1 transition-transform duration-200 ease-out">→</span>
     </motion.a>
   );
 }

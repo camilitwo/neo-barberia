@@ -16,20 +16,20 @@ export default function Footer() {
     <footer className="relative bg-black text-white pt-24 pb-0 overflow-hidden">
       <div className="absolute top-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-8 z-20">
         <a
-          className="group flex items-center justify-center w-8 h-8 rounded-full border border-white/20 hover:border-white transition-colors duration-300"
+          className="group flex items-center justify-center w-8 h-8 rounded-full border border-white/20 hover:border-white transition-all duration-200 ease-out active:scale-[0.97]"
           href="#inicio"
           aria-label="Volver arriba"
         >
-          <span className="text-sm text-gray-400 group-hover:text-white transition-colors">↑</span>
+          <span className="text-sm text-gray-400 group-hover:text-white transition-colors duration-200 ease-out">↑</span>
         </a>
       </div>
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 mb-24 md:mb-32 relative z-10 text-center md:text-left justify-items-center md:justify-items-start">
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <h4 className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase mb-2">Location</h4>
+            <h4 className="text-sm font-medium text-gray-500 mb-2">Ubicación</h4>
             <a
-              className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors"
+              className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors duration-200 ease-out active:scale-[0.97]"
               href={mapsDirections}
               target="_blank"
               rel="noopener noreferrer"
@@ -39,7 +39,7 @@ export default function Footer() {
               Chile
             </a>
             <a
-              className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors mt-2"
+              className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors duration-200 ease-out mt-2 active:scale-[0.97]"
               href={mapsDirections}
               target="_blank"
               rel="noopener noreferrer"
@@ -49,9 +49,9 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <h4 className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase mb-2">Social</h4>
+            <h4 className="text-sm font-medium text-gray-500 mb-2">Redes</h4>
             <a
-              className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors"
+              className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors duration-200 ease-out active:scale-[0.97]"
               href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -59,7 +59,7 @@ export default function Footer() {
               Instagram
             </a>
             <a
-              className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors"
+              className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors duration-200 ease-out active:scale-[0.97]"
               href={tiktokUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -67,7 +67,7 @@ export default function Footer() {
               TikTok
             </a>
             <a
-              className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors"
+              className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors duration-200 ease-out active:scale-[0.97]"
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -77,19 +77,19 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <h4 className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase mb-2">Legal</h4>
+            <h4 className="text-sm font-medium text-gray-500 mb-2">Info</h4>
             <span className="text-[11px] font-medium tracking-wide text-gray-300">Horario</span>
             <span className="text-[11px] font-medium tracking-wide text-gray-300">Lun-Dom: 11:00 - 20:30</span>
             <Link
               href="/trabaja-con-nosotros"
-              className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+              className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]"
             >
               Únete al equipo
             </Link>
             <span className="text-[11px] font-medium tracking-wide text-gray-300">© {currentYear} Neo Barbería</span>
             <Link
               href="https://github.com/camilitwo"
-              className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+              className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]"
             >
               Diseñado por Camilo González
             </Link>

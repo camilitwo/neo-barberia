@@ -16,6 +16,12 @@
   --accent-hover: #ff932b; /* hover acento */
   --danger: #dc2626;
   --focus-ring: var(--accent);
+
+  /* Easing curves - Emil Kowalski recommendations */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Modo claro futuro (placeholder) */
@@ -33,11 +39,21 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   background-color: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Brutalist display headings */
+h1, h2, h3 {
+  font-family: 'Space Mono', 'SF Mono', 'Monaco', monospace;
+}
+
+/* Body text remains system */
+p, span, a, button, input, textarea {
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 /* Tipografía base accesible */
@@ -60,14 +76,7 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, textar
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 @layer utilities {
-  .text-gradient {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  /* Fallback accesible por si gradiente no se renderiza o en forced colors */
-  .text-gradient-fallback { color: var(--primary); }
+  /* NOTE: text-gradient utility removed - gradient text is decorative, not meaningful per design-taste-frontend */
 
   .glass-effect {
     background: rgba(255, 255, 255, 0.06); /* ligero aumento de opacidad para contraste */

@@ -6,9 +6,6 @@ import CdnImage from '@/components/CdnImage';
 import { imagekitUrl } from '@/lib/imagekit';
 import { stylesData } from '@/data/styles';
 
-const goldLine = { backgroundColor: 'rgba(230, 180, 100, 0.35)' };
-const ghostColor = { color: 'rgba(255,255,255,0.07)' };
-const imgBorder = { border: '1px solid rgba(255,255,255,0.06)' };
 
 function StyleCard({ style, index }: { style: (typeof stylesData)[number]; index: number }) {
   return (
@@ -17,13 +14,12 @@ function StyleCard({ style, index }: { style: (typeof stylesData)[number]; index
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, delay: index * 0.15 }}
+        transition={{ duration: 0.5, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
         className="flex flex-col relative"
       >
         {/* Ghost text */}
         <span
-          className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none select-none mb-2"
-          style={ghostColor}
+          className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none select-none mb-2 text-white/[0.07]"
         >
           {style.subtitle}
         </span>
@@ -34,13 +30,13 @@ function StyleCard({ style, index }: { style: (typeof stylesData)[number]; index
         </h3>
 
         {/* Image */}
-        <div className="w-full aspect-[4/5] mb-4 md:mb-6 overflow-hidden rounded-sm relative" style={imgBorder}>
+        <div className="w-full aspect-[4/5] mb-4 md:mb-6 overflow-hidden rounded-sm relative border border-white/[0.06] active:scale-[0.98] transition-transform duration-200 ease-out">
           <CdnImage
             src={imagekitUrl(style.image)}
             alt={style.title}
             fill
             sizes="(max-width: 768px) 70vw, 30vw"
-            className="object-cover grainy-bw group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+            className="object-cover grainy-bw group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-500 ease-out will-change-transform"
           />
         </div>
 
@@ -73,8 +69,8 @@ export default function StylesShowcase() {
         <div className="grid grid-cols-3 gap-0 relative">
 
           {/* Gold vertical dividers */}
-          <div className="absolute left-[33.33%] top-0 bottom-0 w-px -translate-x-1/2 z-20" style={goldLine} />
-          <div className="absolute left-[66.66%] top-0 bottom-0 w-px -translate-x-1/2 z-20" style={goldLine} />
+          <div className="absolute left-[33.33%] top-0 bottom-0 w-px -translate-x-1/2 z-20 bg-primary/[0.35]" />
+          <div className="absolute left-[66.66%] top-0 bottom-0 w-px -translate-x-1/2 z-20 bg-primary/[0.35]" />
 
           {/* Col 1 — Clásico (top) */}
           <div className="pr-8 pt-10 pb-10">

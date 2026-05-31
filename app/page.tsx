@@ -19,7 +19,6 @@ export default function Home() {
       <WhoWeAre variant="preview" />
       <BarberCarousel barbers={barbersData} />
        <StylesShowcase />
-      {/*<GallerySection variant="preview" />*/}
       <Contact />
       <Footer />
       <FloatingBookingButton url="https://neooc2b.setmore.com/?fbclid=PAZXh0bgNhZW0CMTEAAaaOGfb00uDJuEsMw9NMHy2Da7Qy6sfgyZHYMtwgSEj_5R3HK1mp4I51bxU_aem_ZEFdpvIRt2yhMVwlxEbhQg#services" />

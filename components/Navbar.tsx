@@ -107,11 +107,11 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setActiveHref(link.activeKey)}
-              className={`relative font-semibold uppercase transition-colors ${
+              className={`relative font-semibold uppercase transition-colors duration-200 ease-out ${
                 'text-white hover:text-primary'
               } ${
                 'text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em]'
-              } ${isActive ? 'text-primary' : ''} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded`}
+              } ${isActive ? 'text-primary' : ''} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]`}
             >
               {link.label}
               {isActive && (
@@ -125,11 +125,11 @@ export default function Navbar() {
       <button
         type="button"
         onClick={() => setIsMenuOpen((v) => !v)}
-        className="sm:hidden w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-black/20 backdrop-blur-sm text-white hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="sm:hidden w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-black/20 backdrop-blur-sm text-white hover:text-primary transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.97]"
         aria-label="Abrir menú"
         aria-expanded={isMenuOpen}
       >
-        <span className="text-lg">☰</span>
+        <span className="text-lg transition-transform duration-200 ease-out">☰</span>
       </button>
 
       {isMenuOpen && (
@@ -149,17 +149,17 @@ export default function Navbar() {
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.2 }}
-            className="relative z-10 top-4 mx-4 rounded-2xl border border-white/10 bg-[#0a0a0a] p-4 shadow-2xl"
+            className="relative z-10 top-4 mx-4 rounded-sm border border-white/10 bg-[#0a0a0a] p-4 shadow-2xl"
           >
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-gray-300">Menu</span>
               <button
                 type="button"
                 onClick={() => setIsMenuOpen(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 hover:border-white/30 transition-colors"
+                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 hover:border-white/30 transition-all duration-200 ease-out active:scale-[0.97]"
                 aria-label="Cerrar"
               >
-                <span className="text-lg">×</span>
+                <span className="text-lg transition-transform duration-200 ease-out">×</span>
               </button>
             </div>
 
@@ -174,9 +174,9 @@ export default function Navbar() {
                       setActiveHref(link.activeKey);
                       setIsMenuOpen(false);
                     }}
-                    className={`py-3 border-b border-white/10 last:border-b-0 text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors ${
+                    className={`py-3 border-b border-white/10 last:border-b-0 text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors duration-200 ease-out ${
                       isActive ? 'text-primary' : 'text-white hover:text-primary'
-                    } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded`}
+                    } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]`}
                   >
                     <span className="relative inline-block">
                       {link.label}

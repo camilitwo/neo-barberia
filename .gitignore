@@ -67,3 +67,8 @@ Thumbs.db
 testem.log
 /typings
 
+# Skills and AI agents
+.agents/
+.claude/
+.windsurf/skills/
+.impeccable/
