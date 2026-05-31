@@ -9,25 +9,24 @@ export default function Contact() {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.1,
+        duration: 0.4,
+        staggerChildren: 0.07,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        type: 'spring',
-        stiffness: 100,
+        duration: 0.4,
+        ease: [0.23, 1, 0.32, 1],
       },
     },
   };
@@ -135,7 +134,7 @@ export default function Contact() {
               href={mapsDirections}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-primary text-black shadow-[0_20px_50px_rgba(230,180,100,0.25)] flex items-center justify-center hover:scale-105 transition-transform duration-200 ease-out group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent will-change-transform active:scale-[0.95]"
+              className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-primary text-black shadow-[0_20px_50px_rgba(230,180,100,0.25)] flex items-center justify-center transition-transform duration-200 ease-out group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent will-change-transform active:scale-[0.95] contact-maps-btn"
               aria-label="Cómo llegar"
             >
               <span className="text-2xl sm:text-4xl transform -rotate-45 group-hover:rotate-0 transition-transform duration-200 ease-out">↗</span>
@@ -151,6 +150,11 @@ export default function Contact() {
         .contact-section .text-outline {
           -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
           color: transparent;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .contact-section .contact-maps-btn:hover {
+            transform: scale(1.05);
+          }
         }
       `}</style>
     </section>

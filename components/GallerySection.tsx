@@ -19,23 +19,23 @@ export default function GallerySection({ variant = 'preview' }: GallerySectionPr
     <section id="galeria" className="py-20 px-4 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gradient-fallback text-gradient mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Galería
           </h2>
-          <div className="h-1 w-24 bg-gradient-to-r from-primary to-accent mx-auto rounded-full" />
+          <div className="h-px w-16 bg-primary mx-auto opacity-60" />
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.07, ease: [0.23, 1, 0.32, 1] }}
         >
           <ImageGallery
             compact={variant === 'preview'}

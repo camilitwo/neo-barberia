@@ -19,22 +19,22 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.08,
       },
     },
   };
 
   const textVariants = {
     hidden: {
-      y: 20,
+      y: 14,
       opacity: 0,
     },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        type: 'spring',
-        stiffness: 80,
+        duration: 0.4,
+        ease: [0.23, 1, 0.32, 1],
       },
     },
   };
@@ -99,9 +99,8 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
               <motion.a
                 variants={textVariants}
                 href="#equipo"
-                whileHover={{ x: 8 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center text-sm font-bold text-white hover:text-primary transition-colors border-b border-white/10 pb-1"
+                className="inline-flex items-center text-sm font-bold text-white hover:text-primary transition-colors border-b border-white/10 pb-1 who-link"
               >
                 Conoce nuestro equipo
               </motion.a>
@@ -145,6 +144,14 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
         .who-minimal .outline-text {
           -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
           color: transparent;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .who-minimal .who-link:hover {
+            transform: translateX(6px);
+          }
+        }
+        .who-minimal .who-link {
+          transition: color 0.2s ease-out, transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
         }
       `}</style>
     </section>

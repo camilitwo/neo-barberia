@@ -109,9 +109,72 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, textar
   }
 }
 
-/* Modo reducción de movimiento */
+/* Modo reducción de movimiento — reduce movement, preserve functional feedback */
 @media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  /* Keep opacity/color transitions (functional feedback). Kill transform-based motion. */
+  * {
+    transition-property: opacity, color, background-color, border-color, fill, stroke !important;
+    transition-duration: 0.15ms !important;
+  }
+}
+
+/* PopularCutsSection image — specific filter transition */
+.cuts-img {
+  transition: filter 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* StylesShowcase image — specific transitions instead of transition-all */
+.styles-img {
+  transition: filter 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media not (hover: hover) {
+  .styles-img {
+    filter: none;
+  }
+}
+
+/* JoinTheCrew utilities */
+.join-image {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .join-image:hover {
+    transform: scale(1.05);
+  }
+}
+.join-cta {
+  transition: background-color 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out, transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.join-cta:active {
+  transform: scale(0.97);
+}
+
+/* FloatingBookingButton — hover gated to pointer devices */
+.booking-btn {
+  transition: background-color 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out, transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.booking-btn:active {
+  transform: scale(0.97);
+}
+.booking-arrow {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .booking-btn:hover {
+    background-color: #fff;
+    color: #000;
+    border-color: #fff;
+  }
+  .booking-btn:hover .booking-arrow {
+    transform: translateX(4px);
+  }
 }
 
 /* High Contrast (forced-colors) fallback */

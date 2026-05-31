@@ -75,9 +75,9 @@ export default function Navbar() {
 
   return (
     <motion.header
-      initial={{ y: -50, opacity: 0 }}
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }}
+      transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 flex justify-between items-center transition-all duration-300 ${
         isScrolled
           ? 'bg-black/80 supports-[backdrop-filter]:bg-black/50 backdrop-blur-md'
@@ -137,6 +137,7 @@ export default function Navbar() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.15, ease: [0.23, 1, 0.32, 1] }}
           className="fixed inset-0 z-[60] sm:hidden"
         >
           <button
@@ -146,9 +147,9 @@ export default function Navbar() {
             className="absolute inset-0 bg-black/90 backdrop-blur-md"
           />
           <motion.div
-            initial={{ y: -10, opacity: 0 }}
+            initial={{ y: -8, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
             className="relative z-10 top-4 mx-4 rounded-sm border border-white/10 bg-[#0a0a0a] p-4 shadow-2xl"
           >
             <div className="flex items-center justify-between">

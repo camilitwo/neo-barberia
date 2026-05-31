@@ -23,19 +23,24 @@ export default function Hero() {
         <div className="absolute inset-0 hero-grain pointer-events-none opacity-[0.12] mix-blend-overlay" />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }}
-        className="relative z-10 text-center flex flex-col items-center justify-center leading-none select-none"
-      >
-        <h1 className="text-[clamp(3.5rem,12vw,6rem)] font-extrabold tracking-[-0.03em] text-white leading-[0.85] text-balance">
+      <div className="relative z-10 text-center flex flex-col items-center justify-center leading-none select-none">
+        <motion.h1
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+          className="text-[clamp(3.5rem,12vw,6rem)] font-extrabold tracking-[-0.03em] text-white leading-[0.85] text-balance"
+        >
           Neo
-        </h1>
-        <h2 className="text-[clamp(3.5rem,12vw,6rem)] font-light tracking-[-0.03em] text-outline leading-[0.85] -mt-2 md:-mt-4 text-balance">
+        </motion.h1>
+        <motion.h2
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.07, ease: [0.23, 1, 0.32, 1] }}
+          className="text-[clamp(3.5rem,12vw,6rem)] font-light tracking-[-0.03em] text-outline leading-[0.85] -mt-2 md:-mt-4 text-balance"
+        >
           Barbería
-        </h2>
-      </motion.div>
+        </motion.h2>
+      </div>
 
       <style jsx global>{`
         .hero-minimal .text-outline {

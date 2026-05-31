@@ -14,7 +14,7 @@ function StyleCard({ style, index }: { style: (typeof stylesData)[number]; index
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.5, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
+        transition={{ duration: 0.45, delay: index * 0.07, ease: [0.23, 1, 0.32, 1] }}
         className="flex flex-col relative"
       >
         {/* Ghost text */}
@@ -36,7 +36,7 @@ function StyleCard({ style, index }: { style: (typeof stylesData)[number]; index
             alt={style.title}
             fill
             sizes="(max-width: 768px) 70vw, 30vw"
-            className="object-cover grainy-bw group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-500 ease-out will-change-transform"
+            className="object-cover grainy-bw group-hover:grayscale-0 group-hover:scale-[1.03] will-change-transform styles-img"
           />
         </div>
 

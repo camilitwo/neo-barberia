@@ -15,20 +15,19 @@ export default function JoinTheCrew() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola NeoBarberia! Me interesa unirme al equipo.')}`;
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, staggerChildren: 0.15 },
+      transition: { duration: 0.4, staggerChildren: 0.08 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 100 },
+      transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
     },
   };
 
@@ -58,7 +57,7 @@ export default function JoinTheCrew() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.43, 0.13, 0.23, 0.96] }}
+          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
           className="relative z-10 space-y-4"
         >
           <h1 className="text-[15vw] sm:text-[10vw] md:text-[9rem] font-extrabold tracking-tighter uppercase leading-[0.8] join-outline-text mb-4">
@@ -101,7 +100,7 @@ export default function JoinTheCrew() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-4 text-white font-extrabold uppercase tracking-widest text-sm py-4 px-8 bg-surface border border-border hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              className="group inline-flex items-center gap-4 text-white font-extrabold uppercase tracking-widest text-sm py-4 px-8 bg-surface border border-border hover:bg-primary hover:text-black hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.97] join-cta"
             >
               QUIERO EMPEZAR
               <span className="transform group-hover:translate-x-2 transition-transform">→</span>
@@ -119,7 +118,7 @@ export default function JoinTheCrew() {
             alt="Manos de barbero profesional trabajando"
             width={600}
             height={600}
-            className="w-full h-full object-cover grayscale hover:scale-105 transition-transform duration-700"
+            className="w-full h-full object-cover grayscale join-image"
             quality={80}
           />
         </motion.div>

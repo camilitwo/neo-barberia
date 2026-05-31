@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 import CdnImage from '@/components/CdnImage';
@@ -67,10 +66,9 @@ export default function PopularCutsSection() {
 
         <div ref={scrollRef} className="popular-cuts flex overflow-x-auto gap-1 px-4 sm:px-6 pb-8 snap-x snap-mandatory">
           {cuts.map((cut, i) => (
-            <motion.div
+            <div
               key={cut.title}
               ref={(el) => { cardRefs.current[i] = el; }}
-              whileHover={{ scale: 1.01 }}
               className="flex-none w-[80vw] sm:w-[65vw] md:w-[40vw] snap-center relative aspect-[3/4] group overflow-hidden"
             >
               <CdnImage
@@ -78,8 +76,8 @@ export default function PopularCutsSection() {
                 alt={cut.title}
                 fill
                 sizes="(max-width: 768px) 80vw, (max-width: 1024px) 65vw, 40vw"
-                className={`object-cover transition-all duration-500 ${
-                  activeIndex === i ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'
+                className={`object-cover cuts-img ${
+                  activeIndex === i ? 'grayscale-0' : 'grayscale'
                 }`}
               />
               <div className="absolute bottom-4 left-4">
@@ -87,7 +85,7 @@ export default function PopularCutsSection() {
                   {cut.title}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
