@@ -194,7 +194,7 @@ export default function ImageGallery({
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, type: 'spring', stiffness: 100 }}
+          transition={{ delay: 0.6, duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
           onClick={onBookingClick}
           className="mt-8 w-full border border-white/20 text-white font-bold uppercase py-6 hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-between px-8 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >

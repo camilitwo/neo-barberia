@@ -60,7 +60,7 @@ export default function JoinTheCrew() {
           transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
           className="relative z-10 space-y-4"
         >
-          <h1 className="text-[15vw] sm:text-[10vw] md:text-[9rem] font-extrabold tracking-tighter uppercase leading-[0.8] join-outline-text mb-4">
+          <h1 className="text-[clamp(3rem,12vw,6rem)] font-extrabold tracking-tighter uppercase leading-[0.85] join-outline-text mb-4 text-balance">
             ÚNETE AL<br />EQUIPO
           </h1>
           <p className="max-w-xl text-lg sm:text-xl md:text-2xl font-light text-gray-400 leading-relaxed uppercase tracking-tight">
@@ -89,10 +89,9 @@ export default function JoinTheCrew() {
               Nuestra Visión
             </h2>
             <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
-              No somos solo una barbería. Somos un colectivo de mentes creativas
-              dedicadas a elevar el estándar del cuidado masculino. Buscamos
-              talento crudo, pasión innegable y el deseo de liderar el cambio en
-              la industria.
+              Neo Barbería es un equipo de barberos que trabaja con precisión,
+              aprende sin parar y entrega resultados que hablan solos.
+              Si eso te describe, queremos conocerte.
             </p>
           </div>
           <div className="mt-8">
@@ -129,13 +128,13 @@ export default function JoinTheCrew() {
           className="md:col-span-12 flex flex-col md:flex-row items-center justify-between gap-8 py-12 sm:py-16 border-y border-border px-4 sm:px-8"
         >
           <div className="text-center md:text-left">
-            <p className="text-gray-500 uppercase tracking-widest text-xs mb-2">
+            <p className="text-gray-400 uppercase tracking-widest text-xs mb-2">
               ¿Listo para el desafío?
             </p>
             <h3 className="text-2xl sm:text-3xl md:text-5xl font-extrabold uppercase tracking-tighter text-white">
               CONTACTA CON NOSOTROS AL{' '}
               <br className="hidden md:block" />
-              <span className="text-gray-600">+56 9 2372 6076</span>
+              <span className="text-gray-400">+56 9 2372 6076</span>
             </h3>
           </div>
           <div className="flex gap-4">
@@ -162,10 +161,7 @@ export default function JoinTheCrew() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 text-center">
           {requirements.map((req) => (
             <motion.div key={req.number} variants={itemVariants} className="space-y-4">
-              <span className="text-4xl sm:text-5xl font-extrabold italic text-gray-800">
-                {req.number}
-              </span>
-              <p className="uppercase font-bold tracking-tighter text-white">
+              <p className="uppercase font-extrabold tracking-tighter text-white text-2xl sm:text-3xl">
                 {req.label}
               </p>
             </motion.div>

@@ -41,7 +41,7 @@ function StyleCard({ style, index }: { style: (typeof stylesData)[number]; index
         </div>
 
         {/* Description */}
-        <p className="text-[10px] text-gray-500 leading-relaxed tracking-[0.2em] uppercase max-w-[160px]">
+        <p className="text-xs text-gray-400 leading-relaxed tracking-[0.15em] uppercase max-w-[160px]">
           {style.description}
         </p>
       </motion.div>

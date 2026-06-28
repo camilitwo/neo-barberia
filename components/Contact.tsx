@@ -61,7 +61,7 @@ export default function Contact() {
       >
         <div className="relative px-2 sm:px-6 pb-12 pt-4">
           <motion.div variants={itemVariants} className="flex-none pt-4 pb-12">
-            <h2 className="text-[clamp(2.5rem,10vw,6rem)] leading-[0.9] font-extrabold text-outline uppercase tracking-[-0.03em] mix-blend-overlay opacity-90 text-balance">
+            <h2 className="text-[clamp(2.5rem,10vw,6rem)] leading-[0.9] font-extrabold text-outline uppercase tracking-[-0.03em] text-balance">
               Quilicura,
               <br />
               Santiago

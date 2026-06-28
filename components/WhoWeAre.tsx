@@ -133,7 +133,7 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
               <h4 className="text-sm font-medium text-primary mb-3">Info</h4>
               <div className="flex flex-col gap-1">
                 <span className="text-sm font-medium text-white">SirFausto / Nishman</span>
-                <span className="text-sm text-gray-500">NEOBARBERÍA</span>
+                <span className="text-sm text-gray-400">NEOBARBERÍA</span>
               </div>
             </motion.div>
           </div>

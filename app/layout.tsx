@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" data-theme="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -25,6 +25,7 @@ export default function RootLayout({
         {/* Favicon: logo de la barbería */}
         <link rel="icon" href="/neobarberia_2026-01-28_09_23/1_t2y8pa.png" type="image/png" />
         {/* Color del navegador / barra en móviles */}
+        <meta name="color-scheme" content="dark" />
         <meta name="theme-color" content="#E6B464" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="google-site-verification" content="TJ5NYEWtmO0ApBSKCZQfeKMDV6aiMuW_pEuoIry_O9c" />

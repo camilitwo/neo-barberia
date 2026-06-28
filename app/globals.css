@@ -21,23 +21,13 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Modo claro futuro (placeholder) */
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #ffffff;
-    --surface: #f5f5f5;
-    --secondary: #ececec;
-    --border: #d4d4d8;
-    --foreground: #111827;
-    --muted: #4b5563;
-  }
-}
+/* Dark-only brand — Neo Barbería is intentionally dark. No light mode override. */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; color-scheme: dark; }
 body {
   font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   background-color: var(--background);

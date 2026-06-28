@@ -27,7 +27,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 mb-24 md:mb-32 relative z-10 text-center md:text-left justify-items-center md:justify-items-start">
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <h4 className="text-sm font-medium text-gray-500 mb-2">Ubicación</h4>
+            <h4 className="text-sm font-medium text-gray-400 mb-2">Ubicación</h4>
             <a
               className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors duration-200 ease-out active:scale-[0.97]"
               href={mapsDirections}
@@ -49,7 +49,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <h4 className="text-sm font-medium text-gray-500 mb-2">Redes</h4>
+            <h4 className="text-sm font-medium text-gray-400 mb-2">Redes</h4>
             <a
               className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors duration-200 ease-out active:scale-[0.97]"
               href={instagramUrl}
@@ -77,16 +77,16 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <h4 className="text-sm font-medium text-gray-500 mb-2">Info</h4>
-            <span className="text-[11px] font-medium tracking-wide text-gray-300">Horario</span>
-            <span className="text-[11px] font-medium tracking-wide text-gray-300">Lun-Dom: 11:00 - 20:30</span>
+            <h4 className="text-sm font-medium text-gray-400 mb-2">Info</h4>
+            <span className="text-[11px] font-medium tracking-wide text-gray-400">Horario</span>
+            <span className="text-[11px] font-medium tracking-wide text-gray-400">Lun-Dom: 11:00 - 20:30</span>
             <Link
               href="/trabaja-con-nosotros"
               className="text-[11px] font-medium tracking-widest text-gray-300 hover:text-white uppercase transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]"
             >
               Únete al equipo
             </Link>
-            <span className="text-[11px] font-medium tracking-wide text-gray-300">© {currentYear} Neo Barbería</span>
+            <span className="text-[11px] font-medium tracking-wide text-gray-400">© {currentYear} Neo Barbería</span>
             <Link
               href="https://github.com/camilitwo"
               className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]"

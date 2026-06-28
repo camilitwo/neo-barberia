@@ -175,7 +175,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
               <Link
                 href={`/barberos/${selectedBarber?.id}`}
                 aria-label={`Ver perfil de ${selectedBarber?.apodo ?? 'barbero'}`}
-                className="inline-flex items-center gap-1.5 text-white/40 uppercase tracking-[0.15em] text-[10px] hover:text-white/70 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                className="inline-flex items-center gap-1.5 text-white/60 uppercase tracking-[0.15em] text-[10px] hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               >
                 <span>Perfil</span>
                 <span className="text-xs">↗</span>
