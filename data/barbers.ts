@@ -35,7 +35,7 @@ export const barbersData: Barber[] = [
     signatureCuts: [
       { imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp', label: '' },
       { imagen: 'neobarberia_2026-01-28_09_23/barbers/Chris/IMG_6308_ydhab1.jpg?updatedAt=1769603096843', label: '' },
-      
+
     ],
     quote: 'LA PRECISIÓN NO ES TÉCNICA, ES ACTITUD.',
   },
@@ -56,7 +56,7 @@ export const barbersData: Barber[] = [
     ],
     quote: 'TU ESTILO HABLA ANTES QUE VOS.',
   },
-  {
+  /*{
     id: 3,
     nombre: 'Julio Gómez',
     apodo: 'JC',
@@ -71,7 +71,7 @@ export const barbersData: Barber[] = [
       { imagen: '/neobarberia_2026-01-28_09_23/barbers/6f0f93b7-5801-4dc8-8562-007d59f28da6.jpg', label: '' },
     ],
     quote: 'LA DEDICACIÓN SE NOTA EN CADA DETALLE.',
-  },
+  },*/
   /*// {
   //   id: 3,
   //   nombre: 'Fabián Garrido',
