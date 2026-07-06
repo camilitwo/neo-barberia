@@ -12,7 +12,7 @@ interface GallerySectionProps {
 
 export default function GallerySection({ variant = 'preview' }: GallerySectionProps) {
   const handleBooking = () => {
-    window.open('https://neooc2b.setmore.com/?fbclid=PAZXh0bgNhZW0CMTEAAaaOGfb00uDJuEsMw9NMHy2Da7Qy6sfgyZHYMtwgSEj_5R3HK1mp4I51bxU_aem_ZEFdpvIRt2yhMVwlxEbhQg#services', '_blank');
+    window.open('https://club.neobarberia.cl/', '_blank');
   };
 
   return (

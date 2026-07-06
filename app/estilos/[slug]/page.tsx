@@ -178,7 +178,7 @@ export default function StyleDetailPage() {
             Reserva tu cita y deja que nuestros barberos expertos transformen tu estilo.
           </p>
           <a
-            href="https://neooc2b.setmore.com/?fbclid=PAZXh0bgNhZW0CMTEAAaaOGfb00uDJuEsMw9NMHy2Da7Qy6sfgyZHYMtwgSEj_5R3HK1mp4I51bxU_aem_ZEFdpvIRt2yhMVwlxEbhQg#services"
+            href="https://club.neobarberia.cl/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-primary hover:bg-[var(--primary-hover)] text-background px-8 py-4 rounded-xl font-bold text-lg shadow-[0_0_20px_rgba(230,181,101,0.3)] transition-all transform active:scale-95"
@@ -236,7 +236,7 @@ export default function StyleDetailPage() {
       </section>
 
       <Footer />
-      <FloatingBookingButton url="https://neooc2b.setmore.com/?fbclid=PAZXh0bgNhZW0CMTEAAaaOGfb00uDJuEsMw9NMHy2Da7Qy6sfgyZHYMtwgSEj_5R3HK1mp4I51bxU_aem_ZEFdpvIRt2yhMVwlxEbhQg#services" />
+      <FloatingBookingButton url="https://club.neobarberia.cl/" />
     </main>
   );
 }

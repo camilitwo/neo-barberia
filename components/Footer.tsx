@@ -86,13 +86,39 @@ export default function Footer() {
             >
               Únete al equipo
             </Link>
-            <span className="text-[11px] font-medium tracking-wide text-gray-400">© {currentYear} Neo Barbería</span>
-            <Link
-              href="https://github.com/camilitwo"
-              className="text-[11px] font-medium tracking-wide text-gray-300 hover:text-white transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]"
+          </div>
+        </div>
+      </div>
+
+      {/* Signature — colophon */}
+      <div className="border-t border-white/[0.07] mt-0">
+        <div className="max-w-7xl mx-auto px-6 pt-8 pb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+
+            <p className="text-[10px] font-medium tracking-[0.22em] uppercase text-white/20 leading-none">
+              © {currentYear} Neo Barbería
+            </p>
+
+            <a
+              href="https://www.camilitwo.cl/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Sitio diseñado y desarrollado por camilitwo"
+              className="group relative inline-flex flex-col items-start sm:items-end gap-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/30 rounded"
             >
-              Diseñado por Camilo González
-            </Link>
+              <span className="text-[9px] font-medium tracking-[0.3em] uppercase text-white/20 group-hover:text-white/35 transition-colors duration-500 ease-out">
+                Diseño &amp; desarrollo
+              </span>
+              <span className="relative text-[clamp(1.6rem,5vw,2.8rem)] font-black tracking-[-0.04em] leading-none text-white/10 group-hover:text-white/22 transition-colors duration-500 ease-out uppercase overflow-hidden">
+                camilitwo
+                {/* underline reveal */}
+                <span
+                  aria-hidden
+                  className="absolute bottom-0 left-0 h-[1.5px] w-0 group-hover:w-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                />
+              </span>
+            </a>
+
           </div>
         </div>
       </div>
