@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { SiInstagram } from 'react-icons/si';
 
 import { Barber } from '@/data/barbers';
 
@@ -21,6 +22,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
   const selectedBarber = barbers[selectedIndex] ?? barbers[0];
   const socialUrl = selectedBarber?.instagram || selectedBarber?.facebook;
   const socialLabel = selectedBarber?.instagram ? 'Instagram' : selectedBarber?.facebook ? 'Facebook' : '';
+  const hasInstagram = Boolean(selectedBarber?.instagram);
 
   useEffect(() => {
     if (barbers.length <= 1) return;
@@ -155,6 +157,9 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
                     aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
                     className="sm:hidden inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.2em] text-[11px] underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]"
                   >
+                    {hasInstagram && (
+                      <SiInstagram className="w-4 h-4 flex-none" aria-hidden="true" />
+                    )}
                     <span>Ver {socialLabel}</span>
                     <span className="text-base transition-transform duration-200 ease-out">→</span>
                   </a>
@@ -166,6 +171,9 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
                     aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
                     className="hidden sm:inline-flex items-center justify-between gap-4 border border-primary/60 text-primary font-bold uppercase py-3.5 px-6 hover:bg-primary hover:text-black transition-all duration-200 ease-out group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent w-fit active:scale-[0.97]"
                   >
+                    {hasInstagram && (
+                      <SiInstagram className="w-4 h-4 flex-none" aria-hidden="true" />
+                    )}
                     <span className="text-[11px] tracking-[0.2em]">Ver {socialLabel}</span>
                     <span className="text-lg group-hover:translate-x-1 transition-transform duration-200 ease-out">→</span>
                   </a>

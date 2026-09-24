@@ -25,7 +25,7 @@ export const barbersData: Barber[] = [
     id: 1,
     nombre: 'Christofer Beltrán',
     apodo: 'Stofer',
-    especialidad: 'Fundador & Barbero',
+    especialidad: 'Senior Barber',
     descripcion: 'Más de una década transformando estilos. Su visión creó Neo Barbería y su precisión define cada experiencia.',
     imagen: '/neobarberia_2026-01-28_09_23/barbers/400f4454-f75c-46c9-bd5c-c6e5a8661ea2_owfqid.webp',
     instagram: 'https://www.instagram.com/stoferbarber/',
@@ -88,7 +88,7 @@ export const barbersData: Barber[] = [
   //     { imagen: '/neobarberia_2026-01-28_09_23/gallery/WhatsApp_Image_2025-12-01_at_09.19.43_nqzjni.jpg?updatedAt=1769603095899', label: 'BEARD_SCULPT' },
   //   ],
   //   quote: 'LOS DETALLES HACEN LA DIFERENCIA.',
-  // },
+  // },*/
   {
     id: 4,
     nombre: 'Patricio Beltrán',
@@ -96,6 +96,7 @@ export const barbersData: Barber[] = [
     especialidad: 'Creative Barber',
     descripcion: 'Donde otros ven un corte, él ve una oportunidad de expresión. Cada cliente sale con algo único.',
     imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp',
+    instagram: 'https://www.instagram.com/max_barber_s/',
     yearsExperience: 4,
     role: 'CREATIVE BARBER',
     interests: ['Expresión personal', 'Looks únicos', 'Visión artística', 'Identidad de estilo'],
@@ -103,5 +104,5 @@ export const barbersData: Barber[] = [
       { imagen: '/neobarberia_2026-01-28_09_23/barbers/aw-image-53_vgsjzj.webp', label: 'HAIR_ART' },
     ],
     quote: 'CADA CORTE ES UNA DECLARACIÓN.',
-  },*/
+  },
 ];

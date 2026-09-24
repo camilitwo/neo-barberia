@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { SiInstagram } from 'react-icons/si';
 
 import { barbersData } from '@/data/barbers';
 import CdnImage from '@/components/CdnImage';
@@ -167,7 +168,13 @@ export default async function BarberProfilePage({ params }: PageProps) {
               rel="noopener noreferrer"
               className="w-full h-14 sm:h-16 bg-white text-black font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm flex items-center justify-between px-6 sm:px-8 shadow-[4px_4px_0px_0px_rgba(100,100,100,1)] sm:shadow-[6px_6px_0px_0px_rgba(100,100,100,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all"
             >
-              <span>VER_INSTAGRAM</span>
+              <span className="flex items-center gap-3 sm:gap-4">
+                <SiInstagram
+                  className="w-5 h-5 sm:w-6 sm:h-6 flex-none"
+                  aria-hidden="true"
+                />
+                <span>VER_INSTAGRAM</span>
+              </span>
               <span className="material-symbols-outlined font-black text-lg sm:text-2xl">arrow_forward</span>
             </a>
           ) : (
