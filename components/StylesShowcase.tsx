@@ -2,7 +2,7 @@
 
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { UIEvent, useRef, useState } from 'react';
 import CdnImage from '@/components/CdnImage';
 import { imagekitUrl } from '@/lib/imagekit';
 import { stylesData } from '@/data/styles';
@@ -65,10 +65,61 @@ function StyleCard({ style, index }: { style: (typeof stylesData)[number]; index
   );
 }
 
+function MobileStyleCard({ style, index, isActive }: { style: (typeof stylesData)[number]; index: number; isActive: boolean }) {
+  const scene = styleScenes[index] ?? styleScenes[0];
+
+  return (
+    <Link
+      href={`/estilos/${style.slug}`}
+      className={`mobile-style-card group relative block h-[68dvh] min-h-[520px] max-h-[620px] overflow-hidden border bg-black snap-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+        isActive ? 'border-primary/55 shadow-[0_24px_80px_rgba(0,0,0,0.45)]' : 'border-white/12'
+      }`}
+    >
+      <CdnImage
+        src={imagekitUrl(style.image)}
+        alt={style.title}
+        fill
+        sizes="88vw"
+        priority={index === 0}
+        className={`object-cover grayscale contrast-125 transition duration-500 ease-out group-active:scale-[1.02] ${
+          isActive ? 'brightness-95' : 'brightness-75'
+        }`}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+      <div
+        className="absolute inset-0 opacity-70"
+        style={{ backgroundImage: scene.texture }}
+      />
+      <div className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center border border-white/18 bg-black/35 text-xs font-bold text-white backdrop-blur-md">
+        0{index + 1}
+      </div>
+      <div className="absolute right-4 top-4 h-10 border border-white/18 bg-black/35 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white/70 backdrop-blur-md flex items-center">
+        Desliza
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-5">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: scene.accent }}>
+          {style.subtitle}
+        </p>
+        <h3 className="mt-2 text-4xl font-extrabold leading-none tracking-[-0.035em] text-white">
+          {style.title}
+        </h3>
+        <p className="mt-4 max-w-[18rem] text-sm leading-6 text-white/74">
+          {style.description}
+        </p>
+        <div className="mt-5 inline-flex min-h-11 items-center justify-center border border-white/16 bg-white px-4 text-[11px] font-bold uppercase tracking-[0.16em] text-black">
+          Ver estilo
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export default function StylesShowcase() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const mobileTrackRef = useRef<HTMLDivElement | null>(null);
   const reduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
@@ -103,26 +154,65 @@ export default function StylesShowcase() {
   ];
   const activeScene = styleScenes[activeIndex] ?? styleScenes[0];
 
+  const handleMobileScroll = (event: UIEvent<HTMLDivElement>) => {
+    const track = event.currentTarget;
+    const firstItem = track.querySelector<HTMLElement>('[data-style-card]');
+    if (!firstItem) return;
+
+    const step = firstItem.offsetWidth + 16;
+    const nextIndex = Math.round(track.scrollLeft / step);
+    setMobileActiveIndex(Math.max(0, Math.min(stylesData.length - 1, nextIndex)));
+  };
+
   return (
     <section
       id="estilos"
       ref={sectionRef}
       className="styles-scroll bg-background py-16 sm:py-20 md:min-h-[300dvh] md:py-0 relative overflow-visible"
     >
-      <div className="mx-auto mb-10 max-w-6xl px-6 md:hidden">
+      <div className="mx-auto mb-8 max-w-6xl px-6 md:hidden">
         <p className="text-sm font-semibold text-primary">Tipos de corte</p>
         <h2 className="mt-3 max-w-3xl text-[clamp(2.4rem,6vw,4.6rem)] font-extrabold leading-[0.96] tracking-[-0.035em] text-white text-balance">
           El estilo correcto se nota al salir.
         </h2>
+        <p className="mt-4 max-w-sm text-sm leading-6 text-gray-400">
+          Desliza para elegir la dirección de tu próximo look.
+        </p>
       </div>
 
       <div className="md:hidden">
-        <div className="flex overflow-x-auto gap-5 px-6 pb-6 snap-x snap-mandatory no-scrollbar">
+        <div
+          ref={mobileTrackRef}
+          onScroll={handleMobileScroll}
+          className="mobile-style-track flex overflow-x-auto gap-4 px-6 pb-7 snap-x snap-mandatory no-scrollbar"
+        >
           {stylesData.map((style, i) => (
-            <div key={style.slug} className="snap-center shrink-0 w-[72vw] max-w-[300px]">
-              <StyleCard style={style} index={i} />
+            <div key={style.slug} data-style-card className="shrink-0 w-[86vw] max-w-[360px]">
+              <MobileStyleCard style={style} index={i} isActive={mobileActiveIndex === i} />
             </div>
           ))}
+        </div>
+        <div className="px-6 flex items-center justify-between gap-5">
+          <div className="flex flex-1 items-center gap-2">
+            {stylesData.map((style, index) => (
+              <button
+                key={style.slug}
+                type="button"
+                aria-label={`Ver ${style.title}`}
+                onClick={() => {
+                  const track = mobileTrackRef.current;
+                  const item = track?.querySelectorAll<HTMLElement>('[data-style-card]')[index];
+                  item?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+                }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  mobileActiveIndex === index ? 'w-10 bg-primary' : 'w-4 bg-white/18'
+                }`}
+              />
+            ))}
+          </div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/42">
+            {stylesData[mobileActiveIndex]?.title}
+          </p>
         </div>
       </div>
 
@@ -245,7 +335,7 @@ export default function StylesShowcase() {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0">
+      <div className="pointer-events-none fixed -left-[9999px] top-0 h-px w-px overflow-hidden opacity-0">
         {stylesData.flatMap((style) => [style.image, ...style.gallery.map((item) => item.src)]).map((src) => (
           <CdnImage
             key={src}
@@ -257,6 +347,22 @@ export default function StylesShowcase() {
           />
         ))}
       </div>
+
+      <style jsx global>{`
+        .styles-scroll .mobile-style-track {
+          scroll-padding-inline: 1.5rem;
+          overscroll-behavior-x: contain;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .styles-scroll .mobile-style-card {
+          transition: border-color 0.25s ease-out, box-shadow 0.25s ease-out, transform 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .styles-scroll .mobile-style-card:active {
+          transform: scale(0.985);
+        }
+      `}</style>
 
     </section>
   );
