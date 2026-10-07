@@ -21,7 +21,7 @@ export default function Home() {
        <StylesShowcase />
       <Contact />
       <Footer />
-      <FloatingBookingButton url="https://club.neobarberia.cl/" />
+      <FloatingBookingButton url="https://club.neobarberia.cl/" deferUntilScrolled />
     </main>
   );
 }

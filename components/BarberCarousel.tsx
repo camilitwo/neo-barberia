@@ -51,7 +51,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
     <section
       id="equipo"
       ref={ref}
-      className="relative pt-16 pb-32 sm:py-20 md:py-28 px-4 bg-background overflow-hidden team-section"
+      className="relative px-4 py-20 sm:py-24 md:py-28 bg-background overflow-hidden team-section"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -78,6 +78,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
             />
           </motion.div>
         </AnimatePresence>
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/72 to-background/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/80" />
       </div>
 
@@ -87,56 +88,78 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
         animate={isInView ? "visible" : "hidden"}
         className="relative z-10 max-w-7xl mx-auto"
       >
-        <div className="relative min-h-[60vh] flex flex-col justify-center py-10">
-          <h2 className="text-lg font-bold text-muted mb-8 ml-1 text-balance">
-            Nuestro Equipo
-          </h2>
+        <div className="relative min-h-[68vh] grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(300px,0.56fr)] lg:items-center">
+          <div>
+            <p className="mb-4 text-sm font-semibold text-primary">Nuestro equipo</p>
+            <h2 className="max-w-3xl text-[clamp(2.45rem,6.8vw,4.85rem)] font-extrabold leading-[0.95] tracking-[-0.035em] text-white text-balance">
+              Elige el pulso de tu próximo corte.
+            </h2>
 
-          <div className="flex flex-col space-y-2 relative z-20">
-            {barbers.map((barber, index) => (
-              <div key={barber.id} className="group relative">
-                <input
-                  className="hidden peer"
-                  id={`barber-${barber.id}`}
-                  name="barber"
-                  type="radio"
-                  checked={selectedIndex === index}
-                  onChange={() => setSelectedIndex(index)}
-                />
-                <label
-                  className="relative z-10 block cursor-pointer py-4 border-b border-white/10 hover:border-primary/50 transition-all duration-200 ease-out active:scale-[0.98]"
-                  htmlFor={`barber-${barber.id}`}
-                >
-                  <span
-                    className={`barber-name text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-[-0.03em] block transition-colors duration-200 ease-out ${
-                      selectedIndex === index
-                        ? 'text-primary'
-                        : 'text-white/90 group-hover:text-white'
-                    }`}
-                  >
-                    {barber.apodo.toUpperCase()}
-                  </span>
+            <div className="mt-10 flex flex-col relative z-20 border-t border-white/12">
+              {barbers.map((barber, index) => {
+                const isSelected = selectedIndex === index;
 
-                  <span
-                    className={`text-sm font-mono text-gray-500 mt-2 block transition-opacity duration-200 ease-out ${
-                      selectedIndex === index ? 'opacity-100' : 'opacity-0'
-                    }`}
+                return (
+                  <button
+                    key={barber.id}
+                    type="button"
+                    onClick={() => setSelectedIndex(index)}
+                    className="group relative grid w-full grid-cols-[1fr_auto] items-center gap-4 border-b border-white/12 py-5 text-left transition-colors duration-200 ease-out hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.99]"
+                    aria-pressed={isSelected}
                   >
-                    {barber.especialidad} / {(index + 1).toString().padStart(2, '0')}
-                  </span>
-                </label>
-              </div>
-            ))}
+                    <span>
+                      <span
+                        className={`barber-name block text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-[-0.035em] transition-colors duration-200 ease-out ${
+                          isSelected
+                            ? 'text-primary'
+                            : 'text-white/86 group-hover:text-white'
+                        }`}
+                      >
+                        {barber.apodo}
+                      </span>
+                      <span
+                        className={`mt-2 block text-sm text-gray-400 transition-opacity duration-200 ease-out ${
+                          isSelected ? 'opacity-100' : 'opacity-60'
+                        }`}
+                      >
+                        {barber.especialidad}
+                      </span>
+                    </span>
+                    <span className={`text-xs font-bold text-primary transition-opacity duration-200 ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'}`}>
+                      {(index + 1).toString().padStart(2, '0')}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="mt-10 pt-8 border-t border-white/10">
-            <Link
-              href="/trabaja-con-nosotros"
-              className="inline-flex items-center gap-3 text-white/60 hover:text-primary border border-white/10 hover:border-primary/50 px-5 py-3 text-[11px] font-bold transition-all duration-200 ease-out group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.97]"
-            >
-              <span>¿Quieres ser parte del equipo?</span>
-              <span className="text-sm group-hover:translate-x-1 transition-transform duration-200 ease-out">→</span>
-            </Link>
+          <div className="border border-white/12 bg-black/34 p-4 backdrop-blur-md shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedBarber?.id ?? 'barber-card'}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+              >
+                <div className="relative aspect-[4/5] overflow-hidden bg-black">
+                  <CdnImage
+                    src={selectedBarber?.imagen ?? barbers[0]?.imagen}
+                    alt={selectedBarber?.nombre ?? 'Neo Barbería - Barbero'}
+                    fill
+                    sizes="(max-width: 1024px) 80vw, 360px"
+                    className="object-cover grayscale contrast-125 brightness-90"
+                    style={{ objectPosition: selectedBarber?.imagePosition ?? '50% 18%' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <p className="text-2xl font-extrabold leading-none text-white">{selectedBarber?.nombre}</p>
+                    <p className="mt-2 text-sm leading-6 text-white/72">{selectedBarber?.descripcion}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           <AnimatePresence mode="wait">
@@ -146,7 +169,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.2 }}
-              className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
+              className="lg:col-start-1 mt-2 flex flex-wrap items-center gap-4"
             >
               {socialUrl && (
                 <>
@@ -155,7 +178,7 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Ver ${socialLabel} de ${selectedBarber?.apodo ?? 'barbero'}`}
-                    className="sm:hidden inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.2em] text-[11px] underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97]"
+                    className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-[0.18em] text-[11px] underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-[0.97] sm:hidden"
                   >
                     {hasInstagram && (
                       <SiInstagram className="w-4 h-4 flex-none" aria-hidden="true" />
@@ -183,10 +206,16 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
               <Link
                 href={`/barberos/${selectedBarber?.id}`}
                 aria-label={`Ver perfil de ${selectedBarber?.apodo ?? 'barbero'}`}
-                className="inline-flex items-center gap-1.5 text-white/60 uppercase tracking-[0.15em] text-[10px] hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                className="inline-flex min-h-12 items-center justify-center border border-white/16 bg-black/24 px-5 py-3 text-xs font-bold uppercase tracking-[0.16em] text-white hover:bg-white hover:text-black transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.97]"
               >
-                <span>Perfil</span>
-                <span className="text-xs">↗</span>
+                <span>Ver perfil</span>
+              </Link>
+
+              <Link
+                href="/trabaja-con-nosotros"
+                className="inline-flex min-h-12 items-center justify-center px-1 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white/54 hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.97]"
+              >
+                Únete al equipo
               </Link>
             </motion.div>
           </AnimatePresence>
@@ -209,10 +238,6 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
         }
         @media (prefers-reduced-motion: reduce) {
           .team-section .grain-overlay::before { display: none; }
-        }
-
-        .team-section input[type='radio']:checked + label .barber-name {
-          transform: translateX(20px);
         }
 
         .team-section .barber-name {
