@@ -58,26 +58,45 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
       onBlurCapture={() => setIsPaused(false)}
     >
       <div className="absolute inset-0 z-0 grain-overlay pointer-events-none">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={barbers[selectedIndex]?.id ?? selectedIndex}
-            className="absolute inset-0"
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.02 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          >
+        {barbers.map((barber, index) => {
+          const isSelected = selectedIndex === index;
+
+          return (
+            <motion.div
+              key={barber.id}
+              className="absolute inset-0"
+              initial={false}
+              animate={{
+                opacity: isSelected ? 1 : 0,
+                scale: isSelected ? 1 : 1.035,
+                filter: isSelected ? 'blur(0px)' : 'blur(8px)',
+              }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <CdnImage
+                src={barber.imagen}
+                alt={barber.nombre}
+                fill
+                sizes="100vw"
+                className="w-full h-full object-cover grayscale contrast-125 brightness-50"
+                style={{ objectPosition: barber.imagePosition ?? '50% 18%' }}
+                priority={index === 0}
+              />
+            </motion.div>
+          );
+        })}
+        <div className="absolute inset-0 opacity-0 pointer-events-none">
+          {barbers.map((barber) => (
             <CdnImage
-              src={barbers[selectedIndex]?.imagen ?? barbers[0]?.imagen}
-              alt={barbers[selectedIndex]?.nombre ?? barbers[0]?.nombre ?? 'Neo Barbería - Barbero'}
-              fill
-              sizes="100vw"
-              className="w-full h-full object-cover grayscale contrast-125 brightness-50"
-              style={{ objectPosition: barbers[selectedIndex]?.imagePosition ?? '50% 18%' }}
-              priority
+              key={`preload-${barber.id}`}
+              src={barber.imagen}
+              alt=""
+              width={32}
+              height={40}
+              aria-hidden="true"
             />
-          </motion.div>
-        </AnimatePresence>
+          ))}
+        </div>
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/72 to-background/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/80" />
       </div>
@@ -135,31 +154,47 @@ export default function BarberCarousel({ barbers }: BarberCarouselProps) {
           </div>
 
           <div className="border border-white/12 bg-black/34 p-4 backdrop-blur-md shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={selectedBarber?.id ?? 'barber-card'}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-              >
-                <div className="relative aspect-[4/5] overflow-hidden bg-black">
-                  <CdnImage
-                    src={selectedBarber?.imagen ?? barbers[0]?.imagen}
-                    alt={selectedBarber?.nombre ?? 'Neo Barbería - Barbero'}
-                    fill
-                    sizes="(max-width: 1024px) 80vw, 360px"
-                    className="object-cover grayscale contrast-125 brightness-90"
-                    style={{ objectPosition: selectedBarber?.imagePosition ?? '50% 18%' }}
-                  />
+            <div className="relative aspect-[4/5] overflow-hidden bg-black">
+              {barbers.map((barber, index) => {
+                const isSelected = selectedIndex === index;
+
+                return (
+                  <motion.div
+                    key={`portrait-${barber.id}`}
+                    className="absolute inset-0"
+                    initial={false}
+                    animate={{
+                      opacity: isSelected ? 1 : 0,
+                      scale: isSelected ? 1 : 1.025,
+                    }}
+                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <CdnImage
+                      src={barber.imagen}
+                      alt={barber.nombre}
+                      fill
+                      sizes="(max-width: 1024px) 80vw, 360px"
+                      className="object-cover grayscale contrast-125 brightness-90"
+                      style={{ objectPosition: barber.imagePosition ?? '50% 18%' }}
+                    />
+                  </motion.div>
+                );
+              })}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-2xl font-extrabold leading-none text-white">{selectedBarber?.nombre}</p>
-                    <p className="mt-2 text-sm leading-6 text-white/72">{selectedBarber?.descripcion}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.div
+                  key={selectedBarber?.id ?? 'copy'}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
+                  className="absolute bottom-4 left-4 right-4"
+                >
+                  <p className="text-2xl font-extrabold leading-none text-white">{selectedBarber?.nombre}</p>
+                  <p className="mt-2 text-sm leading-6 text-white/72">{selectedBarber?.descripcion}</p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
 
           <AnimatePresence mode="wait">
