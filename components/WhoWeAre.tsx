@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Link from 'next/link';
+import CdnImage from '@/components/CdnImage';
 
 type WhoWeAreVariant = 'preview' | 'full';
 
@@ -12,7 +13,7 @@ interface WhoWeAreProps {
 
 export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: variant === 'full' ? 0.1 : 0.3 });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -125,6 +126,22 @@ export default function WhoWeAre({ variant = 'preview' }: WhoWeAreProps) {
             )}
           </div>
         </div>
+
+        {variant === 'full' && (
+          <figure id="equipo" className="mt-12 scroll-mt-24 lg:mt-16">
+            <CdnImage
+              src="https://ik.imagekit.io/cigv/neobarberia_2026-01-28_09_23/barbers/team-neo.webp"
+              alt="El equipo de Neo Barbería"
+              width={1448}
+              height={1086}
+              sizes="(max-width: 1312px) calc(100vw - 32px), 1280px"
+              className="h-auto w-full"
+            />
+            <figcaption className="mt-4 text-sm font-medium text-muted">
+              El equipo detrás de la experiencia Neo.
+            </figcaption>
+          </figure>
+        )}
 
         {variant === 'full' && (
           <div className="mt-14 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-8">

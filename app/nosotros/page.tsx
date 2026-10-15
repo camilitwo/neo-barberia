@@ -1,12 +1,12 @@
 import Navbar from '@/components/Navbar';
-import WhoWeAre from '@/components/WhoWeAre';
+import AboutStory from '@/components/AboutStory';
 import Footer from '@/components/Footer';
 
 export default function NosotrosPage() {
   return (
-    <main className="min-h-screen">
+    <main id="inicio" className="min-h-screen scroll-mt-24">
       <Navbar />
-      <WhoWeAre variant="full" />
+      <AboutStory />
       <Footer />
     </main>
   );

@@ -114,6 +114,30 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, textar
   }
 }
 
+.neo-about::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23grain)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
+}
+
+.neo-team-photo::before {
+  content: '';
+  position: absolute;
+  inset: 12px -12px -12px 12px;
+  z-index: -1;
+  border: 1px solid var(--border);
+  border-bottom-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  pointer-events: none;
+}
+
+@media (max-width: 639px) {
+  .neo-team-photo::before { inset: 8px -8px -8px 8px; }
+}
+
 /* PopularCutsSection image — specific filter transition */
 .cuts-img {
   transition: filter 0.4s cubic-bezier(0.23, 1, 0.32, 1);
